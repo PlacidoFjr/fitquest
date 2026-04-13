@@ -10,6 +10,10 @@ const mealRoutes = require("./routes/mealRoutes");
 const workoutRoutes = require("./routes/workoutRoutes");
 const dashboardRoutes = require("./routes/dashboardRoutes");
 
+if (!authRoutes || !userRoutes || !mealRoutes || !workoutRoutes || !dashboardRoutes) {
+  console.error("Erro fatal: Algumas rotas não foram carregadas corretamente!");
+}
+
 const app = express();
 
 // Configuração de CORS para aceitar qualquer origem do Vercel e localhost

@@ -19,6 +19,13 @@ export async function apiRequest<T>(
     cache: "no-store",
   });
 
+  const contentType = response.headers.get("content-type");
+  if (!contentType || !contentType.includes("application/json")) {
+    const text = await response.text();
+    console.error("Resposta não-JSON recebida:", text);
+    throw new Error("O servidor retornou um erro inesperado (HTML). Verifique os logs do backend no Vercel.");
+  }
+
   const data = await response.json();
   if (!response.ok) {
     throw new Error(data.message || "Erro na requisicao.");
