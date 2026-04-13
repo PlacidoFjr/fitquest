@@ -104,142 +104,188 @@ export default function DashboardPage() {
 
   return (
     <AppShell>
-      <div className="mb-8 flex flex-col justify-between gap-6 rounded-[2.5rem] bg-gradient-to-br from-card to-slate-900 p-8 shadow-2xl border border-slate-800/60 md:flex-row md:items-center">
-        <div>
-          <div className="flex items-center gap-2 text-primary mb-2">
-            <Sparkles size={16} className="animate-pulse" />
-            <p className="text-xs font-black uppercase tracking-[0.2em]">Painel de Controle</p>
+      <div className="flex flex-col gap-6">
+        {/* Header Section */}
+        <div className="flex flex-col justify-between gap-6 rounded-[2.5rem] bg-gradient-to-br from-card to-slate-900 p-8 shadow-2xl border border-slate-800/60 md:flex-row md:items-center">
+          <div className="flex-1">
+            <div className="flex items-center gap-2 text-primary mb-2">
+              <Sparkles size={16} className="animate-pulse" />
+              <p className="text-xs font-black uppercase tracking-[0.2em]">Painel de Controle</p>
+            </div>
+            <h2 className="text-4xl font-black text-white tracking-tight leading-tight">
+              {new Date().getHours() < 12 ? "Bom dia" : "Boa tarde"},<br />
+              <span className="text-primary">{userName}</span>!
+            </h2>
+            <p className="mt-2 text-slate-400 font-medium">Sua jornada épica continua hoje.</p>
           </div>
-          <h2 className="text-4xl font-black text-white tracking-tight">
-            {new Date().getHours() < 12 ? "Bom dia" : "Boa tarde"}, <span className="text-primary">{userName}</span>!
-          </h2>
-          <p className="mt-2 text-slate-400 font-medium">Sua jornada épica continua hoje.</p>
-        </div>
-        
-        <div className="flex items-center gap-5 rounded-3xl bg-slate-950/40 p-5 border border-white/5 backdrop-blur-md">
-          <div className="h-14 w-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary shadow-inner">
-            <Trophy size={28} />
-          </div>
-          <div>
-            <div className="flex items-center gap-2 mb-0.5">
-              <Badge variant="primary" className="px-1.5 py-0">Nível {profile?.level || 1}</Badge>
-            </div>
-            <p className="text-2xl font-black text-white leading-none">{profile?.total_xp || 0} <span className="text-xs text-slate-500 font-bold uppercase tracking-widest ml-1">XP</span></p>
-          </div>
-        </div>
-      </div>
-
-      {!data ? (
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-          {[...Array(4)].map((_, i) => (
-            <Skeleton key={i} className="h-48 rounded-[2rem]" />
-          ))}
-        </div>
-      ) : (
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-          <Card hover variant="gradient" className="relative overflow-hidden group">
-            <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:scale-110 group-hover:opacity-20 transition-all duration-500">
-              <Target size={80} />
-            </div>
-            <div className="mb-6 flex items-center justify-between">
-              <div className="p-3 rounded-2xl bg-secondary/10 text-secondary border border-secondary/10">
-                <Target size={22} />
+          
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+            {/* XP Card */}
+            <div className="flex items-center gap-5 rounded-3xl bg-slate-950/40 p-5 border border-white/5 backdrop-blur-md min-w-[200px]">
+              <div className="h-14 w-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary shadow-inner shrink-0">
+                <Trophy size={28} />
               </div>
-              <Badge variant="secondary">Energia</Badge>
-            </div>
-            <h3 className="text-sm font-black text-slate-400 uppercase tracking-widest">Calorias</h3>
-            <div className="mt-4">
-              <div className="flex justify-between items-end mb-2">
-                <span className="text-3xl font-black text-white tracking-tighter">
-                  <AnimatedNumber value={progress?.calories_total || 0} />
-                </span>
-                <span className="text-xs text-slate-500 font-bold">/ {profile?.calorie_goal || 0} kcal</span>
-              </div>
-              <ProgressBar
-                value={caloriePercent}
-                className="h-2.5 bg-slate-950/50"
-                indicatorClassName={progress?.mission_calories_completed ? "bg-primary" : "bg-secondary"}
-              />
-            </div>
-          </Card>
-
-          <Card hover variant="gradient" className="relative overflow-hidden group">
-            <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:scale-110 group-hover:opacity-20 transition-all duration-500">
-              <Activity size={80} />
-            </div>
-            <div className="mb-6 flex items-center justify-between">
-              <div className="p-3 rounded-2xl bg-primary/10 text-primary border border-primary/10">
-                <Activity size={22} />
-              </div>
-              <Badge variant="primary">Construção</Badge>
-            </div>
-            <h3 className="text-sm font-black text-slate-400 uppercase tracking-widest">Proteína</h3>
-            <div className="mt-4">
-              <div className="flex justify-between items-end mb-2">
-                <span className="text-3xl font-black text-white tracking-tighter">
-                  <AnimatedNumber value={progress?.protein_total || 0} />
-                </span>
-                <span className="text-xs text-slate-500 font-bold">/ {profile?.protein_goal || 0} g</span>
-              </div>
-              <ProgressBar value={proteinPercent} className="h-2.5 bg-slate-950/50" indicatorClassName="bg-primary" />
-            </div>
-          </Card>
-
-          <Card hover variant="gradient" className="relative overflow-hidden group">
-            <div className="mb-6 flex items-center justify-between">
-              <div className="p-3 rounded-2xl bg-emerald-500/10 text-emerald-500 border border-emerald-500/10">
-                <CheckCircle2 size={22} />
-              </div>
-              <Badge variant="success">Missões</Badge>
-            </div>
-            <h3 className="text-sm font-black text-slate-400 uppercase tracking-widest">Diário</h3>
-            <div className="mt-4 space-y-3">
-              {[
-                { ok: progress?.mission_workout_completed, label: "Treino do Dia", xp: 50 },
-                { ok: progress?.mission_calories_completed, label: "Meta Calórica", xp: 70 },
-                { ok: progress?.mission_protein_completed, label: "Meta Proteica", xp: 30 },
-              ].map((item) => (
-                <div key={item.label} className="flex items-center justify-between group/item">
-                  <div className="flex items-center gap-3">
-                    <div className={cn(
-                      "w-5 h-5 rounded-lg flex items-center justify-center border-2 transition-all duration-300",
-                      item.ok ? "bg-primary border-primary text-slate-950 scale-110" : "border-slate-700 bg-slate-900/50"
-                    )}>
-                      {item.ok && <CheckCircle2 size={12} strokeWidth={4} />}
-                    </div>
-                    <span className={cn("text-xs font-bold transition-colors", item.ok ? "text-white" : "text-slate-500")}>
-                      {item.label}
-                    </span>
-                  </div>
-                  <span className={cn("text-[10px] font-black tracking-tighter", item.ok ? "text-primary" : "text-slate-700")}>
-                    +{item.xp} XP
-                  </span>
+              <div>
+                <div className="flex items-center gap-2 mb-0.5">
+                  <Badge variant="primary" className="px-1.5 py-0">Nível {profile?.level || 1}</Badge>
                 </div>
-              ))}
-            </div>
-          </Card>
-
-          <Card hover variant="gradient" className="relative overflow-hidden group border-amber-500/20">
-            <div className="absolute -right-6 -top-6 h-32 w-32 rounded-full bg-amber-500/5 blur-3xl group-hover:bg-amber-500/10 transition-colors" />
-            <div className="mb-6 flex items-center justify-between">
-              <div className="p-3 rounded-2xl bg-amber-500/10 text-amber-500 border border-amber-500/10">
-                <Flame size={22} className={cn(profile?.current_streak && profile.current_streak > 0 ? "animate-bounce" : "")} />
+                <p className="text-2xl font-black text-white leading-none">
+                  <AnimatedNumber value={profile?.total_xp || 0} />
+                  <span className="text-xs text-slate-500 font-bold uppercase tracking-widest ml-1.5">XP</span>
+                </p>
               </div>
-              <Badge variant="warning">Fogo</Badge>
             </div>
-            <h3 className="text-sm font-black text-slate-400 uppercase tracking-widest">Sequência</h3>
-            <div className="mt-2 flex items-baseline gap-2">
-              <span className="text-5xl font-black text-white tracking-tighter">{profile?.current_streak || 0}</span>
-              <span className="text-sm font-black text-amber-500 uppercase tracking-widest">Dias</span>
-            </div>
-            <p className="mt-3 text-[10px] text-slate-500 font-black uppercase leading-tight">
-              Mantenha o ritmo para <br /> desbloquear recompensas!
-            </p>
-          </Card>
-        </div>
-      )}
 
-      <Card className="mt-8 overflow-hidden border-slate-800/40 shadow-2xl">
+            {/* Streak Card - Moved to header for importance */}
+            <div className="flex items-center gap-5 rounded-3xl bg-slate-950/40 p-5 border border-amber-500/10 backdrop-blur-md min-w-[180px]">
+              <div className="h-14 w-14 rounded-2xl bg-amber-500/10 flex items-center justify-center text-amber-500 shadow-inner shrink-0">
+                <Flame size={28} className={cn(profile?.current_streak && profile.current_streak > 0 ? "animate-bounce" : "")} />
+              </div>
+              <div>
+                <p className="text-xs font-black text-slate-500 uppercase tracking-widest mb-0.5">Sequência</p>
+                <p className="text-2xl font-black text-white leading-none">
+                  {profile?.current_streak || 0}
+                  <span className="text-xs text-amber-500 font-bold uppercase tracking-widest ml-1.5">Dias</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {!data ? (
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {[...Array(3)].map((_, i) => (
+              <Skeleton key={i} className="h-48 rounded-[2rem]" />
+            ))}
+          </div>
+        ) : (
+          <div className="grid gap-6 md:grid-cols-1 lg:grid-cols-3">
+            {/* Main Stats Column - Grouped for better focus */}
+            <div className="lg:col-span-2 grid gap-6 sm:grid-cols-2">
+              <Card hover variant="gradient" className="relative overflow-hidden group">
+                <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:scale-110 group-hover:opacity-20 transition-all duration-500">
+                  <Target size={80} />
+                </div>
+                <div className="mb-6 flex items-center justify-between">
+                  <div className="p-3 rounded-2xl bg-secondary/10 text-secondary border border-secondary/10">
+                    <Target size={22} />
+                  </div>
+                  <Badge variant="secondary">Energia</Badge>
+                </div>
+                <h3 className="text-sm font-black text-slate-400 uppercase tracking-widest">Calorias</h3>
+                <div className="mt-4">
+                  <div className="flex justify-between items-end mb-2">
+                    <span className="text-3xl font-black text-white tracking-tighter">
+                      <AnimatedNumber value={progress?.calories_total || 0} />
+                    </span>
+                    <span className="text-xs text-slate-500 font-bold">/ {profile?.calorie_goal || 0} kcal</span>
+                  </div>
+                  <ProgressBar
+                    value={caloriePercent}
+                    className="h-2.5 bg-slate-950/50"
+                    indicatorClassName={progress?.mission_calories_completed ? "bg-primary" : "bg-secondary"}
+                  />
+                </div>
+              </Card>
+
+              <Card hover variant="gradient" className="relative overflow-hidden group">
+                <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:scale-110 group-hover:opacity-20 transition-all duration-500">
+                  <Activity size={80} />
+                </div>
+                <div className="mb-6 flex items-center justify-between">
+                  <div className="p-3 rounded-2xl bg-primary/10 text-primary border border-primary/10">
+                    <Activity size={22} />
+                  </div>
+                  <Badge variant="primary">Construção</Badge>
+                </div>
+                <h3 className="text-sm font-black text-slate-400 uppercase tracking-widest">Proteína</h3>
+                <div className="mt-4">
+                  <div className="flex justify-between items-end mb-2">
+                    <span className="text-3xl font-black text-white tracking-tighter">
+                      <AnimatedNumber value={progress?.protein_total || 0} />
+                    </span>
+                    <span className="text-xs text-slate-500 font-bold">/ {profile?.protein_goal || 0} g</span>
+                  </div>
+                  <ProgressBar value={proteinPercent} className="h-2.5 bg-slate-950/50" indicatorClassName="bg-primary" />
+                </div>
+              </Card>
+
+              {/* Action Buttons for quick access */}
+              <div className="sm:col-span-2 grid grid-cols-2 gap-4">
+                <Button 
+                  onClick={() => router.push('/meals')}
+                  className="h-16 rounded-2xl bg-slate-900 border border-slate-800 hover:border-primary/50 transition-all group"
+                  variant="ghost"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 rounded-xl bg-primary/10 text-primary group-hover:scale-110 transition-transform">
+                      <Sparkles size={20} />
+                    </div>
+                    <div className="text-left">
+                      <p className="text-xs font-black text-white uppercase tracking-widest">Registrar</p>
+                      <p className="text-[10px] text-slate-500 font-bold">Refeição</p>
+                    </div>
+                  </div>
+                </Button>
+                <Button 
+                  onClick={() => router.push('/workouts')}
+                  className="h-16 rounded-2xl bg-slate-900 border border-slate-800 hover:border-secondary/50 transition-all group"
+                  variant="ghost"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 rounded-xl bg-secondary/10 text-secondary group-hover:scale-110 transition-transform">
+                      <Dumbbell size={20} />
+                    </div>
+                    <div className="text-left">
+                      <p className="text-xs font-black text-white uppercase tracking-widest">Registrar</p>
+                      <p className="text-[10px] text-slate-500 font-bold">Treino</p>
+                    </div>
+                  </div>
+                </Button>
+              </div>
+            </div>
+
+            {/* Missions Sidebar - Keep it as a dedicated vertical list */}
+            <Card hover variant="gradient" className="relative overflow-hidden group border-slate-800/40">
+              <div className="mb-6 flex items-center justify-between">
+                <div className="p-3 rounded-2xl bg-emerald-500/10 text-emerald-500 border border-emerald-500/10">
+                  <CheckCircle2 size={22} />
+                </div>
+                <Badge variant="success">Missões</Badge>
+              </div>
+              <h3 className="text-sm font-black text-slate-400 uppercase tracking-widest">Objetivos Diários</h3>
+              <div className="mt-6 space-y-4">
+                {[
+                  { ok: progress?.mission_workout_completed, label: "Treino do Dia", xp: 50, desc: "Bata sua meta de atividade" },
+                  { ok: progress?.mission_calories_completed, label: "Meta Calórica", xp: 70, desc: "Mantenha a energia no alvo" },
+                  { ok: progress?.mission_protein_completed, label: "Meta Proteica", xp: 30, desc: "Garanta a reconstrução" },
+                ].map((item) => (
+                  <div key={item.label} className="flex flex-col gap-2 p-3 rounded-2xl bg-slate-950/40 border border-white/5 group/item hover:border-primary/20 transition-all">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <div className={cn(
+                          "w-5 h-5 rounded-lg flex items-center justify-center border-2 transition-all duration-300",
+                          item.ok ? "bg-primary border-primary text-slate-950 scale-110" : "border-slate-700 bg-slate-900/50"
+                        )}>
+                          {item.ok && <CheckCircle2 size={12} strokeWidth={4} />}
+                        </div>
+                        <span className={cn("text-xs font-black transition-colors", item.ok ? "text-white" : "text-slate-500")}>
+                          {item.label}
+                        </span>
+                      </div>
+                      <span className={cn("text-[10px] font-black tracking-tighter", item.ok ? "text-primary" : "text-slate-700")}>
+                        +{item.xp} XP
+                      </span>
+                    </div>
+                    <p className="text-[10px] text-slate-600 font-medium ml-8">{item.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </Card>
+          </div>
+        )}
+
+        <Card className="mt-2 overflow-hidden border-slate-800/40 shadow-2xl">
         <div className="mb-8 flex items-center gap-4">
           <div className="p-3 rounded-2xl bg-secondary/10 text-secondary border border-secondary/10">
             <UserCircle2 size={24} />
