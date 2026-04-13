@@ -225,7 +225,7 @@ export default function DashboardPage() {
             <div className="absolute -right-6 -top-6 h-32 w-32 rounded-full bg-amber-500/5 blur-3xl group-hover:bg-amber-500/10 transition-colors" />
             <div className="mb-6 flex items-center justify-between">
               <div className="p-3 rounded-2xl bg-amber-500/10 text-amber-500 border border-amber-500/10">
-                <Flame size={22} className={cn(profile?.current_streak && profile.current_streak > 0 && "animate-bounce")} />
+                <Flame size={22} className={cn(profile?.current_streak && profile.current_streak > 0 ? "animate-bounce" : "")} />
               </div>
               <Badge variant="warning">Fogo</Badge>
             </div>
