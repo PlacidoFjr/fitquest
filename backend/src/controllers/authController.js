@@ -91,12 +91,12 @@ async function login(req, res) {
     const body = authSchema.parse(req.body);
     const user = await db.query("SELECT id, email, password_hash FROM users WHERE email = $1", [body.email]);
     if (user.rowCount === 0) {
-      return res.status(401).json({ message: "Credenciais invalidas." });
+      return res.status(401).json({ message: "Você ainda não tem cadastro. Que tal criar uma conta agora?" });
     }
 
     const match = await bcrypt.compare(body.password, user.rows[0].password_hash);
     if (!match) {
-      return res.status(401).json({ message: "Credenciais invalidas." });
+      return res.status(401).json({ message: "Senha incorreta. Verifique os dados ou recupere sua senha." });
     }
 
     const token = buildToken(user.rows[0].id);

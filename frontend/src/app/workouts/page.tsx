@@ -233,17 +233,17 @@ export default function WorkoutsPage() {
               </div>
               <div>
                 <div className="flex flex-col">
-                  <p className="text-sm font-black text-white tracking-tight">
+                  <p className="text-base font-black text-white tracking-tight uppercase">
                     {WORKOUT_TYPES.find(t => t.id === item.type)?.label || 'Sessão'} • {item.duration_minutes} min
                   </p>
-                  <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">
-                    {new Date(item.date).toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit", year: "numeric" })}
+                  <p className="text-[10px] font-bold text-slate-500 uppercase tracking-[0.2em] mt-0.5">
+                    {new Date(item.date).toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit", year: "numeric" }).replace(/\//g, '-')}
                   </p>
                 </div>
-                <div className="flex items-center gap-2 mt-1">
-                  <div className="flex items-center gap-1 text-[10px] font-bold text-amber-500/80">
+                <div className="flex items-center gap-2 mt-1.5">
+                  <div className="flex items-center gap-1.5 text-[10px] font-black text-amber-500 bg-amber-500/10 px-2 py-0.5 rounded-md border border-amber-500/10">
                     <Flame size={10} />
-                    <span>{Number(item.calories_burned).toFixed(0)} kcal</span>
+                    <span>{Number(item.calories_burned).toFixed(0)} KCAL</span>
                   </div>
                 </div>
               </div>

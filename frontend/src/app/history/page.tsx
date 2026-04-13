@@ -22,8 +22,8 @@ import { History, Calendar, Star, LayoutDashboard, Target, Flame } from "lucide-
 import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/Badge";
 
-// Helper para formatar a data
-function formatDate(dateStr: string) {
+// Helper para formatar a data amigável
+function formatFriendlyDate(dateStr: string) {
   const date = new Date(dateStr);
   const today = new Date();
   const yesterday = new Date();
@@ -97,8 +97,10 @@ export default function HistoryPage() {
                       <Calendar size={18} />
                     </div>
                     <div>
-                      <p className="font-bold text-white tracking-tight">{formatDate(item.date)}</p>
-                      <p className="text-[10px] font-black uppercase tracking-widest text-slate-500">Resumo do Dia</p>
+                      <p className="text-sm font-black text-white tracking-tight uppercase">Resumo do Dia</p>
+                      <p className="text-[10px] font-bold text-slate-500 uppercase tracking-[0.2em] mt-0.5">
+                        {new Date(item.date).toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit", year: "numeric" }).replace(/\//g, '-')}
+                      </p>
                     </div>
                   </div>
                   <Badge variant={Number(item.completed_missions_count) >= 2 ? "success" : "secondary"} className="h-7 px-3">

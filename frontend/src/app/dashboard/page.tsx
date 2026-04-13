@@ -84,8 +84,8 @@ export default function DashboardPage() {
 
   const progress = data?.dailyProgress;
   const profile = data?.profile;
-  const caloriePercent = profile ? ((progress?.calories_total || 0) / profile.calorie_goal) * 100 : 0;
-  const proteinPercent = profile ? ((progress?.protein_total || 0) / profile.protein_goal) * 100 : 0;
+  const caloriePercent = profile?.calorie_goal ? ((progress?.calories_total || 0) / profile.calorie_goal) * 100 : 0;
+  const proteinPercent = profile?.protein_goal ? ((progress?.protein_total || 0) / profile.protein_goal) * 100 : 0;
   const userName = profile?.name || profile?.email?.split("@")[0] || "Atleta";
 
   async function updateProfile(event: FormEvent<HTMLFormElement>) {
@@ -451,53 +451,53 @@ export default function DashboardPage() {
 
         <AnimatePresence>
           {showOnboarding && (
-            <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 overflow-y-auto bg-slate-950/80 backdrop-blur-sm">
+            <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 overflow-y-auto bg-slate-950/90 backdrop-blur-md">
               <motion.div
-                initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                initial={{ opacity: 0, scale: 0.9, y: 20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                className="relative w-full max-w-lg my-auto overflow-hidden rounded-3xl bg-slate-900 border border-slate-700 shadow-2xl"
+                exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                className="relative w-full max-w-lg my-auto overflow-hidden rounded-[2.5rem] bg-slate-900 border border-slate-700 shadow-2xl"
               >
-                <div className="bg-gradient-to-r from-primary/20 to-secondary/20 p-6 sm:p-8 text-center">
+                <div className="bg-gradient-to-r from-primary/20 to-secondary/20 p-6 sm:p-10 text-center border-b border-white/5">
                   <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-slate-900 border border-slate-700 shadow-xl">
                     <Sparkles className="text-primary" size={32} />
                   </div>
-                  <h3 className="text-2xl font-black text-white">Bem-vindo ao FitQuest!</h3>
-                  <p className="mt-2 text-sm text-slate-400">
-                    Vamos calcular seu plano ideal baseado no seu metabolismo real.
+                  <h3 className="text-2xl font-black text-white tracking-tight">Personalize sua Experiência</h3>
+                  <p className="mt-2 text-sm text-slate-400 font-medium">
+                    Calculamos seu plano ideal baseado no seu metabolismo real.
                   </p>
                 </div>
 
-                <div className="p-6 sm:p-8 max-h-[70vh] overflow-y-auto custom-scrollbar">
-                  <form className="grid gap-5 md:grid-cols-2" onSubmit={updateProfile}>
-                    <div className="space-y-1.5">
-                      <label className="text-[10px] font-black uppercase text-slate-500 ml-1">Sexo</label>
-                      <select name="gender" className="w-full rounded-xl border border-slate-700 bg-slate-900/70 px-3 py-2.5 text-sm text-slate-100 outline-none focus:border-primary transition-all" required>
+                <div className="p-6 sm:p-10 max-h-[60vh] overflow-y-auto custom-scrollbar">
+                  <form className="grid gap-6 md:grid-cols-2" id="onboardingForm" onSubmit={updateProfile}>
+                    <div className="space-y-2">
+                      <label className="text-[10px] font-black uppercase text-slate-500 ml-1 tracking-widest">Sexo</label>
+                      <select name="gender" className="w-full rounded-xl border border-slate-700 bg-slate-950/50 px-4 py-3 text-sm text-slate-100 outline-none focus:border-primary transition-all appearance-none" required>
                         <option value="male">Masculino</option>
                         <option value="female">Feminino</option>
                       </select>
                     </div>
-                    <div className="space-y-1.5">
-                      <label className="text-[10px] font-black uppercase text-slate-500 ml-1">Idade</label>
-                      <Input name="age" type="number" defaultValue={25} placeholder="25" className="px-3" required />
+                    <div className="space-y-2">
+                      <label className="text-[10px] font-black uppercase text-slate-500 ml-1 tracking-widest">Idade</label>
+                      <Input name="age" type="number" defaultValue={25} placeholder="25" className="h-11" required />
                     </div>
-                    <div className="space-y-1.5">
-                      <label className="text-[10px] font-black uppercase text-slate-500 ml-1">Peso (kg)</label>
+                    <div className="space-y-2">
+                      <label className="text-[10px] font-black uppercase text-slate-500 ml-1 tracking-widest">Peso (kg)</label>
                       <div className="relative group">
                         <Scale className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-primary transition-colors" size={16} />
-                        <Input name="weight" type="number" defaultValue={profile?.weight} placeholder="00.0" className="pl-10" required />
+                        <Input name="weight" type="number" defaultValue={profile?.weight} placeholder="70.0" className="pl-10 h-11" required />
                       </div>
                     </div>
-                    <div className="space-y-1.5">
-                      <label className="text-[10px] font-black uppercase text-slate-500 ml-1">Altura (cm)</label>
+                    <div className="space-y-2">
+                      <label className="text-[10px] font-black uppercase text-slate-500 ml-1 tracking-widest">Altura (cm)</label>
                       <div className="relative group">
                         <Activity className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-primary transition-colors" size={16} />
-                        <Input name="height" type="number" defaultValue={profile?.height} placeholder="170" className="pl-10" required />
+                        <Input name="height" type="number" defaultValue={profile?.height} placeholder="170" className="pl-10 h-11" required />
                       </div>
                     </div>
-                    <div className="space-y-1.5 md:col-span-2">
-                      <label className="text-[10px] font-black uppercase text-slate-500 ml-1">Nível de Atividade</label>
-                      <select name="activityLevel" className="w-full rounded-xl border border-slate-700 bg-slate-900/70 px-3 py-2.5 text-sm text-slate-100 outline-none focus:border-primary transition-all" required>
+                    <div className="space-y-2 md:col-span-2">
+                      <label className="text-[10px] font-black uppercase text-slate-500 ml-1 tracking-widest">Nível de Atividade</label>
+                      <select name="activityLevel" className="w-full rounded-xl border border-slate-700 bg-slate-950/50 px-4 py-3 text-sm text-slate-100 outline-none focus:border-primary transition-all appearance-none" required>
                         <option value="1.2">Sedentário (Pouco exercício)</option>
                         <option value="1.375">Leve (1-3 dias/semana)</option>
                         <option value="1.55">Moderado (3-5 dias/semana)</option>
@@ -505,26 +505,30 @@ export default function DashboardPage() {
                         <option value="1.9">Atleta (Treino pesado diário)</option>
                       </select>
                     </div>
-                    <div className="space-y-1.5 md:col-span-2">
-                      <label className="text-[10px] font-black uppercase text-slate-500 ml-1">Seu Objetivo</label>
+                    <div className="space-y-2 md:col-span-2">
+                      <label className="text-[10px] font-black uppercase text-slate-500 ml-1 tracking-widest">Seu Objetivo Principal</label>
                       <select
                         name="goalType"
-                        className="w-full rounded-xl border border-slate-700 bg-slate-900/70 px-3 py-2.5 text-sm text-slate-100 outline-none focus:border-primary transition-all"
+                        className="w-full rounded-xl border border-slate-700 bg-slate-950/50 px-4 py-3 text-sm text-slate-100 outline-none focus:border-primary transition-all appearance-none"
                         defaultValue={profile?.goal_type || "manter"}
                         required
                       >
                         <option value="emagrecer">Emagrecer - Perda de gordura</option>
-                        <option value="manter">Manter - Equilíbrio saudável</option>
+                        <option value="manter">Manter - Estilo de vida saudável</option>
                         <option value="ganhar_massa">Ganhar Massa - Hipertrofia</option>
                       </select>
                     </div>
-                    
-                    <div className="md:col-span-2 pt-2">
-                      <Button className="w-full py-4 text-base font-black rounded-2xl shadow-xl shadow-primary/20" type="submit" disabled={saving}>
-                        {saving ? "Calculando seu plano..." : "Começar Minha Jornada"}
-                      </Button>
-                    </div>
                   </form>
+                </div>
+                <div className="p-6 sm:p-10 border-t border-white/5 bg-slate-900/50">
+                  <Button 
+                    className="w-full py-6 text-base font-black rounded-2xl shadow-xl shadow-primary/20" 
+                    type="submit" 
+                    form="onboardingForm"
+                    disabled={saving}
+                  >
+                    {saving ? "Calculando seu Plano..." : "Começar Minha Jornada"}
+                  </Button>
                 </div>
               </motion.div>
             </div>

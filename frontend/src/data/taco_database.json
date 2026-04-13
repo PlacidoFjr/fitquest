@@ -30,6 +30,46 @@
     "protein": 14.2
   },
   {
+    "name": "Frango, peito, grelhado (filé)",
+    "calories": 159,
+    "protein": 32.0
+  },
+  {
+    "name": "Frango, peito, cozido e desfiado",
+    "calories": 163,
+    "protein": 31.5
+  },
+  {
+    "name": "Frango, assado (pedaço médio)",
+    "calories": 215,
+    "protein": 27.0
+  },
+  {
+    "name": "Frango, empanado (nugget)",
+    "calories": 290,
+    "protein": 15.0
+  },
+  {
+    "name": "Sanduíche, hambúrguer simples",
+    "calories": 250,
+    "protein": 13.0
+  },
+  {
+    "name": "Sanduíche, queijo quente",
+    "calories": 280,
+    "protein": 10.0
+  },
+  {
+    "name": "Sanduíche, pão com ovo",
+    "calories": 245,
+    "protein": 11.5
+  },
+  {
+    "name": "Sanduíche, wrap de frango",
+    "calories": 220,
+    "protein": 16.0
+  },
+  {
     "name": "Arroz, integral, cru",
     "calories": 360,
     "protein": 7.323285869565217
