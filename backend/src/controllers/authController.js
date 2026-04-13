@@ -40,8 +40,8 @@ async function googleLogin(req, res) {
       const passwordHash = await bcrypt.hash(randomPassword, 10);
       
       const newUser = await db.query(
-        `INSERT INTO users (email, password_hash, weight, height, goal_type, calorie_goal, protein_goal)
-         VALUES ($1, $2, 70, 170, 'manter', 2200, 120)
+        `INSERT INTO users (email, password_hash, weight, height, goal_type, calorie_goal, protein_goal, age, gender, activity_level)
+         VALUES ($1, $2, 70, 170, 'manter', 2200, 120, 25, 'male', 1.375)
          RETURNING id, email`,
         [email, passwordHash]
       );
@@ -69,8 +69,8 @@ async function register(req, res) {
 
     const passwordHash = await bcrypt.hash(body.password, 10);
     const user = await db.query(
-      `INSERT INTO users (email, name, password_hash, weight, height, goal_type, calorie_goal, protein_goal)
-       VALUES ($1, $2, $3, 70, 170, 'manter', 2200, 120)
+      `INSERT INTO users (email, name, password_hash, weight, height, goal_type, calorie_goal, protein_goal, age, gender, activity_level)
+       VALUES ($1, $2, $3, 70, 170, 'manter', 2200, 120, 25, 'male', 1.375)
        RETURNING id, email, name`,
       [body.email, body.name || body.email.split("@")[0], passwordHash]
     );
