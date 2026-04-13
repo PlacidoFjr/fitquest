@@ -22,8 +22,8 @@ CREATE TABLE IF NOT EXISTS meals (
   user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
   date DATE NOT NULL,
   name VARCHAR(120) NOT NULL,
-  calories INTEGER NOT NULL CHECK (calories >= 0),
-  protein INTEGER NOT NULL CHECK (protein >= 0),
+  calories NUMERIC(10,2) NOT NULL CHECK (calories >= 0),
+  protein NUMERIC(10,2) NOT NULL CHECK (protein >= 0),
   created_at TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
@@ -33,17 +33,19 @@ CREATE TABLE IF NOT EXISTS workouts (
   id SERIAL PRIMARY KEY,
   user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
   date DATE NOT NULL,
+  type VARCHAR(50) DEFAULT 'musculação',
+  duration_minutes INTEGER DEFAULT 60,
+  calories_burned NUMERIC(10,2) DEFAULT 0,
   completed BOOLEAN NOT NULL DEFAULT true,
-  created_at TIMESTAMP NOT NULL DEFAULT NOW(),
-  UNIQUE(user_id, date)
+  created_at TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
 CREATE TABLE IF NOT EXISTS daily_progress (
   id SERIAL PRIMARY KEY,
   user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
   date DATE NOT NULL,
-  calories_total INTEGER NOT NULL DEFAULT 0,
-  protein_total INTEGER NOT NULL DEFAULT 0,
+  calories_total NUMERIC(10,2) NOT NULL DEFAULT 0,
+  protein_total NUMERIC(10,2) NOT NULL DEFAULT 0,
   mission_protein_completed BOOLEAN NOT NULL DEFAULT false,
   mission_calories_completed BOOLEAN NOT NULL DEFAULT false,
   mission_workout_completed BOOLEAN NOT NULL DEFAULT false,
