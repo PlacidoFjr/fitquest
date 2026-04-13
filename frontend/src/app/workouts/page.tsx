@@ -13,6 +13,7 @@ import { Input } from "@/components/ui/Input";
 import { apiRequest } from "@/lib/api";
 import { getToken } from "@/lib/auth";
 import { cn } from "@/lib/cn";
+import { UserProfile } from "@/types";
 
 interface WorkoutItem {
   id: number;
@@ -24,19 +25,20 @@ interface WorkoutItem {
 }
 
 const WORKOUT_TYPES = [
-  { id: 'musculação', label: 'Musculação', icon: <Dumbbell size={14} />, kcalPerMin: 5 },
-  { id: 'corrida', label: 'Corrida', icon: <Activity size={14} />, kcalPerMin: 10 },
-  { id: 'caminhada', label: 'Caminhada', icon: <Activity size={14} />, kcalPerMin: 4 },
-  { id: 'ciclismo', label: 'Ciclismo', icon: <Activity size={14} />, kcalPerMin: 8 },
-  { id: 'natação', label: 'Natação', icon: <Activity size={14} />, kcalPerMin: 9 },
-  { id: 'hiit', label: 'HIIT', icon: <Zap size={14} />, kcalPerMin: 12 },
-  { id: 'futebol', label: 'Futebol', icon: <Activity size={14} />, kcalPerMin: 9 },
+  { id: 'musculação', label: 'Musculação', icon: <Dumbbell size={14} />, met: 3.5 },
+  { id: 'corrida', label: 'Corrida', icon: <Activity size={14} />, met: 8.0 },
+  { id: 'caminhada', label: 'Caminhada', icon: <Activity size={14} />, met: 3.5 },
+  { id: 'ciclismo', label: 'Ciclismo', icon: <Activity size={14} />, met: 7.5 },
+  { id: 'natação', label: 'Natação', icon: <Activity size={14} />, met: 7.0 },
+  { id: 'hiit', label: 'HIIT', icon: <Zap size={14} />, met: 10.0 },
+  { id: 'futebol', label: 'Futebol', icon: <Activity size={14} />, met: 8.0 },
 ];
 
 export default function WorkoutsPage() {
   const router = useRouter();
   const { showToast } = useToast();
   const [workouts, setWorkouts] = useState<WorkoutItem[]>([]);
+  const [profile, setProfile] = useState<UserProfile | null>(null);
   const [loading, setLoading] = useState(false);
   const [showForm, setShowForm] = useState(false);
 
@@ -44,13 +46,20 @@ export default function WorkoutsPage() {
   const [type, setType] = useState('musculação');
   const [duration, setDuration] = useState(60);
 
-  async function load(token: string) {
-    const data = await apiRequest<WorkoutItem[]>("/api/workouts/history", "GET", undefined, token);
-    setWorkouts(data);
+  async function loadData(token: string) {
+    const [workoutsData, dashboardData] = await Promise.all([
+      apiRequest<WorkoutItem[]>("/api/workouts/history", "GET", undefined, token),
+      apiRequest<{ profile: UserProfile }>("/api/dashboard", "GET", undefined, token)
+    ]);
+    setWorkouts(workoutsData);
+    setProfile(dashboardData.profile);
   }
 
   const selectedType = WORKOUT_TYPES.find(t => t.id === type) || WORKOUT_TYPES[0];
-  const estimatedKcal = duration * selectedType.kcalPerMin;
+  
+  // Fórmula MET: (MET * Peso em kg * Tempo em horas)
+  const userWeight = profile?.weight || 75; // 75kg como fallback se não houver perfil
+  const estimatedKcal = Math.round(selectedType.met * userWeight * (duration / 60));
 
   async function handleDeleteWorkout(id: number) {
     const token = getToken();
@@ -58,7 +67,7 @@ export default function WorkoutsPage() {
     try {
       await apiRequest(`/api/workouts/${id}`, "DELETE", undefined, token);
       showToast("Treino removido.");
-      await load(token);
+      await loadData(token);
     } catch (error) {
       showToast((error as Error).message, "error");
     }
@@ -70,8 +79,8 @@ export default function WorkoutsPage() {
       router.push("/");
       return;
     }
-    load(token).catch(() => {
-      showToast("Erro ao carregar treinos.", "error");
+    loadData(token).catch(() => {
+      showToast("Erro ao carregar dados.", "error");
       router.push("/");
     });
   }, [router, showToast]);
@@ -176,7 +185,7 @@ export default function WorkoutsPage() {
                         duration_minutes: duration,
                         calories_burned: estimatedKcal
                       }, token);
-                      await load(token);
+                      await loadData(token);
                       showToast(`Treino de ${selectedType.label} registrado! +50 XP.`);
                       setShowForm(false);
                     } catch (error) {
