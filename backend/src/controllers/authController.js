@@ -12,6 +12,9 @@ function buildToken(userId) {
   return jwt.sign({ userId }, process.env.JWT_SECRET, { expiresIn: "7d" });
 }
 
+const { sendWelcomeEmail, sendRecoveryEmail } = require("../services/mailService");
+const crypto = require("crypto");
+
 async function register(req, res) {
   try {
     const body = authSchema.parse(req.body);
@@ -28,6 +31,11 @@ async function register(req, res) {
       [body.email, passwordHash]
     );
     const token = buildToken(user.rows[0].id);
+    
+    // Enviar email de boas-vindas de forma assíncrona (não trava a resposta)
+    const userName = body.email.split("@")[0];
+    sendWelcomeEmail(body.email, userName).catch(err => console.error("Erro email boas-vindas:", err));
+
     return res.status(201).json({ token, user: user.rows[0] });
   } catch (error) {
     return res.status(400).json({ message: error.message });
@@ -54,4 +62,55 @@ async function login(req, res) {
   }
 }
 
-module.exports = { register, login };
+async function forgotPassword(req, res) {
+  try {
+    const { email } = req.body;
+    const user = await db.query("SELECT id, email FROM users WHERE email = $1", [email]);
+    
+    if (user.rowCount === 0) {
+      // Por segurança, não informamos que o e-mail não existe
+      return res.json({ message: "Se este e-mail estiver cadastrado, um link de recuperação será enviado." });
+    }
+
+    const resetToken = crypto.randomBytes(32).toString("hex");
+    const expires = new Date(Date.now() + 3600000); // 1 hora
+
+    await db.query(
+      "UPDATE users SET reset_token = $1, reset_expires = $2 WHERE id = $3",
+      [resetToken, expires, user.rows[0].id]
+    );
+
+    const userName = email.split("@")[0];
+    await sendRecoveryEmail(email, userName, resetToken);
+
+    return res.json({ message: "Se este e-mail estiver cadastrado, um link de recuperação será enviado." });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+}
+
+async function resetPassword(req, res) {
+  try {
+    const { token, newPassword } = req.body;
+    const user = await db.query(
+      "SELECT id FROM users WHERE reset_token = $1 AND reset_expires > NOW()",
+      [token]
+    );
+
+    if (user.rowCount === 0) {
+      return res.status(400).json({ message: "Token inválido ou expirado." });
+    }
+
+    const passwordHash = await bcrypt.hash(newPassword, 10);
+    await db.query(
+      "UPDATE users SET password_hash = $1, reset_token = NULL, reset_expires = NULL WHERE id = $2",
+      [passwordHash, user.rows[0].id]
+    );
+
+    return res.json({ message: "Senha redefinida com sucesso." });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+}
+
+module.exports = { register, login, forgotPassword, resetPassword };

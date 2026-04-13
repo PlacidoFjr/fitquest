@@ -11,12 +11,12 @@ import { apiRequest } from "@/lib/api";
 import { getToken, setToken } from "@/lib/auth";
 import { cn } from "@/lib/cn";
 
-import { Dumbbell, Mail, Lock, Sparkles } from "lucide-react";
+import { Dumbbell, Mail, Lock, Sparkles, KeyRound, ArrowLeft } from "lucide-react";
 
 export default function Home() {
   const router = useRouter();
   const { showToast } = useToast();
-  const [mode, setMode] = useState<"login" | "register">("login");
+  const [mode, setMode] = useState<"login" | "register" | "forgot">("login");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -24,6 +24,20 @@ export default function Home() {
   useEffect(() => {
     if (getToken()) router.push("/dashboard");
   }, [router]);
+
+  async function handleForgotPassword(e: FormEvent) {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      await apiRequest("/api/auth/forgot-password", "POST", { email });
+      showToast("Verifique seu e-mail para recuperar a senha.");
+      setMode("login");
+    } catch (error) {
+      showToast((error as Error).message, "error");
+    } finally {
+      setLoading(false);
+    }
+  }
 
   async function submit(event: FormEvent) {
     event.preventDefault();
@@ -67,62 +81,108 @@ export default function Home() {
             Fit<span className="text-primary">Quest</span>
           </h1>
           <p className="mt-3 text-slate-400 font-medium tracking-tight">
-            Transforme sua disciplina em conquistas épicas
+            {mode === "forgot" ? "Recupere sua jornada épica" : "Transforme sua disciplina em conquistas épicas"}
           </p>
         </div>
 
         <Card variant="glass" className="p-8 border-white/5 backdrop-blur-xl">
-          <div className="flex p-1 mb-8 rounded-2xl bg-slate-950/50 border border-white/5">
-            <button
-              type="button"
-              onClick={() => setMode("login")}
-              className={cn(
-                "flex-1 py-2.5 text-sm font-black rounded-xl transition-all duration-300",
-                mode === "login" ? "bg-primary text-primary-foreground shadow-lg" : "text-slate-500 hover:text-slate-300"
-              )}
-            >
-              Login
-            </button>
-            <button
-              type="button"
-              onClick={() => setMode("register")}
-              className={cn(
-                "flex-1 py-2.5 text-sm font-black rounded-xl transition-all duration-300",
-                mode === "register" ? "bg-primary text-primary-foreground shadow-lg" : "text-slate-500 hover:text-slate-300"
-              )}
-            >
-              Cadastro
-            </button>
-          </div>
+          {mode !== "forgot" ? (
+            <>
+              <div className="flex p-1 mb-8 rounded-2xl bg-slate-950/50 border border-white/5">
+                <button
+                  type="button"
+                  onClick={() => setMode("login")}
+                  className={cn(
+                    "flex-1 py-2.5 text-sm font-black rounded-xl transition-all duration-300",
+                    mode === "login" ? "bg-primary text-primary-foreground shadow-lg" : "text-slate-500 hover:text-slate-300"
+                  )}
+                >
+                  Login
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setMode("register")}
+                  className={cn(
+                    "flex-1 py-2.5 text-sm font-black rounded-xl transition-all duration-300",
+                    mode === "register" ? "bg-primary text-primary-foreground shadow-lg" : "text-slate-500 hover:text-slate-300"
+                  )}
+                >
+                  Cadastro
+                </button>
+              </div>
 
-          <form className="space-y-5" onSubmit={submit}>
-            <Input
-              placeholder="Seu melhor email"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              icon={<Mail size={18} />}
-              required
-            />
-            <Input
-              placeholder="Sua senha secreta"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              icon={<Lock size={18} />}
-              required
-            />
-            
-            <Button 
-              className="w-full h-12 text-base font-black rounded-2xl shadow-2xl shadow-primary/20 mt-2" 
-              type="submit"
-              loading={loading}
-            >
-              {mode === "login" ? "Entrar na Arena" : "Iniciar Minha Jornada"}
-          </Button>
-        </form>
-      </Card>
-    </motion.div>
+              <form className="space-y-5" onSubmit={submit}>
+                <Input
+                  placeholder="Seu melhor email"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  icon={<Mail size={18} />}
+                  required
+                />
+                <Input
+                  placeholder="Sua senha secreta"
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  icon={<Lock size={18} />}
+                  required
+                />
+                
+                <div className="flex justify-end">
+                  <button 
+                    type="button"
+                    onClick={() => setMode("forgot")}
+                    className="text-xs font-bold text-slate-500 hover:text-primary transition-colors"
+                  >
+                    Esqueceu a senha?
+                  </button>
+                </div>
+
+                <Button 
+                  className="w-full h-12 text-base font-black rounded-2xl shadow-2xl shadow-primary/20 mt-2" 
+                  type="submit"
+                  loading={loading}
+                >
+                  {mode === "login" ? "Entrar na Arena" : "Iniciar Minha Jornada"}
+                </Button>
+              </form>
+            </>
+          ) : (
+            <div className="animate-in">
+              <button 
+                onClick={() => setMode("login")}
+                className="mb-6 flex items-center gap-2 text-xs font-black uppercase tracking-widest text-slate-500 hover:text-white transition-colors"
+              >
+                <ArrowLeft size={14} /> Voltar ao Login
+              </button>
+              
+              <h3 className="mb-2 text-xl font-black text-white">Esqueceu a senha?</h3>
+              <p className="mb-8 text-sm text-slate-400 font-medium">
+                Insira seu e-mail abaixo para receber as instruções de recuperação.
+              </p>
+
+              <form onSubmit={handleForgotPassword} className="space-y-5">
+                <Input
+                  placeholder="Seu email cadastrado"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  icon={<Mail size={18} />}
+                  required
+                />
+                <Button 
+                  className="w-full h-12 text-base font-black rounded-2xl shadow-2xl shadow-primary/20" 
+                  type="submit"
+                  loading={loading}
+                >
+                  <KeyRound size={18} /> Enviar Link
+                </Button>
+              </form>
+            </div>
+          )}
+        </Card>
+      </motion.div>
     </div>
   );
 }
