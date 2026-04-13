@@ -38,14 +38,22 @@ function parseTaco() {
     if (!row || row.length < 5) continue;
 
     const name = row[1]; // Coluna B: Nome do Alimento
-    const kcal = row[2]; // Coluna C: Energia (kcal)
-    const protein = row[3]; // Coluna D: Proteína (g)
+    const kcal = row[3]; // Coluna D: Energia (kcal)
+    const protein = row[5]; // Coluna F: Proteína (g)
+
+    // Função auxiliar para limpar valores numéricos (trata 'Tr' como 0 e 'NA' como null)
+    const parseValue = (val) => {
+      if (val === "Tr") return 0;
+      if (val === "NA" || val === null || val === undefined) return 0;
+      const num = parseFloat(val);
+      return isNaN(num) ? 0 : num;
+    };
 
     if (name && typeof name === "string" && !isNaN(parseFloat(kcal))) {
       foods.push({
         name: name.trim(),
-        calories: Math.round(parseFloat(kcal)) || 0,
-        protein: parseFloat(protein) || 0
+        calories: Math.round(parseValue(kcal)),
+        protein: parseValue(protein)
       });
     }
   }
