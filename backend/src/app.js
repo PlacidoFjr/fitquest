@@ -14,10 +14,9 @@ const db = require("./config/db");
 // Função para rodar migrações/scripts SQL automaticamente no banco de dados
 const runMigrations = async () => {
   try {
-    console.log("Iniciando migrações de banco de dados...");
+    console.log("Iniciando migrações de banco de dados (Supabase)...");
     
-    // 1. Garante que a tabela workouts tenha as colunas novas (type, duration_minutes, calories_burned)
-    // Usamos um bloco anônimo para evitar erros se as colunas já existirem
+    // 1. Garante que a tabela workouts tenha as colunas novas
     await db.query(`
       DO $$ 
       BEGIN 
@@ -38,17 +37,28 @@ const runMigrations = async () => {
       END $$;
     `);
 
-    // 2. Garante que as colunas de calorias e proteínas sejam NUMERIC para evitar erro de integer
-    await db.query(`
-      ALTER TABLE meals ALTER COLUMN calories TYPE NUMERIC(10,2);
-      ALTER TABLE meals ALTER COLUMN protein TYPE NUMERIC(10,2);
-      ALTER TABLE daily_progress ALTER COLUMN calories_total TYPE NUMERIC(10,2);
-      ALTER TABLE daily_progress ALTER COLUMN protein_total TYPE NUMERIC(10,2);
-    `);
+    // 2. Garante que as colunas de calorias e proteínas sejam NUMERIC para aceitar decimais (ex: 0.8)
+    // Usamos blocks separados para garantir que cada um rode ou dê erro isolado
+    const alterColumns = [
+      "ALTER TABLE meals ALTER COLUMN calories TYPE NUMERIC(10,2) USING calories::numeric",
+      "ALTER TABLE meals ALTER COLUMN protein TYPE NUMERIC(10,2) USING protein::numeric",
+      "ALTER TABLE daily_progress ALTER COLUMN calories_total TYPE NUMERIC(10,2) USING calories_total::numeric",
+      "ALTER TABLE daily_progress ALTER COLUMN protein_total TYPE NUMERIC(10,2) USING protein_total::numeric",
+      "ALTER TABLE users ALTER COLUMN calorie_goal TYPE NUMERIC(10,2) USING calorie_goal::numeric",
+      "ALTER TABLE users ALTER COLUMN protein_goal TYPE NUMERIC(10,2) USING protein_goal::numeric"
+    ];
+
+    for (const sql of alterColumns) {
+      try {
+        await db.query(sql);
+      } catch (e) {
+        console.warn(`Aviso na migração (${sql.split(' ')[2]}): ${e.message}`);
+      }
+    }
 
     console.log("Migrações concluídas com sucesso!");
   } catch (err) {
-    console.error("Erro ao rodar migrações:", err);
+    console.error("ERRO CRÍTICO nas migrações:", err);
   }
 };
 
