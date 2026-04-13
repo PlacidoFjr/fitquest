@@ -11,7 +11,7 @@ import { apiRequest } from "@/lib/api";
 import { getToken, setToken } from "@/lib/auth";
 import { cn } from "@/lib/cn";
 
-import { Dumbbell, Mail, Lock, Sparkles, KeyRound, ArrowLeft } from "lucide-react";
+import { Dumbbell, Mail, Lock, Sparkles, KeyRound, ArrowLeft, User } from "lucide-react";
 
 export default function Home() {
   const router = useRouter();
@@ -19,6 +19,7 @@ export default function Home() {
   const [mode, setMode] = useState<"login" | "register" | "forgot">("login");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -72,7 +73,8 @@ export default function Home() {
     setLoading(true);
     try {
       const endpoint = mode === "login" ? "/api/auth/login" : "/api/auth/register";
-      const data = await apiRequest<{ token: string }>(endpoint, "POST", { email, password });
+      const payload = mode === "login" ? { email, password } : { email, password, name };
+      const data = await apiRequest<{ token: string }>(endpoint, "POST", payload);
       setToken(data.token);
       showToast(mode === "login" ? "Acesso autorizado. Bem-vindo!" : "Conta criada com sucesso.");
       router.push("/dashboard");
@@ -144,6 +146,16 @@ export default function Home() {
               </div>
 
               <form className="space-y-5" onSubmit={submit}>
+                {mode === "register" && (
+                  <Input
+                    placeholder="Como quer ser chamado?"
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    icon={<User size={18} />}
+                    required
+                  />
+                )}
                 <Input
                   placeholder="Seu melhor email"
                   type="email"

@@ -148,7 +148,7 @@ export default function MealsPage() {
                     >
                       <span className="text-sm font-bold text-white">{food.name}</span>
                       <span className="text-[10px] uppercase text-slate-500 font-black">
-                        {food.calories} kcal | {food.protein}g proteína (por 100g)
+                        {food.calories} kcal | {Number(food.protein).toFixed(1)}g proteína (por 100g)
                       </span>
                     </button>
                   ))}
@@ -156,23 +156,28 @@ export default function MealsPage() {
               )}
             </div>
 
-            <Input
-              placeholder="Peso (g)"
-              type="number"
-              value={weight || ""}
-              onChange={(e) => handleWeightChange(Number(e.target.value))}
-              icon={<Scale size={18} />}
-              required
-            />
+            <div className="relative">
+              <Input
+                placeholder="Peso (g)"
+                type="number"
+                value={weight || ""}
+                onChange={(e) => handleWeightChange(Number(e.target.value))}
+                icon={<Scale size={18} />}
+                required
+              />
+              <span className="absolute right-10 top-1/2 -translate-y-1/2 text-[10px] font-black text-slate-500 uppercase pointer-events-none">
+                Gramas
+              </span>
+            </div>
 
             <div className="flex gap-2">
               <div className="flex-1 rounded-xl bg-slate-950/50 border border-white/5 p-2 flex flex-col items-center justify-center">
                 <span className="text-[10px] font-black text-slate-500 uppercase">Kcal</span>
-                <span className="text-sm font-bold text-white">{calories}</span>
+                <span className="text-sm font-bold text-white">{Number(calories).toFixed(0)}</span>
               </div>
               <div className="flex-1 rounded-xl bg-slate-950/50 border border-white/5 p-2 flex flex-col items-center justify-center">
                 <span className="text-[10px] font-black text-slate-500 uppercase">Prot (g)</span>
-                <span className="text-sm font-bold text-white">{protein}</span>
+                <span className="text-sm font-bold text-white">{Number(protein).toFixed(1)}</span>
               </div>
             </div>
           </div>
@@ -209,10 +214,10 @@ export default function MealsPage() {
                 <p className="font-bold text-white tracking-tight">{meal.name}</p>
                 <div className="flex gap-3 mt-0.5">
                   <span className="text-[10px] font-black uppercase tracking-tighter text-slate-500">
-                    <span className="text-secondary">{meal.calories}</span> KCAL
+                    <span className="text-secondary">{Number(meal.calories).toFixed(0)}</span> KCAL
                   </span>
                   <span className="text-[10px] font-black uppercase tracking-tighter text-slate-500">
-                    <span className="text-primary">{meal.protein}G</span> PROTEÍNA
+                    <span className="text-primary">{Number(meal.protein).toFixed(1)}G</span> PROTEÍNA
                   </span>
                 </div>
               </div>

@@ -1,11 +1,11 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { Dumbbell, LayoutDashboard, LogOut, Menu, UserCircle2, UtensilsCrossed, X } from "lucide-react";
+import { Bell, Dumbbell, LayoutDashboard, LogOut, Menu, UserCircle2, UtensilsCrossed, X } from "lucide-react";
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { clearToken } from "@/lib/auth";
+import { clearToken, getToken } from "@/lib/auth";
 import { cn } from "@/lib/cn";
 import { Button } from "./ui/Button";
 
@@ -21,12 +21,50 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [notificationOpen, setNotificationOpen] = useState(false);
+  const [canRequestNotification, setCanRequestNotification] = useState(false);
   const activePath = useMemo(() => pathname ?? "/dashboard", [pathname]);
 
   const handleLogout = () => {
     clearToken();
     router.push("/");
   };
+
+  const requestNotificationPermission = async () => {
+    if ('Notification' in window) {
+      const permission = await Notification.requestPermission();
+      if (permission === 'granted') {
+        setCanRequestNotification(false);
+        setNotificationOpen(false);
+      }
+    }
+  };
+
+  // Lógica de notificação simulada para Streak
+  useEffect(() => {
+    const token = getToken();
+    if (!token) return;
+    
+    // Verifica se já temos permissão
+    if ('Notification' in window) {
+      if (Notification.permission === 'default') {
+        setCanRequestNotification(true);
+      } else if (Notification.permission === 'granted') {
+        setCanRequestNotification(false);
+      }
+    }
+
+    // Simula uma verificação de streak
+    const lastCheck = localStorage.getItem("fitquest_streak_check");
+    const today = new Date().toDateString();
+    
+    if (lastCheck !== today) {
+      setTimeout(() => {
+        setNotificationOpen(true);
+        localStorage.setItem("fitquest_streak_check", today);
+      }, 2000);
+    }
+  }, []);
 
   return (
     <div className="min-h-screen bg-background text-foreground selection:bg-primary/30 selection:text-primary-foreground">
@@ -143,7 +181,48 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               ) : null}
             </AnimatePresence>
 
-          <main className="animate-in">{children}</main>
+          <main className="animate-in relative">{children}
+            <AnimatePresence>
+              {notificationOpen && (
+                <motion.div
+                  initial={{ opacity: 0, x: 100 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 100 }}
+                  className="fixed bottom-8 right-8 z-50 max-w-sm"
+                >
+                  <Card variant="glass" className="p-4 border-primary/20 bg-slate-900/90 shadow-2xl backdrop-blur-xl">
+                    <div className="flex gap-4">
+                      <div className="h-10 w-10 shrink-0 rounded-full bg-primary/20 flex items-center justify-center text-primary">
+                        <Bell size={20} className="animate-bounce" />
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-sm font-black text-white">Não perca seu Streak! 🔥</p>
+                        <p className="text-xs text-slate-400 mt-1 leading-relaxed">Você ainda não registrou suas missões hoje. Complete 2 missões para manter seu foguinho!</p>
+                        <div className="mt-3 flex flex-col gap-2">
+                          {canRequestNotification ? (
+                            <div className="flex gap-2">
+                              <Button size="sm" className="h-8 px-4 text-[10px]" onClick={requestNotificationPermission}>
+                                Ativar Notificações 🔥
+                              </Button>
+                              <Button size="sm" variant="ghost" className="h-8 px-4 text-[10px] text-slate-500" onClick={() => setNotificationOpen(false)}>
+                                Agora não
+                              </Button>
+                            </div>
+                          ) : (
+                            <div className="flex gap-2">
+                              <Button size="sm" className="h-8 px-4 text-[10px]" onClick={() => setNotificationOpen(false)}>
+                                Vou fazer agora!
+                              </Button>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </Card>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </main>
         </div>
       </div>
     </div>

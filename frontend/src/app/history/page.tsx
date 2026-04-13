@@ -18,9 +18,22 @@ interface HistoryItem {
   feedback_grade: string;
 }
 
-import { History, Calendar, Star, Zap, ChevronRight, LayoutDashboard } from "lucide-react";
+import { History, Calendar, Star, Zap, ChevronRight, LayoutDashboard, Target, Dumbbell } from "lucide-react";
 import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/Badge";
+
+// Helper para formatar a data
+function formatDate(dateStr: string) {
+  const date = new Date(dateStr);
+  const today = new Date();
+  const yesterday = new Date();
+  yesterday.setDate(today.getDate() - 1);
+
+  if (date.toDateString() === today.toDateString()) return "Hoje";
+  if (date.toDateString() === yesterday.toDateString()) return "Ontem";
+
+  return date.toLocaleDateString("pt-BR", { day: "2-digit", month: "short" });
+}
 
 export default function HistoryPage() {
   const router = useRouter();
@@ -84,21 +97,21 @@ export default function HistoryPage() {
                       <Calendar size={18} />
                     </div>
                     <div>
-                      <p className="font-bold text-white tracking-tight">{item.date}</p>
+                      <p className="font-bold text-white tracking-tight">{formatDate(item.date)}</p>
                       <p className="text-[10px] font-black uppercase tracking-widest text-slate-500">Resumo do Dia</p>
                     </div>
                   </div>
-                  <Badge variant={Number(item.feedback_grade) >= 8 ? "success" : "secondary"} className="h-7 px-3">
-                    Nota: {item.feedback_grade}
+                  <Badge variant={Number(item.completed_missions_count) >= 2 ? "success" : "secondary"} className="h-7 px-3">
+                    Status: {Number(item.completed_missions_count) === 3 ? "Lendário" : item.completed_missions_count >= 1 ? "Em Progresso" : "Iniciado"}
                   </Badge>
                 </div>
 
                 <div className="grid grid-cols-3 gap-4 pt-2 border-t border-white/5">
                   <div className="flex flex-col gap-1">
                     <span className="text-[10px] font-black uppercase tracking-tighter text-slate-500 flex items-center gap-1">
-                      <Zap size={10} className="text-primary" /> Missões
+                      <Target size={10} className="text-primary" /> Missões
                     </span>
-                    <p className="text-sm font-bold text-white">{item.completed_missions_count} Concluídas</p>
+                    <p className="text-sm font-bold text-white">{item.completed_missions_count}/3 Batidas</p>
                   </div>
                   <div className="flex flex-col gap-1">
                     <span className="text-[10px] font-black uppercase tracking-tighter text-slate-500 flex items-center gap-1">
@@ -108,10 +121,10 @@ export default function HistoryPage() {
                   </div>
                   <div className="flex flex-col gap-1">
                     <span className="text-[10px] font-black uppercase tracking-tighter text-slate-500 flex items-center gap-1">
-                      <Zap size={10} className="text-secondary" /> Macros
+                      <Flame size={10} className="text-secondary" /> Macros
                     </span>
                     <p className="text-xs font-bold text-slate-400">
-                      {item.calories_total}kcal | {item.protein_total}g
+                      {Number(item.calories_total).toFixed(0)} kcal | {Number(item.protein_total).toFixed(1)}g
                     </p>
                   </div>
                 </div>

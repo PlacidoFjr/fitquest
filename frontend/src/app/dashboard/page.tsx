@@ -66,7 +66,7 @@ export default function DashboardPage() {
   const proteinPercent = profile ? ((progress?.protein_total || 0) / profile.protein_goal) * 100 : 0;
   const levelXp = (profile?.total_xp || 0) % 100;
   const xpProgress = levelXp;
-  const userName = profile?.email?.split("@")[0] || "Atleta";
+  const userName = profile?.name || profile?.email?.split("@")[0] || "Atleta";
 
   async function updateProfile(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();

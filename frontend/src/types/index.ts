@@ -3,6 +3,7 @@ export type GoalType = "emagrecer" | "manter" | "ganhar_massa";
 export interface UserProfile {
   id: number;
   email: string;
+  name?: string;
   weight: number;
   height: number;
   goal_type: GoalType;
