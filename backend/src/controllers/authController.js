@@ -14,6 +14,49 @@ function buildToken(userId) {
 
 const { sendWelcomeEmail, sendRecoveryEmail } = require("../services/mailService");
 const crypto = require("crypto");
+const { OAuth2Client } = require("google-auth-library");
+
+const googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+
+async function googleLogin(req, res) {
+  try {
+    const { credential } = req.body;
+    const ticket = await googleClient.verifyIdToken({
+      idToken: credential,
+      audience: process.env.GOOGLE_CLIENT_ID,
+    });
+
+    const payload = ticket.getPayload();
+    const { email, name, sub: googleId } = payload;
+
+    // Verifica se o usuário já existe
+    let user = await db.query("SELECT id, email FROM users WHERE email = $1", [email]);
+
+    if (user.rowCount === 0) {
+      // Cria novo usuário via Google
+      // Nota: Como é login social, geramos um hash aleatório para a senha já que não será usada
+      const randomPassword = crypto.randomBytes(16).toString("hex");
+      const passwordHash = await bcrypt.hash(randomPassword, 10);
+      
+      const newUser = await db.query(
+        `INSERT INTO users (email, password_hash, weight, height, goal_type, calorie_goal, protein_goal)
+         VALUES ($1, $2, 70, 170, 'manter', 2200, 120)
+         RETURNING id, email`,
+        [email, passwordHash]
+      );
+      user = newUser;
+      
+      // Email de boas vindas para novo usuário social
+      sendWelcomeEmail(email, name || email.split("@")[0]).catch(err => console.error(err));
+    }
+
+    const token = buildToken(user.rows[0].id);
+    return res.json({ token, user: user.rows[0] });
+  } catch (error) {
+    console.error("Erro Google Login:", error);
+    return res.status(400).json({ message: "Falha na autenticação com Google." });
+  }
+}
 
 async function register(req, res) {
   try {

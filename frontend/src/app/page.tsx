@@ -25,6 +25,34 @@ export default function Home() {
     if (getToken()) router.push("/dashboard");
   }, [router]);
 
+  // Inicializa Google Login
+  useEffect(() => {
+    if (typeof window !== "undefined" && (window as any).google && mode !== "forgot") {
+      (window as any).google.accounts.id.initialize({
+        client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
+        callback: async (response: any) => {
+          setLoading(true);
+          try {
+            const data = await apiRequest<{ token: string }>("/api/auth/google", "POST", {
+              credential: response.credential,
+            });
+            setToken(data.token);
+            showToast("Acesso autorizado via Google!");
+            router.push("/dashboard");
+          } catch (e) {
+            showToast("Falha ao entrar com Google", "error");
+          } finally {
+            setLoading(false);
+          }
+        },
+      });
+      (window as any).google.accounts.id.renderButton(
+        document.getElementById("googleBtn"),
+        { theme: "outline", size: "large", width: "100%", shape: "pill" }
+      );
+    }
+  }, [mode, router, showToast]);
+
   async function handleForgotPassword(e: FormEvent) {
     e.preventDefault();
     setLoading(true);
@@ -146,6 +174,17 @@ export default function Home() {
                 >
                   {mode === "login" ? "Entrar na Arena" : "Iniciar Minha Jornada"}
                 </Button>
+
+                <div className="relative my-6">
+                  <div className="absolute inset-0 flex items-center">
+                    <div className="w-full border-t border-slate-800"></div>
+                  </div>
+                  <div className="relative flex justify-center text-xs font-black uppercase">
+                    <span className="bg-[#0f172a] px-4 text-slate-500">Ou continue com</span>
+                  </div>
+                </div>
+
+                <div id="googleBtn" className="w-full min-h-[44px]"></div>
               </form>
             </>
           ) : (
