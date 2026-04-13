@@ -84,8 +84,8 @@ export default function DashboardPage() {
 
   const progress = data?.dailyProgress;
   const profile = data?.profile;
-  const caloriePercent = profile?.calorie_goal ? ((progress?.calories_total || 0) / profile.calorie_goal) * 100 : 0;
-  const proteinPercent = profile?.protein_goal ? ((progress?.protein_total || 0) / profile.protein_goal) * 100 : 0;
+  const caloriePercent = profile?.calorie_goal ? (Number(progress?.calories_total || 0) / Number(profile.calorie_goal)) * 100 : 0;
+  const proteinPercent = profile?.protein_goal ? (Number(progress?.protein_total || 0) / Number(profile.protein_goal)) * 100 : 0;
   const userName = profile?.name || profile?.email?.split("@")[0] || "Atleta";
 
   async function updateProfile(event: FormEvent<HTMLFormElement>) {

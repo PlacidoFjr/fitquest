@@ -300,7 +300,7 @@ export default function MealsPage() {
               <div className="h-px flex-1 bg-slate-800/60 ml-2" />
               {group.items.length > 0 && (
                 <Badge variant="outline" className="text-[10px] border-slate-800 text-slate-500">
-                  {group.items.reduce((acc, curr) => acc + curr.calories, 0).toFixed(0)} kcal
+                  {group.items.reduce((acc, curr) => acc + Number(curr.calories || 0), 0).toFixed(0)} kcal
                 </Badge>
               )}
             </div>
@@ -323,11 +323,11 @@ export default function MealsPage() {
                       <div className="flex items-center gap-3">
                         <div className="flex items-center gap-1 text-[10px] font-black text-slate-500 uppercase tracking-tighter">
                           <Flame size={10} className="text-amber-500" />
-                          {item.calories} kcal
+                          {Number(item.calories || 0).toFixed(0)} kcal
                         </div>
                         <div className="flex items-center gap-1 text-[10px] font-black text-slate-500 uppercase tracking-tighter">
                           <Scale size={10} className="text-primary" />
-                          {item.protein}g proteína
+                          {Number(item.protein || 0).toFixed(1)}g proteína
                         </div>
                       </div>
                     </div>

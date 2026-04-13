@@ -18,13 +18,14 @@ interface HistoryItem {
   feedback_grade: string;
 }
 
-import { History, Calendar, Star, LayoutDashboard, Target, Flame } from "lucide-react";
+import { History, Calendar, Star, LayoutDashboard, Target } from "lucide-react";
 import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/Badge";
 
 // Helper para formatar a data amigável
 function formatFriendlyDate(dateStr: string) {
-  const date = new Date(dateStr);
+  // Ajuste para evitar problemas de fuso horário com strings YYYY-MM-DD
+  const date = new Date(dateStr.includes("T") ? dateStr : `${dateStr}T00:00:00`);
   const today = new Date();
   const yesterday = new Date();
   yesterday.setDate(today.getDate() - 1);
@@ -99,7 +100,7 @@ export default function HistoryPage() {
                     <div>
                       <p className="text-sm font-black text-white tracking-tight uppercase">Resumo do Dia</p>
                       <p className="text-[10px] font-bold text-slate-500 uppercase tracking-[0.2em] mt-0.5">
-                        {new Date(item.date).toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit", year: "numeric" }).replace(/\//g, '-')}
+                        {formatFriendlyDate(item.date)}
                       </p>
                     </div>
                   </div>
@@ -122,12 +123,14 @@ export default function HistoryPage() {
                     <p className="text-sm font-bold text-white">+{item.daily_xp} XP</p>
                   </div>
                   <div className="flex flex-col gap-1">
-                    <span className="text-[10px] font-black uppercase tracking-tighter text-slate-500 flex items-center gap-1">
-                      <Flame size={10} className="text-secondary" /> Macros
-                    </span>
-                    <p className="text-xs font-bold text-slate-400">
-                      {Number(item.calories_total).toFixed(0)} kcal | {Number(item.protein_total).toFixed(1)}g
-                    </p>
+                    <div className="flex justify-between items-center text-[10px] font-black uppercase tracking-tighter text-slate-500">
+                      <span>Calorias</span>
+                      <span className="text-white">{Number(item.calories_total || 0).toFixed(0)} kcal</span>
+                    </div>
+                    <div className="flex justify-between items-center text-[10px] font-black uppercase tracking-tighter text-slate-500">
+                      <span>Proteínas</span>
+                      <span className="text-white">{Number(item.protein_total || 0).toFixed(1)}g</span>
+                    </div>
                   </div>
                 </div>
               </motion.div>
