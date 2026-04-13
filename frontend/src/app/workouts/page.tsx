@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Dumbbell, Calendar, Trophy, Clock, Trash2, Timer, Zap, Plus, Flame, Activity } from "lucide-react";
+import { Dumbbell, Calendar, Trophy, Clock, Trash2, Timer, Zap, Flame, Activity } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { AppShell } from "@/components/AppShell";
 import { useToast } from "@/components/providers/ToastProvider";
