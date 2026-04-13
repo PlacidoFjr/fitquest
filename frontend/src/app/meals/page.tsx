@@ -21,7 +21,7 @@ interface Meal {
 
 const FOOD_DATABASE = TACO_DATABASE;
 
-import { UtensilsCrossed, Plus, Flame, Activity, Search, Scale, Trash2 } from "lucide-react";
+import { UtensilsCrossed, Plus, Search, Scale, Trash2 } from "lucide-react";
 
 export default function MealsPage() {
   const router = useRouter();

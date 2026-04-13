@@ -8,7 +8,7 @@ import { Card } from "@/components/ui/Card";
 import { Input } from "@/components/ui/Input";
 import { useToast } from "@/components/providers/ToastProvider";
 import { apiRequest } from "@/lib/api";
-import { Dumbbell, Lock, Sparkles, CheckCircle2 } from "lucide-react";
+import { Dumbbell, Lock, CheckCircle2 } from "lucide-react";
 import { Suspense } from "react";
 
 function ResetPasswordForm() {

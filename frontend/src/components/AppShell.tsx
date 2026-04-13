@@ -8,6 +8,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { clearToken, getToken } from "@/lib/auth";
 import { cn } from "@/lib/cn";
 import { Button } from "./ui/Button";
+import { Card } from "./ui/Card";
 
 const links = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -47,11 +48,10 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     
     // Verifica se já temos permissão
     if ('Notification' in window) {
-      if (Notification.permission === 'default') {
-        setCanRequestNotification(true);
-      } else if (Notification.permission === 'granted') {
-        setCanRequestNotification(false);
-      }
+      const isDefault = Notification.permission === 'default';
+      setTimeout(() => {
+        setCanRequestNotification(isDefault);
+      }, 0);
     }
 
     // Simula uma verificação de streak

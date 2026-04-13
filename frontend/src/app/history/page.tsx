@@ -18,7 +18,7 @@ interface HistoryItem {
   feedback_grade: string;
 }
 
-import { History, Calendar, Star, Zap, ChevronRight, LayoutDashboard, Target, Dumbbell } from "lucide-react";
+import { History, Calendar, Star, LayoutDashboard, Target, Flame } from "lucide-react";
 import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/Badge";
 

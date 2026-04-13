@@ -63,7 +63,7 @@ self.addEventListener('push', function(event) {
   if (event.data) {
     try {
       data = event.data.json();
-    } catch (e) {
+    } catch {
       data = { title: 'FitQuest', body: event.data.text() };
     }
   }

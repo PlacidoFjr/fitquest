@@ -11,7 +11,24 @@ import { apiRequest } from "@/lib/api";
 import { getToken, setToken } from "@/lib/auth";
 import { cn } from "@/lib/cn";
 
-import { Dumbbell, Mail, Lock, Sparkles, KeyRound, ArrowLeft, User } from "lucide-react";
+import { Dumbbell, Mail, Lock, KeyRound, ArrowLeft, User } from "lucide-react";
+
+interface GoogleResponse {
+  credential: string;
+}
+
+declare global {
+  interface Window {
+    google?: {
+      accounts: {
+        id: {
+          initialize: (config: { client_id: string | undefined; callback: (response: GoogleResponse) => Promise<void> }) => void;
+          renderButton: (parent: HTMLElement | null, options: { theme: string; size: string; width: string; shape: string }) => void;
+        };
+      };
+    };
+  }
+}
 
 export default function Home() {
   const router = useRouter();
@@ -28,10 +45,10 @@ export default function Home() {
 
   // Inicializa Google Login
   useEffect(() => {
-    if (typeof window !== "undefined" && (window as any).google && mode !== "forgot") {
-      (window as any).google.accounts.id.initialize({
+    if (typeof window !== "undefined" && window.google && mode !== "forgot") {
+      window.google.accounts.id.initialize({
         client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
-        callback: async (response: any) => {
+        callback: async (response: GoogleResponse) => {
           setLoading(true);
           try {
             const data = await apiRequest<{ token: string }>("/api/auth/google", "POST", {
@@ -40,14 +57,14 @@ export default function Home() {
             setToken(data.token);
             showToast("Acesso autorizado via Google!");
             router.push("/dashboard");
-          } catch (e) {
+          } catch {
             showToast("Falha ao entrar com Google", "error");
           } finally {
             setLoading(false);
           }
         },
       });
-      (window as any).google.accounts.id.renderButton(
+      window.google.accounts.id.renderButton(
         document.getElementById("googleBtn"),
         { theme: "outline", size: "large", width: "100%", shape: "pill" }
       );
