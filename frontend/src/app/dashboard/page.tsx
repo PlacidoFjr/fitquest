@@ -41,6 +41,25 @@ export default function DashboardPage() {
   const [saving, setSaving] = useState(false);
   const [feedback, setFeedback] = useState("");
   const [showOnboarding, setShowOnboarding] = useState(false);
+  const [autoCalculate, setAutoCalculate] = useState(true);
+
+  // Mifflin-St Jeor TDEE calculation logic
+  const calculateTDEE = (weight: number, height: number, age: number, gender: 'male' | 'female', activity: number, goal: string) => {
+    // BMR Calculation
+    const bmr = (10 * weight) + (6.25 * height) - (5 * age) + (gender === 'male' ? 5 : -161);
+    // TDEE (Maintenance)
+    const tdee = Math.round(bmr * activity);
+    
+    let calorieGoal = tdee;
+    if (goal === 'emagrecer') calorieGoal = tdee - 500;
+    if (goal === 'ganhar_massa') calorieGoal = tdee + 400;
+
+    // Protein: 2g per kg for mass gain/weight loss (muscle preservation), 1.6g for maintenance
+    const proteinFactor = (goal === 'manter') ? 1.6 : 2.0;
+    const proteinGoal = Math.round(weight * proteinFactor);
+
+    return { calorieGoal, proteinGoal };
+  };
 
   useEffect(() => {
     const token = getToken();
@@ -72,6 +91,23 @@ export default function DashboardPage() {
     const formData = new FormData(event.currentTarget);
     const token = getToken();
     if (!token || !profile) return;
+
+    let calorieGoal = Number(formData.get("calorieGoal"));
+    let proteinGoal = Number(formData.get("proteinGoal"));
+
+    if (autoCalculate) {
+      const weight = Number(formData.get("weight"));
+      const height = Number(formData.get("height"));
+      const age = Number(formData.get("age")) || 25; // Default age if not provided
+      const gender = (formData.get("gender") as 'male' | 'female') || 'male';
+      const activity = Number(formData.get("activityLevel")) || 1.375;
+      const goal = formData.get("goalType") as string;
+      
+      const calculated = calculateTDEE(weight, height, age, gender, activity, goal);
+      calorieGoal = calculated.calorieGoal;
+      proteinGoal = calculated.proteinGoal;
+    }
+
     setSaving(true);
     setFeedback("");
     try {
@@ -82,8 +118,8 @@ export default function DashboardPage() {
           weight: Number(formData.get("weight")),
           height: Number(formData.get("height")),
           goalType: formData.get("goalType"),
-          calorieGoal: Number(formData.get("calorieGoal")),
-          proteinGoal: Number(formData.get("proteinGoal")),
+          calorieGoal,
+          proteinGoal,
         },
         token
       );
@@ -287,65 +323,113 @@ export default function DashboardPage() {
         )}
 
         <Card className="mt-2 overflow-hidden border-slate-800/40 shadow-2xl">
-          <div className="mb-8 flex items-center gap-4">
-            <div className="p-3 rounded-2xl bg-secondary/10 text-secondary border border-secondary/10">
-              <UserCircle2 size={24} />
+          <div className="mb-8 flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <div className="p-3 rounded-2xl bg-secondary/10 text-secondary border border-secondary/10">
+                <UserCircle2 size={24} />
+              </div>
+              <div>
+                <h3 id="perfil" className="text-xl font-black text-white tracking-tight">
+                  Perfil e Objetivos
+                </h3>
+                <p className="text-sm text-slate-500 font-medium">Ajuste seus parâmetros para cálculos precisos</p>
+              </div>
             </div>
-            <div>
-              <h3 id="perfil" className="text-xl font-black text-white tracking-tight">
-                Perfil e Objetivos
-              </h3>
-              <p className="text-sm text-slate-500 font-medium">Ajuste seus parâmetros para cálculos precisos</p>
+
+            <div className="flex items-center gap-2 bg-slate-950/50 p-1.5 rounded-xl border border-white/5">
+              <button
+                type="button"
+                onClick={() => setAutoCalculate(true)}
+                className={cn(
+                  "px-3 py-1.5 text-[10px] font-black uppercase tracking-widest rounded-lg transition-all",
+                  autoCalculate ? "bg-primary text-primary-foreground shadow-lg" : "text-slate-500 hover:text-white"
+                )}
+              >
+                Auto (TMB)
+              </button>
+              <button
+                type="button"
+                onClick={() => setAutoCalculate(false)}
+                className={cn(
+                  "px-3 py-1.5 text-[10px] font-black uppercase tracking-widest rounded-lg transition-all",
+                  !autoCalculate ? "bg-secondary text-secondary-foreground shadow-lg" : "text-slate-500 hover:text-white"
+                )}
+              >
+                Manual
+              </button>
             </div>
           </div>
 
           <form className="grid gap-6 md:grid-cols-2 lg:grid-cols-5" onSubmit={updateProfile}>
-            <Input 
-              name="weight" 
-              type="number" 
-              defaultValue={profile?.weight} 
-              placeholder="00.0" 
-              icon={<Scale size={18} />}
-            />
-            <Input 
-              name="height" 
-              type="number" 
-              defaultValue={profile?.height} 
-              placeholder="000" 
-              icon={<Activity size={18} />}
-            />
-            
-            <div className="space-y-2">
-              <div className="relative">
-                <select
-                  className="w-full rounded-xl border border-slate-700 bg-slate-900/50 px-4 py-3 text-sm text-slate-100 outline-none transition-all focus:border-primary/50 focus:ring-4 focus:ring-primary/10 appearance-none"
-                  name="goalType"
-                  defaultValue={profile?.goal_type}
-                >
-                  <option value="emagrecer">Emagrecer</option>
-                  <option value="manter">Manter</option>
-                  <option value="ganhar_massa">Ganhar Massa</option>
-                </select>
-                <div className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-slate-500">
-                  <ChevronRight size={16} className="rotate-90" />
+            {autoCalculate ? (
+              <>
+                <div className="space-y-1.5">
+                  <label className="text-[10px] font-black uppercase text-slate-500 ml-1">Sexo</label>
+                  <select name="gender" className="w-full rounded-xl border border-slate-700 bg-slate-900/70 px-3 py-2 text-sm text-slate-100 outline-none">
+                    <option value="male">Masculino</option>
+                    <option value="female">Feminino</option>
+                  </select>
                 </div>
-              </div>
-            </div>
-
-            <Input 
-              name="calorieGoal" 
-              type="number" 
-              defaultValue={profile?.calorie_goal} 
-              placeholder="0000" 
-              icon={<Target size={18} />}
-            />
-            <Input 
-              name="proteinGoal" 
-              type="number" 
-              defaultValue={profile?.protein_goal} 
-              placeholder="000" 
-              icon={<Activity size={18} />}
-            />
+                <div className="space-y-1.5">
+                  <label className="text-[10px] font-black uppercase text-slate-500 ml-1">Idade</label>
+                  <Input name="age" type="number" defaultValue={25} placeholder="25" />
+                </div>
+                <div className="space-y-1.5">
+                  <label className="text-[10px] font-black uppercase text-slate-500 ml-1">Peso (kg)</label>
+                  <Input name="weight" type="number" defaultValue={profile?.weight} placeholder="00.0" icon={<Scale size={18} />} />
+                </div>
+                <div className="space-y-1.5">
+                  <label className="text-[10px] font-black uppercase text-slate-500 ml-1">Altura (cm)</label>
+                  <Input name="height" type="number" defaultValue={profile?.height} placeholder="000" icon={<Activity size={18} />} />
+                </div>
+                <div className="space-y-1.5">
+                  <label className="text-[10px] font-black uppercase text-slate-500 ml-1">Atividade</label>
+                  <select name="activityLevel" className="w-full rounded-xl border border-slate-700 bg-slate-900/70 px-3 py-2 text-sm text-slate-100 outline-none">
+                    <option value="1.2">Sedentario</option>
+                    <option value="1.375">Leve</option>
+                    <option value="1.55">Moderado</option>
+                    <option value="1.725">Ativo</option>
+                    <option value="1.9">Muito Ativo</option>
+                  </select>
+                </div>
+                <div className="lg:col-span-2 space-y-1.5">
+                  <label className="text-[10px] font-black uppercase text-slate-500 ml-1">Objetivo</label>
+                  <select name="goalType" className="w-full rounded-xl border border-slate-700 bg-slate-900/70 px-3 py-2 text-sm text-slate-100 outline-none" defaultValue={profile?.goal_type}>
+                    <option value="emagrecer">Emagrecer</option>
+                    <option value="manter">Manter</option>
+                    <option value="ganhar_massa">Ganhar Massa</option>
+                  </select>
+                </div>
+                <div className="lg:col-span-3 flex items-end">
+                  <p className="text-[10px] text-slate-500 italic font-medium pb-2">
+                    * Metas de calorias e proteinas serao calculadas automaticamente via Mifflin-St Jeor.
+                  </p>
+                </div>
+              </>
+            ) : (
+              <>
+                <Input name="weight" type="number" defaultValue={profile?.weight} placeholder="00.0" icon={<Scale size={18} />} />
+                <Input name="height" type="number" defaultValue={profile?.height} placeholder="000" icon={<Activity size={18} />} />
+                <div className="space-y-2">
+                  <div className="relative">
+                    <select
+                      className="w-full rounded-xl border border-slate-700 bg-slate-900/50 px-4 py-3 text-sm text-slate-100 outline-none transition-all focus:border-primary/50 focus:ring-4 focus:ring-primary/10 appearance-none"
+                      name="goalType"
+                      defaultValue={profile?.goal_type}
+                    >
+                      <option value="emagrecer">Emagrecer</option>
+                      <option value="manter">Manter</option>
+                      <option value="ganhar_massa">Ganhar Massa</option>
+                    </select>
+                    <div className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-slate-500">
+                      <ChevronRight size={16} className="rotate-90" />
+                    </div>
+                  </div>
+                </div>
+                <Input name="calorieGoal" type="number" defaultValue={profile?.calorie_goal} placeholder="0000" icon={<Target size={18} />} />
+                <Input name="proteinGoal" type="number" defaultValue={profile?.protein_goal} placeholder="000" icon={<Activity size={18} />} />
+              </>
+            )}
 
             <div className="lg:col-span-5 flex items-center justify-between pt-4 border-t border-slate-800/60 mt-2">
               {feedback ? (
@@ -397,7 +481,18 @@ export default function DashboardPage() {
                 <div className="p-8">
                   <form className="grid gap-6 md:grid-cols-2" onSubmit={updateProfile}>
                     <div className="space-y-1.5">
-                      <label className="text-[10px] font-black uppercase text-slate-500 ml-1">Peso Atual</label>
+                      <label className="text-[10px] font-black uppercase text-slate-500 ml-1">Sexo</label>
+                      <select name="gender" className="w-full rounded-xl border border-slate-700 bg-slate-900/70 px-3 py-2.5 text-sm text-slate-100 outline-none">
+                        <option value="male">Masculino</option>
+                        <option value="female">Feminino</option>
+                      </select>
+                    </div>
+                    <div className="space-y-1.5">
+                      <label className="text-[10px] font-black uppercase text-slate-500 ml-1">Idade</label>
+                      <Input name="age" type="number" defaultValue={25} placeholder="25" className="px-3" required />
+                    </div>
+                    <div className="space-y-1.5">
+                      <label className="text-[10px] font-black uppercase text-slate-500 ml-1">Peso Atual (kg)</label>
                       <div className="relative group">
                         <Scale className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-secondary transition-colors" size={16} />
                         <Input name="weight" type="number" defaultValue={profile?.weight} placeholder="00.0" className="pl-10" required />
@@ -411,6 +506,16 @@ export default function DashboardPage() {
                       </div>
                     </div>
                     <div className="space-y-1.5 md:col-span-2">
+                      <label className="text-[10px] font-black uppercase text-slate-500 ml-1">Frequencia de Atividade</label>
+                      <select name="activityLevel" className="w-full rounded-xl border border-slate-700 bg-slate-900/70 px-3 py-2.5 text-sm text-slate-100 outline-none">
+                        <option value="1.2">Sedentario (Pouco/Nenhum exercicio)</option>
+                        <option value="1.375">Leve (1-3 dias/semana)</option>
+                        <option value="1.55">Moderado (3-5 dias/semana)</option>
+                        <option value="1.725">Ativo (6-7 dias/semana)</option>
+                        <option value="1.9">Muito Ativo (Atleta/Trabalho pesado)</option>
+                      </select>
+                    </div>
+                    <div className="space-y-1.5 md:col-span-2">
                       <label className="text-[10px] font-black uppercase text-slate-500 ml-1">Seu Objetivo</label>
                       <select
                         className="w-full rounded-xl border border-slate-700 bg-slate-900/70 px-3 py-2.5 text-sm text-slate-100 outline-none transition-all focus:border-secondary focus:ring-2 focus:ring-secondary/35"
@@ -422,22 +527,9 @@ export default function DashboardPage() {
                         <option value="ganhar_massa">Ganhar Massa - Hipertrofia</option>
                       </select>
                     </div>
-                    <div className="space-y-1.5">
-                      <label className="text-[10px] font-black uppercase text-slate-500 ml-1">Meta Calorias</label>
-                      <div className="relative group">
-                        <Target className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-secondary transition-colors" size={16} />
-                        <Input name="calorieGoal" type="number" defaultValue={profile?.calorie_goal} placeholder="2200" className="pl-10" required />
-                      </div>
-                    </div>
-                    <div className="space-y-1.5">
-                      <label className="text-[10px] font-black uppercase text-slate-500 ml-1">Meta Proteina</label>
-                      <div className="relative group">
-                        <Activity className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-secondary transition-colors" size={16} />
-                        <Input name="proteinGoal" type="number" defaultValue={profile?.protein_goal} placeholder="120" className="pl-10" required />
-                      </div>
-                    </div>
+                    
                     <Button className="mt-2 md:col-span-2 py-4 text-base font-black rounded-2xl" type="submit" disabled={saving}>
-                      {saving ? "Salvando seu perfil..." : "Começar Minha Jornada"}
+                      {saving ? "Calculando seu plano..." : "Começar Minha Jornada"}
                     </Button>
                   </form>
                 </div>
