@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/Input";
 import { useToast } from "@/components/providers/ToastProvider";
 import { apiRequest } from "@/lib/api";
 import { getToken } from "@/lib/auth";
+import TACO_DATABASE from "@/data/taco_database.json";
 
 interface Meal {
   id: number;
@@ -18,19 +19,7 @@ interface Meal {
   protein: number;
 }
 
-// Pequena amostra da tabela TACO para demonstração
-const FOOD_DATABASE = [
-  { name: "Arroz integral, cozido", calories: 124, protein: 2.6 }, // por 100g
-  { name: "Feijão carioca, cozido", calories: 76, protein: 4.8 },
-  { name: "Pão francês", calories: 300, protein: 8.0 },
-  { name: "Ovo de galinha, cozido", calories: 155, protein: 13.0 },
-  { name: "Peito de frango, grelhado", calories: 159, protein: 32.0 },
-  { name: "Banana prata, crua", calories: 89, protein: 1.3 },
-  { name: "Alface crespa, crua", calories: 11, protein: 1.3 },
-  { name: "Azeite de oliva extra virgem", calories: 884, protein: 0.0 },
-  { name: "Carne moída (patinho), cozida", calories: 219, protein: 35.9 },
-  { name: "Aveia em flocos", calories: 394, protein: 13.9 },
-];
+const FOOD_DATABASE = TACO_DATABASE;
 
 import { UtensilsCrossed, Plus, Flame, Activity, Search, Scale, Trash2 } from "lucide-react";
 

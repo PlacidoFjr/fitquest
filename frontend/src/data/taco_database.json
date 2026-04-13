@@ -1,0 +1,2922 @@
+[
+  {
+    "name": "Arroz, integral, cozido",
+    "calories": 70,
+    "protein": 123.53489250000001
+  },
+  {
+    "name": "Arroz, integral, cru",
+    "calories": 12,
+    "protein": 359.6780020326088
+  },
+  {
+    "name": "Arroz, tipo 1, cozido",
+    "calories": 69,
+    "protein": 128.25848566666664
+  },
+  {
+    "name": "Arroz, tipo 1, cru",
+    "calories": 13,
+    "protein": 357.789273115942
+  },
+  {
+    "name": "Arroz, tipo 2, cozido",
+    "calories": 69,
+    "protein": 130.11964833333332
+  },
+  {
+    "name": "Arroz, tipo 2, cru",
+    "calories": 13,
+    "protein": 358.1167614565217
+  },
+  {
+    "name": "Aveia, flocos, crua",
+    "calories": 9,
+    "protein": 393.82268944927546
+  },
+  {
+    "name": "Biscoito, doce, maisena",
+    "calories": 3,
+    "protein": 442.8193901449275
+  },
+  {
+    "name": "Biscoito, doce, recheado com chocolate",
+    "calories": 2,
+    "protein": 471.824779710145
+  },
+  {
+    "name": "Biscoito, doce, recheado com morango",
+    "calories": 3,
+    "protein": 471.1747362318841
+  },
+  {
+    "name": "Biscoito, doce, wafer, recheado de chocolate",
+    "calories": 1,
+    "protein": 502.4568579710144
+  },
+  {
+    "name": "Biscoito, doce, wafer, recheado de morango",
+    "calories": 1,
+    "protein": 513.4461826086956
+  },
+  {
+    "name": "Biscoito, salgado, cream cracker",
+    "calories": 4,
+    "protein": 431.73228115942027
+  },
+  {
+    "name": "Bolo, mistura para",
+    "calories": 1,
+    "protein": 418.6333333333333
+  },
+  {
+    "name": "Bolo, pronto, aipim",
+    "calories": 34,
+    "protein": 323.85166666666663
+  },
+  {
+    "name": "Bolo, pronto, chocolate",
+    "calories": 19,
+    "protein": 410.01366666666667
+  },
+  {
+    "name": "Bolo, pronto, coco",
+    "calories": 29,
+    "protein": 333.4376666666667
+  },
+  {
+    "name": "Bolo, pronto, milho",
+    "calories": 37,
+    "protein": 311.387
+  },
+  {
+    "name": "Canjica, branca, crua",
+    "calories": 14,
+    "protein": 357.60258999999996
+  },
+  {
+    "name": "Canjica, com leite integral",
+    "calories": 72,
+    "protein": 112.45677722046528
+  },
+  {
+    "name": "Cereais, milho, flocos, com sal",
+    "calories": 9,
+    "protein": 369.59975000000003
+  },
+  {
+    "name": "Cereais, milho, flocos, sem sal",
+    "calories": 11,
+    "protein": 363.3383166666666
+  },
+  {
+    "name": "Cereais, mingau, milho, infantil",
+    "calories": 5,
+    "protein": 394.42752173913044
+  },
+  {
+    "name": "Cereais, mistura para vitamina, trigo, cevada e aveia",
+    "calories": 4,
+    "protein": 381.1333333333333
+  },
+  {
+    "name": "Cereal matinal, milho",
+    "calories": 6,
+    "protein": 365.354163768116
+  },
+  {
+    "name": "Cereal matinal, milho, açúcar",
+    "calories": 4,
+    "protein": 376.55525362318843
+  },
+  {
+    "name": "Creme de arroz, pó",
+    "calories": 7,
+    "protein": 386.00119033639794
+  },
+  {
+    "name": "Creme de milho, pó",
+    "calories": 6,
+    "protein": 333.03419267054403
+  },
+  {
+    "name": "Curau, milho verde",
+    "calories": 82,
+    "protein": 78.43381831365585
+  },
+  {
+    "name": "Curau, milho verde, mistura para",
+    "calories": 4,
+    "protein": 402.28657743531465
+  },
+  {
+    "name": "Farinha, de arroz, enriquecida",
+    "calories": 13,
+    "protein": 363.0564801812235
+  },
+  {
+    "name": "Farinha, de centeio, integral",
+    "calories": 11,
+    "protein": 335.77766279932655
+  },
+  {
+    "name": "Farinha, de milho, amarela",
+    "calories": 12,
+    "protein": 350.58693322738014
+  },
+  {
+    "name": "Farinha, de rosca",
+    "calories": 10,
+    "protein": 370.5780966666666
+  },
+  {
+    "name": "Farinha, de trigo",
+    "calories": 13,
+    "protein": 360.4729785507247
+  },
+  {
+    "name": "Farinha, láctea, de cereais",
+    "calories": 3,
+    "protein": 414.8505173913043
+  },
+  {
+    "name": "Lasanha, massa fresca, cozida",
+    "calories": 60,
+    "protein": 163.76366666666667
+  },
+  {
+    "name": "Lasanha, massa fresca, crua",
+    "calories": 45,
+    "protein": 220.3056666666667
+  },
+  {
+    "name": "Macarrão, instantâneo",
+    "calories": 6,
+    "protein": 435.8647805333334
+  },
+  {
+    "name": "Macarrão, trigo, cru",
+    "calories": 10,
+    "protein": 371.1226130434783
+  },
+  {
+    "name": "Macarrão, trigo, cru, com ovos",
+    "calories": 11,
+    "protein": 370.5671133333334
+  },
+  {
+    "name": "Milho, amido, cru",
+    "calories": 12,
+    "protein": 361.36682387826096
+  },
+  {
+    "name": "Milho, fubá, cru",
+    "calories": 11,
+    "protein": 353.482268115942
+  },
+  {
+    "name": "Milho, verde, cru",
+    "calories": 64,
+    "protein": 138.166565
+  },
+  {
+    "name": "Milho, verde, enlatado, drenado",
+    "calories": 76,
+    "protein": 97.56489420289851
+  },
+  {
+    "name": "Mingau tradicional, pó",
+    "calories": 8,
+    "protein": 373.4214666666667
+  },
+  {
+    "name": "Pamonha, barra para cozimento, pré-cozida",
+    "calories": 61,
+    "protein": 171.2191116666667
+  },
+  {
+    "name": "Pão, aveia, forma",
+    "calories": 20,
+    "protein": 343.0853666666667
+  },
+  {
+    "name": "Pão, de soja",
+    "calories": 26,
+    "protein": 308.7263233333333
+  },
+  {
+    "name": "Pão, glúten, forma",
+    "calories": 41,
+    "protein": 252.99402999999998
+  },
+  {
+    "name": "Pão, milho, forma",
+    "calories": 30,
+    "protein": 292.01349
+  },
+  {
+    "name": "Pão, trigo, forma, integral",
+    "calories": 35,
+    "protein": 253.19361833333332
+  },
+  {
+    "name": "Pão, trigo, francês",
+    "calories": 28,
+    "protein": 299.8101504347826
+  },
+  {
+    "name": "Pão, trigo, sovado",
+    "calories": 26,
+    "protein": 310.96494
+  },
+  {
+    "name": "Pastel, de carne, cru",
+    "calories": 34,
+    "protein": 288.70207151598953
+  },
+  {
+    "name": "Pastel, de carne, frito",
+    "calories": 23,
+    "protein": 388.37465162496756
+  },
+  {
+    "name": "Pastel, de queijo, cru",
+    "calories": 31,
+    "protein": 308.4744338873742
+  },
+  {
+    "name": "Pastel, de queijo, frito",
+    "calories": 18,
+    "protein": 422.11208003931927
+  },
+  {
+    "name": "Pastel, massa, crua",
+    "calories": 27,
+    "protein": 310.2025143333333
+  },
+  {
+    "name": "Pastel, massa, frita",
+    "calories": 1,
+    "protein": 569.6724593333333
+  },
+  {
+    "name": "Pipoca, com óleo de soja, sem sal",
+    "calories": 3,
+    "protein": 448.334261847198
+  },
+  {
+    "name": "Polenta, pré-cozida",
+    "calories": 73,
+    "protein": 102.74116666666669
+  },
+  {
+    "name": "Torrada, pão francês",
+    "calories": 9,
+    "protein": 377.422283
+  },
+  {
+    "name": "Abóbora, cabotian, cozida",
+    "calories": 86,
+    "protein": 48.04374250000001
+  },
+  {
+    "name": "Abóbora, cabotian, crua",
+    "calories": 89,
+    "protein": 38.59929420289856
+  },
+  {
+    "name": "Abóbora, menina brasileira, crua",
+    "calories": 96,
+    "protein": 13.605673913043486
+  },
+  {
+    "name": "Abóbora, moranga, crua",
+    "calories": 96,
+    "protein": 12.364436231884042
+  },
+  {
+    "name": "Abóbora, moranga, refogada",
+    "calories": 92,
+    "protein": 29.003822031756222
+  },
+  {
+    "name": "Abóbora, pescoço, crua",
+    "calories": 92,
+    "protein": 24.466267949700352
+  },
+  {
+    "name": "Abobrinha, italiana, cozida",
+    "calories": 95,
+    "protein": 15.038520000000023
+  },
+  {
+    "name": "Abobrinha, italiana, crua",
+    "calories": 94,
+    "protein": 19.279126086956484
+  },
+  {
+    "name": "Abobrinha, italiana, refogada",
+    "calories": 93,
+    "protein": 24.42960218765336
+  },
+  {
+    "name": "Abobrinha, paulista, crua",
+    "calories": 91,
+    "protein": 30.810702228816336
+  },
+  {
+    "name": "Acelga, crua",
+    "calories": 93,
+    "protein": 20.942342499999942
+  },
+  {
+    "name": "Agrião, cru",
+    "calories": 94,
+    "protein": 16.578801449275325
+  },
+  {
+    "name": "Aipo, cru",
+    "calories": 94,
+    "protein": 19.09145664497062
+  },
+  {
+    "name": "Alface, americana, crua",
+    "calories": 97,
+    "protein": 8.794903236866052
+  },
+  {
+    "name": "Alface, crespa, crua",
+    "calories": 96,
+    "protein": 10.68085652173921
+  },
+  {
+    "name": "Alface, lisa, crua",
+    "calories": 95,
+    "protein": 13.820901449275343
+  },
+  {
+    "name": "Alface, roxa, crua",
+    "calories": 96,
+    "protein": 12.716997363467993
+  },
+  {
+    "name": "Alfavaca, crua",
+    "calories": 90,
+    "protein": 29.183613081057864
+  },
+  {
+    "name": "Alho, cru",
+    "calories": 68,
+    "protein": 113.12987826086957
+  },
+  {
+    "name": "Alho-poró, cru",
+    "calories": 91,
+    "protein": 31.5079193532467
+  },
+  {
+    "name": "Almeirão, cru",
+    "calories": 94,
+    "protein": 18.034428985507237
+  },
+  {
+    "name": "Almeirão, refogado",
+    "calories": 87,
+    "protein": 65.08191082886853
+  },
+  {
+    "name": "Batata, baroa, cozida",
+    "calories": 79,
+    "protein": 80.11976250000004
+  },
+  {
+    "name": "Batata, baroa, crua",
+    "calories": 74,
+    "protein": 100.98492318840582
+  },
+  {
+    "name": "Batata, doce, cozida",
+    "calories": 80,
+    "protein": 76.75961050343517
+  },
+  {
+    "name": "Batata, doce, crua",
+    "calories": 70,
+    "protein": 118.24137536231882
+  },
+  {
+    "name": "Batata, frita, tipo chips, industrializada",
+    "calories": 3,
+    "protein": 542.7346733841896
+  },
+  {
+    "name": "Batata, inglesa, cozida",
+    "calories": 86,
+    "protein": 51.588476636270656
+  },
+  {
+    "name": "Batata, inglesa, crua",
+    "calories": 83,
+    "protein": 64.3702260869565
+  },
+  {
+    "name": "Batata, inglesa, frita",
+    "calories": 44,
+    "protein": 267.15742250204084
+  },
+  {
+    "name": "Batata, inglesa, sauté",
+    "calories": 83,
+    "protein": 67.88793615063032
+  },
+  {
+    "name": "Berinjela, cozida",
+    "calories": 94,
+    "protein": 18.845285556813074
+  },
+  {
+    "name": "Berinjela, crua",
+    "calories": 94,
+    "protein": 19.62775362318839
+  },
+  {
+    "name": "Beterraba, cozida",
+    "calories": 91,
+    "protein": 32.15432433140276
+  },
+  {
+    "name": "Beterraba, crua",
+    "calories": 86,
+    "protein": 48.82850869565215
+  },
+  {
+    "name": "Biscoito, polvilho doce",
+    "calories": 5,
+    "protein": 437.54900000000004
+  },
+  {
+    "name": "Brócolis, cozido",
+    "calories": 93,
+    "protein": 24.63616311136879
+  },
+  {
+    "name": "Brócolis, cru",
+    "calories": 91,
+    "protein": 25.495131884057955
+  },
+  {
+    "name": "Cará, cozido",
+    "calories": 79,
+    "protein": 77.58491333333336
+  },
+  {
+    "name": "Cará, cru",
+    "calories": 74,
+    "protein": 95.6331347826087
+  },
+  {
+    "name": "Caruru, cru",
+    "calories": 88,
+    "protein": 34.03162971734997
+  },
+  {
+    "name": "Catalonha, crua",
+    "calories": 92,
+    "protein": 23.888412257373297
+  },
+  {
+    "name": "Catalonha, refogada",
+    "calories": 87,
+    "protein": 63.449269148826616
+  },
+  {
+    "name": "Cebola, crua",
+    "calories": 89,
+    "protein": 39.420046376811584
+  },
+  {
+    "name": "Cebolinha, crua",
+    "calories": 94,
+    "protein": 19.515885507246438
+  },
+  {
+    "name": "Cenoura, cozida",
+    "calories": 92,
+    "protein": 29.86177771015958
+  },
+  {
+    "name": "Cenoura, crua",
+    "calories": 90,
+    "protein": 34.13538840579714
+  },
+  {
+    "name": "Chicória, crua",
+    "calories": 95,
+    "protein": 13.837120289855097
+  },
+  {
+    "name": "Chuchu, cozido",
+    "calories": 95,
+    "protein": 18.53979053137702
+  },
+  {
+    "name": "Chuchu, cru",
+    "calories": 95,
+    "protein": 16.97891884057972
+  },
+  {
+    "name": "Coentro, folhas desidratadas",
+    "calories": 11,
+    "protein": 309.0707468044758
+  },
+  {
+    "name": "Couve, manteiga, crua",
+    "calories": 91,
+    "protein": 27.05669710144928
+  },
+  {
+    "name": "Couve, manteiga, refogada",
+    "calories": 82,
+    "protein": 90.34481542611123
+  },
+  {
+    "name": "Couve-flor, crua",
+    "calories": 93,
+    "protein": 22.56334927536229
+  },
+  {
+    "name": "Couve-flor, cozida",
+    "calories": 94,
+    "protein": 19.114140614728182
+  },
+  {
+    "name": "Espinafre, Nova Zelândia, cru",
+    "calories": 94,
+    "protein": 16.095694202898525
+  },
+  {
+    "name": "Espinafre, Nova Zelândia, refogado",
+    "calories": 87,
+    "protein": 67.25365175066395
+  },
+  {
+    "name": "Farinha, de mandioca, crua",
+    "calories": 9,
+    "protein": 360.8696985507246
+  },
+  {
+    "name": "Farinha, de mandioca, torrada",
+    "calories": 8,
+    "protein": 365.268975
+  },
+  {
+    "name": "Farinha, de puba",
+    "calories": 10,
+    "protein": 360.17977487993244
+  },
+  {
+    "name": "Fécula, de mandioca",
+    "calories": 18,
+    "protein": 330.85055833333337
+  },
+  {
+    "name": "Feijão, broto, cru",
+    "calories": 87,
+    "protein": 38.723236375411325
+  },
+  {
+    "name": "Inhame, cru",
+    "calories": 73,
+    "protein": 96.69983188405796
+  },
+  {
+    "name": "Jiló, cru",
+    "calories": 92,
+    "protein": 27.36514347826087
+  },
+  {
+    "name": "Jurubeba, crua",
+    "calories": 67,
+    "protein": 125.81163499999998
+  },
+  {
+    "name": "Mandioca, cozida",
+    "calories": 69,
+    "protein": 125.35825000000003
+  },
+  {
+    "name": "Mandioca, crua",
+    "calories": 62,
+    "protein": 151.4169565217391
+  },
+  {
+    "name": "Mandioca, farofa, temperada",
+    "calories": 6,
+    "protein": 405.69394166666666
+  },
+  {
+    "name": "Mandioca, frita",
+    "calories": 37,
+    "protein": 300.0552433891495
+  },
+  {
+    "name": "Manjericão, cru",
+    "calories": 93,
+    "protein": 21.14767681159422
+  },
+  {
+    "name": "Maxixe, cru",
+    "calories": 95,
+    "protein": 13.747236086956516
+  },
+  {
+    "name": "Mostarda, folha, crua",
+    "calories": 93,
+    "protein": 18.107389052172486
+  },
+  {
+    "name": "Nhoque, batata, cozido",
+    "calories": 55,
+    "protein": 180.7752739934126
+  },
+  {
+    "name": "Nabo, cru",
+    "calories": 94,
+    "protein": 18.18662463768122
+  },
+  {
+    "name": "Palmito, juçara, em conserva",
+    "calories": 91,
+    "protein": 23.199716434081346
+  },
+  {
+    "name": "Palmito, pupunha, em conserva",
+    "calories": 89,
+    "protein": 29.43196333333332
+  },
+  {
+    "name": "Pão, de queijo, assado",
+    "calories": 34,
+    "protein": 363.07791333333336
+  },
+  {
+    "name": "Pão, de queijo, cru",
+    "calories": 42,
+    "protein": 294.538
+  },
+  {
+    "name": "Pepino, cru",
+    "calories": 97,
+    "protein": 9.533691304347819
+  },
+  {
+    "name": "Pimentão, amarelo, cru",
+    "calories": 92,
+    "protein": 27.92745942028985
+  },
+  {
+    "name": "Pimentão, verde, cru",
+    "calories": 94,
+    "protein": 21.285881159420292
+  },
+  {
+    "name": "Pimentão, vermelho, cru",
+    "calories": 93,
+    "protein": 23.28136376811601
+  },
+  {
+    "name": "Polvilho, doce",
+    "calories": 13,
+    "protein": 351.2267333333333
+  },
+  {
+    "name": "Quiabo, cru",
+    "calories": 91,
+    "protein": 29.939262150069077
+  },
+  {
+    "name": "Rabanete, cru",
+    "calories": 95,
+    "protein": 13.738126086956488
+  },
+  {
+    "name": "Repolho, branco, cru",
+    "calories": 95,
+    "protein": 17.11880289855071
+  },
+  {
+    "name": "Repolho, roxo, cru",
+    "calories": 90,
+    "protein": 30.907502954324087
+  },
+  {
+    "name": "Repolho, roxo, refogado",
+    "calories": 89,
+    "protein": 41.77352528971434
+  },
+  {
+    "name": "Rúcula, crua",
+    "calories": 95,
+    "protein": 13.133256607294062
+  },
+  {
+    "name": "Salsa, crua",
+    "calories": 89,
+    "protein": 33.424111594202884
+  },
+  {
+    "name": "Seleta de legumes, enlatada",
+    "calories": 82,
+    "protein": 56.533772463768145
+  },
+  {
+    "name": "Serralha, crua",
+    "calories": 90,
+    "protein": 30.397934166666644
+  },
+  {
+    "name": "Taioba, crua",
+    "calories": 89,
+    "protein": 34.208918333333315
+  },
+  {
+    "name": "Tomate, com semente, cru",
+    "calories": 95,
+    "protein": 15.335156521739158
+  },
+  {
+    "name": "Tomate, extrato",
+    "calories": 80,
+    "protein": 60.93343365217388
+  },
+  {
+    "name": "Tomate, molho industrializado",
+    "calories": 88,
+    "protein": 38.446549460490566
+  },
+  {
+    "name": "Tomate, purê",
+    "calories": 91,
+    "protein": 27.93687971014494
+  },
+  {
+    "name": "Tomate, salada",
+    "calories": 94,
+    "protein": 20.546909166666637
+  },
+  {
+    "name": "Vagem, crua",
+    "calories": 92,
+    "protein": 24.898357971014487
+  },
+  {
+    "name": "Abacate, cru",
+    "calories": 84,
+    "protein": 96.1547086956522
+  },
+  {
+    "name": "Abacaxi, cru",
+    "calories": 86,
+    "protein": 48.32221304347824
+  },
+  {
+    "name": "Abacaxi, polpa, congelada",
+    "calories": 91,
+    "protein": 30.591799194335923
+  },
+  {
+    "name": "Abiu, cru",
+    "calories": 83,
+    "protein": 62.42409840854006
+  },
+  {
+    "name": "Açaí, polpa, com xarope de guaraná e glucose",
+    "calories": 74,
+    "protein": 110.29759000000001
+  },
+  {
+    "name": "Açaí, polpa, congelada",
+    "calories": 89,
+    "protein": 58.04536887282133
+  },
+  {
+    "name": "Acerola, crua",
+    "calories": 91,
+    "protein": 33.46227000000003
+  },
+  {
+    "name": "Acerola, polpa, congelada",
+    "calories": 94,
+    "protein": 21.936799999999977
+  },
+  {
+    "name": "Ameixa, calda, enlatada",
+    "calories": 52,
+    "protein": 182.84662000000003
+  },
+  {
+    "name": "Ameixa, crua",
+    "calories": 85,
+    "protein": 52.54248260869565
+  },
+  {
+    "name": "Ameixa, em calda, enlatada, drenada",
+    "calories": 50,
+    "protein": 177.35918531537055
+  },
+  {
+    "name": "Atemóia, crua",
+    "calories": 73,
+    "protein": 96.97158744792144
+  },
+  {
+    "name": "Banana, da terra, crua",
+    "calories": 64,
+    "protein": 128.02445217391306
+  },
+  {
+    "name": "Banana, doce em barra",
+    "calories": 21,
+    "protein": 280.10519255063934
+  },
+  {
+    "name": "Banana, figo, crua",
+    "calories": 70,
+    "protein": 105.08265000000002
+  },
+  {
+    "name": "Banana, maçã, crua",
+    "calories": 75,
+    "protein": 86.80533043478259
+  },
+  {
+    "name": "Banana, nanica, crua",
+    "calories": 74,
+    "protein": 91.52884782608696
+  },
+  {
+    "name": "Banana, ouro, crua",
+    "calories": 68,
+    "protein": 112.36604782608694
+  },
+  {
+    "name": "Banana, pacova, crua",
+    "calories": 78,
+    "protein": 77.90952792507412
+  },
+  {
+    "name": "Banana, prata, crua",
+    "calories": 72,
+    "protein": 98.24970217391306
+  },
+  {
+    "name": "Cacau, cru",
+    "calories": 79,
+    "protein": 74.29148000000004
+  },
+  {
+    "name": "Cajá-Manga, cru",
+    "calories": 87,
+    "protein": 45.58096877372266
+  },
+  {
+    "name": "Cajá, polpa, congelada",
+    "calories": 92,
+    "protein": 26.332269311050553
+  },
+  {
+    "name": "Caju, cru",
+    "calories": 88,
+    "protein": 43.065068521739114
+  },
+  {
+    "name": "Caju, polpa, congelada",
+    "calories": 90,
+    "protein": 36.568679999999965
+  },
+  {
+    "name": "Caju, suco concentrado, envasado",
+    "calories": 88,
+    "protein": 45.10862666666668
+  },
+  {
+    "name": "Caqui, chocolate, cru",
+    "calories": 80,
+    "protein": 71.35001811164616
+  },
+  {
+    "name": "Carambola, crua",
+    "calories": 87,
+    "protein": 45.740888793428724
+  },
+  {
+    "name": "Ciriguela, crua",
+    "calories": 79,
+    "protein": 75.59411
+  },
+  {
+    "name": "Cupuaçu, cru",
+    "calories": 86,
+    "protein": 49.42255877437193
+  },
+  {
+    "name": "Cupuaçu, polpa, congelada",
+    "calories": 87,
+    "protein": 48.79688999999999
+  },
+  {
+    "name": "Figo, cru",
+    "calories": 88,
+    "protein": 41.447126086956516
+  },
+  {
+    "name": "Figo, enlatado, em calda",
+    "calories": 49,
+    "protein": 184.36071739130435
+  },
+  {
+    "name": "Fruta-pão, crua",
+    "calories": 81,
+    "protein": 67.04561999999997
+  },
+  {
+    "name": "Goiaba, branca, com casca, crua",
+    "calories": 86,
+    "protein": 51.73774782608695
+  },
+  {
+    "name": "Goiaba, doce em pasta",
+    "calories": 25,
+    "protein": 268.9598260869565
+  },
+  {
+    "name": "Goiaba, doce, cascão",
+    "calories": 20,
+    "protein": 285.58779243900375
+  },
+  {
+    "name": "Goiaba, vermelha, com casca, crua",
+    "calories": 85,
+    "protein": 54.16993043478262
+  },
+  {
+    "name": "Graviola, crua",
+    "calories": 82,
+    "protein": 61.62189837666358
+  },
+  {
+    "name": "Graviola, polpa, congelada",
+    "calories": 89,
+    "protein": 38.27386999999997
+  },
+  {
+    "name": "Jabuticaba, crua",
+    "calories": 84,
+    "protein": 58.05315000000004
+  },
+  {
+    "name": "Jaca, crua",
+    "calories": 75,
+    "protein": 87.92034999999997
+  },
+  {
+    "name": "Jambo, cru",
+    "calories": 92,
+    "protein": 26.91229999999998
+  },
+  {
+    "name": "Jamelão, cru",
+    "calories": 88,
+    "protein": 41.00970891670385
+  },
+  {
+    "name": "Kiwi, cru",
+    "calories": 86,
+    "protein": 51.136330434782636
+  },
+  {
+    "name": "Laranja, baía, crua",
+    "calories": 87,
+    "protein": 45.43811739130433
+  },
+  {
+    "name": "Laranja, baía, suco",
+    "calories": 90,
+    "protein": 36.64948260869561
+  },
+  {
+    "name": "Laranja, da terra, crua",
+    "calories": 85,
+    "protein": 51.471128639280764
+  },
+  {
+    "name": "Laranja, da terra, suco",
+    "calories": 89,
+    "protein": 40.95600731086733
+  },
+  {
+    "name": "Laranja, lima, crua",
+    "calories": 87,
+    "protein": 45.701038780629624
+  },
+  {
+    "name": "Laranja, lima, suco",
+    "calories": 90,
+    "protein": 39.336093944132394
+  },
+  {
+    "name": "Laranja, pêra, crua",
+    "calories": 90,
+    "protein": 36.77376521739132
+  },
+  {
+    "name": "Laranja, pêra, suco",
+    "calories": 91,
+    "protein": 32.70975362318838
+  },
+  {
+    "name": "Laranja, valência, crua",
+    "calories": 87,
+    "protein": 46.109628783385006
+  },
+  {
+    "name": "Laranja, valência, suco",
+    "calories": 91,
+    "protein": 36.19635058768591
+  },
+  {
+    "name": "Limão, cravo, suco",
+    "calories": 94,
+    "protein": 14.103733399311682
+  },
+  {
+    "name": "Limão, galego, suco",
+    "calories": 92,
+    "protein": 22.22504347826089
+  },
+  {
+    "name": "Limão, tahiti, cru",
+    "calories": 87,
+    "protein": 31.818153430163903
+  },
+  {
+    "name": "Maçã, Argentina, com casca, crua",
+    "calories": 83,
+    "protein": 62.531818366289116
+  },
+  {
+    "name": "Maçã, Fuji, com casca, crua",
+    "calories": 84,
+    "protein": 55.51520000000005
+  },
+  {
+    "name": "Macaúba, crua",
+    "calories": 42,
+    "protein": 404.2818766666667
+  },
+  {
+    "name": "Mamão, doce em calda, drenado",
+    "calories": 46,
+    "protein": 195.62747482178608
+  },
+  {
+    "name": "Mamão, Formosa, cru",
+    "calories": 87,
+    "protein": 45.34074782608691
+  },
+  {
+    "name": "Mamão, Papaia, cru",
+    "calories": 89,
+    "protein": 40.156768942296566
+  },
+  {
+    "name": "Mamão verde, doce em calda, drenado",
+    "calories": 42,
+    "protein": 209.3762544589043
+  },
+  {
+    "name": "Manga, Haden, crua",
+    "calories": 82,
+    "protein": 63.50031833879153
+  },
+  {
+    "name": "Manga, Palmer, crua",
+    "calories": 80,
+    "protein": 72.48673809168733
+  },
+  {
+    "name": "Manga, polpa, congelada",
+    "calories": 86,
+    "protein": 48.30588
+  },
+  {
+    "name": "Manga, Tommy Atkins, crua",
+    "calories": 86,
+    "protein": 50.69218260869563
+  },
+  {
+    "name": "Maracujá, cru",
+    "calories": 83,
+    "protein": 68.43950869565214
+  },
+  {
+    "name": "Maracujá, polpa, congelada",
+    "calories": 89,
+    "protein": 38.75969999999999
+  },
+  {
+    "name": "Maracujá, suco concentrado, envasado",
+    "calories": 89,
+    "protein": 41.96731999999999
+  },
+  {
+    "name": "Melancia, crua",
+    "calories": 91,
+    "protein": 32.60662608695646
+  },
+  {
+    "name": "Melão, cru",
+    "calories": 91,
+    "protein": 29.369391304347808
+  },
+  {
+    "name": "Mexerica, Murcote, crua",
+    "calories": 84,
+    "protein": 57.592778474648775
+  },
+  {
+    "name": "Mexerica, Rio, crua",
+    "calories": 90,
+    "protein": 36.871350000000064
+  },
+  {
+    "name": "Morango, cru",
+    "calories": 92,
+    "protein": 30.147917391304354
+  },
+  {
+    "name": "Nêspera, crua",
+    "calories": 88,
+    "protein": 42.539198868195214
+  },
+  {
+    "name": "Pequi, cru",
+    "calories": 66,
+    "protein": 204.96677
+  },
+  {
+    "name": "Pêra, Park, crua",
+    "calories": 83,
+    "protein": 60.58859
+  },
+  {
+    "name": "Pêra, Williams, crua",
+    "calories": 85,
+    "protein": 53.309047826086925
+  },
+  {
+    "name": "Pêssego, Aurora, cru",
+    "calories": 89,
+    "protein": 36.327599024534216
+  },
+  {
+    "name": "Pêssego, enlatado, em calda",
+    "calories": 82,
+    "protein": 63.142434782608696
+  },
+  {
+    "name": "Pinha, crua",
+    "calories": 75,
+    "protein": 88.4735276668668
+  },
+  {
+    "name": "Pitanga, crua",
+    "calories": 88,
+    "protein": 41.41552999999997
+  },
+  {
+    "name": "Pitanga, polpa, congelada",
+    "calories": 95,
+    "protein": 19.10545950235922
+  },
+  {
+    "name": "Romã, crua",
+    "calories": 84,
+    "protein": 55.73900000000001
+  },
+  {
+    "name": "Tamarindo, cru",
+    "calories": 22,
+    "protein": 275.69564269441366
+  },
+  {
+    "name": "Tangerina, Poncã, crua",
+    "calories": 89,
+    "protein": 37.83059999999995
+  },
+  {
+    "name": "Tangerina, Poncã, suco",
+    "calories": 90,
+    "protein": 36.10879999999999
+  },
+  {
+    "name": "Tucumã, cru",
+    "calories": 51,
+    "protein": 262.01519507239266
+  },
+  {
+    "name": "Umbu, cru",
+    "calories": 89,
+    "protein": 37.016689999999976
+  },
+  {
+    "name": "Umbu, polpa, congelada",
+    "calories": 90,
+    "protein": 33.943290000000005
+  },
+  {
+    "name": "Uva, Itália, crua",
+    "calories": 85,
+    "protein": 52.873100000000065
+  },
+  {
+    "name": "Uva, Rubi, crua",
+    "calories": 86,
+    "protein": 49.061289999999964
+  },
+  {
+    "name": "Uva, suco concentrado, envasado",
+    "calories": 85,
+    "protein": 57.655359999999995
+  },
+  {
+    "name": "Manteiga, com sal",
+    "calories": 16,
+    "protein": 725.9689268459988
+  },
+  {
+    "name": "Manteiga, sem sal",
+    "calories": 14,
+    "protein": 757.5404607259967
+  },
+  {
+    "name": "Margarina, com óleo hidrogenado, com sal (65% de lipídeos)",
+    "calories": 32,
+    "protein": 596.1195169563294
+  },
+  {
+    "name": "Margarina, com óleo hidrogenado, sem sal (80% de lipídeos)",
+    "calories": 20,
+    "protein": 722.525625804901
+  },
+  {
+    "name": "Margarina, com óleo interesterificado, com sal (65%de lipídeos)",
+    "calories": 32,
+    "protein": 594.4516933333332
+  },
+  {
+    "name": "Margarina, com óleo interesterificado, sem sal (65% de lipídeos)",
+    "calories": 33,
+    "protein": 593.1374902381897
+  },
+  {
+    "name": "Abadejo, filé, congelado, assado",
+    "calories": 74,
+    "protein": 111.6155034511884
+  },
+  {
+    "name": "Abadejo, filé, congelado,cozido",
+    "calories": 80,
+    "protein": 91.10354839555423
+  },
+  {
+    "name": "Abadejo, filé, congelado, cru",
+    "calories": 86,
+    "protein": 59.11303324858347
+  },
+  {
+    "name": "Abadejo, filé, congelado, grelhado",
+    "calories": 71,
+    "protein": 129.6435259028673
+  },
+  {
+    "name": "Atum, conserva em óleo",
+    "calories": 65,
+    "protein": 165.91056057890256
+  },
+  {
+    "name": "Atum, fresco, cru",
+    "calories": 73,
+    "protein": 117.50099999999998
+  },
+  {
+    "name": "Bacalhau, salgado, cru",
+    "calories": 48,
+    "protein": 135.89296666666664
+  },
+  {
+    "name": "Bacalhau, salgado, refogado",
+    "calories": 66,
+    "protein": 139.66070105353995
+  },
+  {
+    "name": "Cação, posta, com farinha de trigo, frita",
+    "calories": 61,
+    "protein": 208.33274372597532
+  },
+  {
+    "name": "Cação, posta, cozida",
+    "calories": 76,
+    "protein": 116.01448068765795
+  },
+  {
+    "name": "Cação, posta, crua",
+    "calories": 81,
+    "protein": 83.33302501956622
+  },
+  {
+    "name": "Camarão, Rio Grande, grande, cozido",
+    "calories": 79,
+    "protein": 90.01368009630838
+  },
+  {
+    "name": "Camarão, Rio Grande, grande, cru",
+    "calories": 89,
+    "protein": 47.18343670543035
+  },
+  {
+    "name": "Camarão, Sete Barbas, sem cabeça, com casca, frito",
+    "calories": 61,
+    "protein": 231.24615385087333
+  },
+  {
+    "name": "Caranguejo, cozido",
+    "calories": 77,
+    "protein": 82.72150150783858
+  },
+  {
+    "name": "Corimba, cru",
+    "calories": 76,
+    "protein": 128.1554
+  },
+  {
+    "name": "Corimbatá, assado",
+    "calories": 60,
+    "protein": 261.45243941056725
+  },
+  {
+    "name": "Corimbatá, cozido",
+    "calories": 65,
+    "protein": 238.69610486733916
+  },
+  {
+    "name": "Corvina de água doce, crua",
+    "calories": 79,
+    "protein": 101.00903333333332
+  },
+  {
+    "name": "Corvina do mar, crua",
+    "calories": 79,
+    "protein": 94
+  },
+  {
+    "name": "Corvina grande, assada",
+    "calories": 69,
+    "protein": 146.52814112536112
+  },
+  {
+    "name": "Corvina grande, cozida",
+    "calories": 74,
+    "protein": 100.07812455296516
+  },
+  {
+    "name": "Dourada de água doce, fresca",
+    "calories": 76,
+    "protein": 131.2083147237698
+  },
+  {
+    "name": "Lambari, congelado, cru",
+    "calories": 72,
+    "protein": 130.84031100948653
+  },
+  {
+    "name": "Lambari, congelado, frito",
+    "calories": 40,
+    "protein": 326.86839988660813
+  },
+  {
+    "name": "Lambari, fresco, cru",
+    "calories": 72,
+    "protein": 151.598346503218
+  },
+  {
+    "name": "Manjuba, com farinha de trigo, frita",
+    "calories": 41,
+    "protein": 343.55045872306823
+  },
+  {
+    "name": "Manjuba, frita",
+    "calories": 41,
+    "protein": 349.32523145536584
+  },
+  {
+    "name": "Merluza, filé, assado",
+    "calories": 71,
+    "protein": 121.91021833333333
+  },
+  {
+    "name": "Merluza, filé, cru",
+    "calories": 82,
+    "protein": 89.13086666666665
+  },
+  {
+    "name": "Merluza, filé, frito",
+    "calories": 63,
+    "protein": 191.62747837583225
+  },
+  {
+    "name": "Pescada, branca, crua",
+    "calories": 80,
+    "protein": 110.87629999999999
+  },
+  {
+    "name": "Pescada, branca, frita",
+    "calories": 57,
+    "protein": 223.0397323693037
+  },
+  {
+    "name": "Pescada, filé, com farinha de trigo, frito",
+    "calories": 53,
+    "protein": 283.4252144319614
+  },
+  {
+    "name": "Pescada, filé, cru",
+    "calories": 80,
+    "protein": 107.20556666666666
+  },
+  {
+    "name": "Pescada, filé, frito",
+    "calories": 67,
+    "protein": 154.270025
+  },
+  {
+    "name": "Pescada, filé, molho escabeche",
+    "calories": 75,
+    "protein": 141.9583228750229
+  },
+  {
+    "name": "Pescadinha, crua",
+    "calories": 81,
+    "protein": 76.40890833333334
+  },
+  {
+    "name": "Pintado, assado",
+    "calories": 57,
+    "protein": 191.55914112758637
+  },
+  {
+    "name": "Pintado, cru",
+    "calories": 80,
+    "protein": 91.08323333333333
+  },
+  {
+    "name": "Pintado, grelhado",
+    "calories": 65,
+    "protein": 152.19008833333334
+  },
+  {
+    "name": "Porquinho, cru",
+    "calories": 79,
+    "protein": 93.02456666666666
+  },
+  {
+    "name": "Salmão, filé, com pele, fresco,  grelhado",
+    "calories": 61,
+    "protein": 228.73177513531843
+  },
+  {
+    "name": "Salmão, sem pele, fresco, cru",
+    "calories": 69,
+    "protein": 169.78157991055645
+  },
+  {
+    "name": "Salmão, sem pele, fresco, grelhado",
+    "calories": 58,
+    "protein": 242.7065694870949
+  },
+  {
+    "name": "Sardinha, assada",
+    "calories": 60,
+    "protein": 164.3507883333333
+  },
+  {
+    "name": "Sardinha, conserva em óleo",
+    "calories": 55,
+    "protein": 284.9810048712492
+  },
+  {
+    "name": "Sardinha, frita",
+    "calories": 48,
+    "protein": 257.0407
+  },
+  {
+    "name": "Sardinha, inteira, crua",
+    "calories": 77,
+    "protein": 113.90036666666666
+  },
+  {
+    "name": "Tucunaré, filé, congelado, cru",
+    "calories": 80,
+    "protein": 87.686483549277
+  },
+  {
+    "name": "Apresuntado",
+    "calories": 74,
+    "protein": 128.85725581200919
+  },
+  {
+    "name": "Caldo de carne, tablete",
+    "calories": 3,
+    "protein": 240.62333333333333
+  },
+  {
+    "name": "Caldo de galinha, tablete",
+    "calories": 3,
+    "protein": 251.44566666666665
+  },
+  {
+    "name": "Carne, bovina, acém, moído, cozido",
+    "calories": 62,
+    "protein": 212.42039999999997
+  },
+  {
+    "name": "Carne, bovina, acém, moído, cru",
+    "calories": 73,
+    "protein": 136.56233333333333
+  },
+  {
+    "name": "Carne, bovina, acém, sem gordura, cozido",
+    "calories": 60,
+    "protein": 214.61056666666664
+  },
+  {
+    "name": "Carne, bovina, acém, sem gordura, cru",
+    "calories": 72,
+    "protein": 144.02943333333332
+  },
+  {
+    "name": "Carne, bovina, almôndegas, cruas",
+    "calories": 64,
+    "protein": 189.2566666666666
+  },
+  {
+    "name": "Carne, bovina, almôndegas, fritas",
+    "calories": 48,
+    "protein": 271.813
+  },
+  {
+    "name": "Carne, bovina, bucho, cozido",
+    "calories": 74,
+    "protein": 133.02286666666666
+  },
+  {
+    "name": "Carne, bovina, bucho, cru",
+    "calories": 75,
+    "protein": 137.30316666666667
+  },
+  {
+    "name": "Carne, bovina, capa de contra-filé, com gordura, crua",
+    "calories": 65,
+    "protein": 216.9089666666667
+  },
+  {
+    "name": "Carne, bovina, capa de contra-filé, com gordura, grelhada",
+    "calories": 48,
+    "protein": 311.7026666666667
+  },
+  {
+    "name": "Carne, bovina, capa de contra-filé, sem gordura, crua",
+    "calories": 73,
+    "protein": 131.06246666666664
+  },
+  {
+    "name": "Carne, bovina, capa de contra-filé, sem gordura, grelhada",
+    "calories": 54,
+    "protein": 239.44363333333328
+  },
+  {
+    "name": "Carne, bovina, charque, cozido",
+    "calories": 46,
+    "protein": 262.7801422621807
+  },
+  {
+    "name": "Carne, bovina, charque, cru",
+    "calories": 44,
+    "protein": 248.86101810745396
+  },
+  {
+    "name": "Carne, bovina, contra-filé, à milanesa",
+    "calories": 42,
+    "protein": 351.5926591989994
+  },
+  {
+    "name": "Carne, bovina, contra-filé de costela, cru",
+    "calories": 66,
+    "protein": 202.43739999999997
+  },
+  {
+    "name": "Carne, bovina, contra-filé de costela, grelhado",
+    "calories": 52,
+    "protein": 274.91426666666666
+  },
+  {
+    "name": "Carne, bovina, contra-filé, com gordura, cru",
+    "calories": 66,
+    "protein": 205.8567
+  },
+  {
+    "name": "Carne, bovina, contra-filé, com gordura, grelhado",
+    "calories": 52,
+    "protein": 278.05356666666665
+  },
+  {
+    "name": "Carne, bovina, contra-filé, sem gordura, cru",
+    "calories": 69,
+    "protein": 156.6158333333333
+  },
+  {
+    "name": "Carne, bovina, contra-filé, sem gordura, grelhado",
+    "calories": 58,
+    "protein": 193.69156666666663
+  },
+  {
+    "name": "Carne, bovina, costela, assada",
+    "calories": 43,
+    "protein": 373.03886666666665
+  },
+  {
+    "name": "Carne, bovina, costela, crua",
+    "calories": 53,
+    "protein": 357.72246666666666
+  },
+  {
+    "name": "Carne, bovina, coxão duro, sem gordura, cozido",
+    "calories": 59,
+    "protein": 216.616066666667
+  },
+  {
+    "name": "Carne, bovina, coxão duro, sem gordura, cru",
+    "calories": 70,
+    "protein": 147.96633333333335
+  },
+  {
+    "name": "Carne, bovina, coxão mole, sem gordura, cozido",
+    "calories": 58,
+    "protein": 218.6751
+  },
+  {
+    "name": "Carne, bovina, coxão mole, sem gordura, cru",
+    "calories": 69,
+    "protein": 169.06596666666667
+  },
+  {
+    "name": "Carne, bovina, cupim, assado",
+    "calories": 48,
+    "protein": 330.1002908333333
+  },
+  {
+    "name": "Carne, bovina, cupim, cru",
+    "calories": 65,
+    "protein": 221.3975
+  },
+  {
+    "name": "Carne, bovina, fígado, cru",
+    "calories": 71,
+    "protein": 141.04586666666665
+  },
+  {
+    "name": "Carne, bovina, fígado, grelhado",
+    "calories": 55,
+    "protein": 225.0264
+  },
+  {
+    "name": "Carne, bovina, filé mingnon, sem gordura, cru",
+    "calories": 72,
+    "protein": 142.86426666666665
+  },
+  {
+    "name": "Carne, bovina, filé mingnon, sem gordura, grelhado",
+    "calories": 57,
+    "protein": 219.70259999999996
+  },
+  {
+    "name": "Carne, bovina, flanco, sem gordura, cozido",
+    "calories": 62,
+    "protein": 195.5753666666667
+  },
+  {
+    "name": "Carne, bovina, flanco, sem gordura, cru",
+    "calories": 72,
+    "protein": 141.46009999999998
+  },
+  {
+    "name": "Carne, bovina, fraldinha, com gordura, cozida",
+    "calories": 50,
+    "protein": 338.44573333333335
+  },
+  {
+    "name": "Carne, bovina, fraldinha, com gordura, crua",
+    "calories": 65,
+    "protein": 220.72376666666662
+  },
+  {
+    "name": "Carne, bovina, lagarto, cozido",
+    "calories": 58,
+    "protein": 222.46856666666667
+  },
+  {
+    "name": "Carne, bovina, lagarto, cru",
+    "calories": 71,
+    "protein": 134.86456666666663
+  },
+  {
+    "name": "Carne, bovina, língua, cozida",
+    "calories": 53,
+    "protein": 314.9016
+  },
+  {
+    "name": "Carne, bovina, língua, crua",
+    "calories": 65,
+    "protein": 215.24976666666663
+  },
+  {
+    "name": "Carne, bovina, maminha, crua",
+    "calories": 70,
+    "protein": 152.76586666666665
+  },
+  {
+    "name": "Carne, bovina, maminha, grelhada",
+    "calories": 65,
+    "protein": 153.0896758333333
+  },
+  {
+    "name": "Carne, bovina, miolo de alcatra, sem gordura, cru",
+    "calories": 69,
+    "protein": 162.87123333333332
+  },
+  {
+    "name": "Carne, bovina, miolo de alcatra, sem gordura, grelhado",
+    "calories": 52,
+    "protein": 241.36396666666667
+  },
+  {
+    "name": "Carne, bovina, músculo, sem gordura, cozido",
+    "calories": 63,
+    "protein": 193.80033333333333
+  },
+  {
+    "name": "Carne, bovina, músculo, sem gordura, cru",
+    "calories": 72,
+    "protein": 141.581
+  },
+  {
+    "name": "Carne, bovina, paleta, com gordura, crua",
+    "calories": 71,
+    "protein": 158.7099
+  },
+  {
+    "name": "Carne, bovina, paleta, sem gordura, cozida",
+    "calories": 63,
+    "protein": 193.65239999999997
+  },
+  {
+    "name": "Carne, bovina, paleta, sem gordura, crua",
+    "calories": 72,
+    "protein": 140.9415
+  },
+  {
+    "name": "Carne, bovina, patinho, sem gordura, cru",
+    "calories": 73,
+    "protein": 133.46889999999996
+  },
+  {
+    "name": "Carne, bovina, patinho, sem gordura, grelhado",
+    "calories": 55,
+    "protein": 219.25926666666663
+  },
+  {
+    "name": "Carne, bovina, peito, sem gordura, cozido",
+    "calories": 51,
+    "protein": 338.4731333333333
+  },
+  {
+    "name": "Carne, bovina, peito, sem gordura, cru",
+    "calories": 61,
+    "protein": 259.2756333333333
+  },
+  {
+    "name": "Carne, bovina, picanha, com gordura, crua",
+    "calories": 66,
+    "protein": 212.8794333333333
+  },
+  {
+    "name": "Carne, bovina, picanha, com gordura, grelhada",
+    "calories": 53,
+    "protein": 288.7670916666666
+  },
+  {
+    "name": "Carne, bovina, picanha, sem gordura, crua",
+    "calories": 72,
+    "protein": 133.52236666666667
+  },
+  {
+    "name": "Carne, bovina, picanha, sem gordura, grelhada",
+    "calories": 55,
+    "protein": 238.4681333333333
+  },
+  {
+    "name": "Carne, bovina, seca, cozida",
+    "calories": 47,
+    "protein": 312.79903369144597
+  },
+  {
+    "name": "Carne, bovina, seca, crua",
+    "calories": 39,
+    "protein": 312.7484279036522
+  },
+  {
+    "name": "Coxinha de frango, frita",
+    "calories": 42,
+    "protein": 283.048
+  },
+  {
+    "name": "Croquete, de carne, cru",
+    "calories": 56,
+    "protein": 245.77192529714108
+  },
+  {
+    "name": "Croquete, de carne, frito",
+    "calories": 39,
+    "protein": 346.7420146474044
+  },
+  {
+    "name": "Empada de frango, pré-cozida, assada",
+    "calories": 28,
+    "protein": 358.1916666666667
+  },
+  {
+    "name": "Empada, de frango, pré-cozida",
+    "calories": 32,
+    "protein": 377.4796666666667
+  },
+  {
+    "name": "Frango, asa, com pele, crua",
+    "calories": 67,
+    "protein": 213.18833333333333
+  },
+  {
+    "name": "Frango, caipira, inteiro, com pele, cozido",
+    "calories": 60,
+    "protein": 242.88932666666665
+  },
+  {
+    "name": "Frango, caipira, inteiro, sem pele, cozido",
+    "calories": 61,
+    "protein": 195.76029666666665
+  },
+  {
+    "name": "Frango, coração, cru",
+    "calories": 69,
+    "protein": 221.50283333333334
+  },
+  {
+    "name": "Frango, coração, grelhado",
+    "calories": 64,
+    "protein": 207.27364333333327
+  },
+  {
+    "name": "Frango, coxa, com pele, assada",
+    "calories": 60,
+    "protein": 215.1186475329399
+  },
+  {
+    "name": "Frango, coxa, com pele, crua",
+    "calories": 73,
+    "protein": 161.47473333333332
+  },
+  {
+    "name": "Frango, coxa, sem pele, cozida",
+    "calories": 67,
+    "protein": 167.42803216441473
+  },
+  {
+    "name": "Frango, coxa, sem pele, crua",
+    "calories": 76,
+    "protein": 119.94746666666661
+  },
+  {
+    "name": "Frango, fígado, cru",
+    "calories": 78,
+    "protein": 106.48456666666667
+  },
+  {
+    "name": "Frango, filé, à milanesa",
+    "calories": 55,
+    "protein": 220.87277999999998
+  },
+  {
+    "name": "Frango, inteiro, com pele, cru",
+    "calories": 67,
+    "protein": 226.31916666666666
+  },
+  {
+    "name": "Frango, inteiro, sem pele, assado",
+    "calories": 63,
+    "protein": 187.3377966666667
+  },
+  {
+    "name": "Frango, inteiro, sem pele, cozido",
+    "calories": 67,
+    "protein": 170.38997583333332
+  },
+  {
+    "name": "Frango, inteiro, sem pele, cru",
+    "calories": 75,
+    "protein": 129.09640000000002
+  },
+  {
+    "name": "Frango, peito, com pele, assado",
+    "calories": 59,
+    "protein": 211.68314953072866
+  },
+  {
+    "name": "Frango, peito, com pele, cru",
+    "calories": 72,
+    "protein": 149.46526666666665
+  },
+  {
+    "name": "Frango, peito, sem pele, cozido",
+    "calories": 66,
+    "protein": 162.87476334631444
+  },
+  {
+    "name": "Frango, peito, sem pele, cru",
+    "calories": 75,
+    "protein": 119.15926666666665
+  },
+  {
+    "name": "Frango, peito, sem pele, grelhado",
+    "calories": 64,
+    "protein": 159.18500719261172
+  },
+  {
+    "name": "Frango, sobrecoxa, com pele, assada",
+    "calories": 55,
+    "protein": 259.60476916666664
+  },
+  {
+    "name": "Frango, sobrecoxa, com pele, crua",
+    "calories": 64,
+    "protein": 254.5322
+  },
+  {
+    "name": "Frango, sobrecoxa, sem pele, assada",
+    "calories": 56,
+    "protein": 232.88339666666667
+  },
+  {
+    "name": "Frango, sobrecoxa, sem pele, crua",
+    "calories": 73,
+    "protein": 161.79629999999997
+  },
+  {
+    "name": "Hambúrguer, bovino, cru",
+    "calories": 64,
+    "protein": 214.836
+  },
+  {
+    "name": "Hambúrguer, bovino, frito",
+    "calories": 52,
+    "protein": 258.283
+  },
+  {
+    "name": "Hambúrguer, bovino, grelhado",
+    "calories": 59,
+    "protein": 209.8316666666667
+  },
+  {
+    "name": "Lingüiça, frango, crua",
+    "calories": 65,
+    "protein": 218.10881416666666
+  },
+  {
+    "name": "Lingüiça, frango, frita",
+    "calories": 60,
+    "protein": 245.46100666666663
+  },
+  {
+    "name": "Lingüiça, frango, grelhada",
+    "calories": 59,
+    "protein": 243.6585675
+  },
+  {
+    "name": "Lingüiça, porco, crua",
+    "calories": 62,
+    "protein": 227.2034508333333
+  },
+  {
+    "name": "Lingüiça, porco, frita",
+    "calories": 55,
+    "protein": 279.54358916666666
+  },
+  {
+    "name": "Lingüiça, porco, grelhada",
+    "calories": 50,
+    "protein": 296.4896091666666
+  },
+  {
+    "name": "Mortadela",
+    "calories": 56,
+    "protein": 268.8199890167316
+  },
+  {
+    "name": "Peru, congelado, assado",
+    "calories": 65,
+    "protein": 163.07139793137708
+  },
+  {
+    "name": "Peru, congelado, cru",
+    "calories": 78,
+    "protein": 93.72243382612864
+  },
+  {
+    "name": "Porco, bisteca, crua",
+    "calories": 68,
+    "protein": 164.11533659299215
+  },
+  {
+    "name": "Porco, bisteca, frita",
+    "calories": 47,
+    "protein": 311.1690453348557
+  },
+  {
+    "name": "Porco, bisteca, grelhada",
+    "calories": 52,
+    "protein": 280.0840349027713
+  },
+  {
+    "name": "Porco, costela, assada",
+    "calories": 37,
+    "protein": 402.16844745083654
+  },
+  {
+    "name": "Porco, costela, crua",
+    "calories": 61,
+    "protein": 255.60634206136066
+  },
+  {
+    "name": "Porco, lombo, assado",
+    "calories": 57,
+    "protein": 210.2346655796369
+  },
+  {
+    "name": "Porco, lombo, cru",
+    "calories": 68,
+    "protein": 175.6251952501138
+  },
+  {
+    "name": "Porco, orelha, salgada, crua",
+    "calories": 60,
+    "protein": 258.49175833333334
+  },
+  {
+    "name": "Porco, pernil, assado",
+    "calories": 49,
+    "protein": 262.2596066666666
+  },
+  {
+    "name": "Porco, pernil, cru",
+    "calories": 67,
+    "protein": 186.05575
+  },
+  {
+    "name": "Porco, rabo, salgado, cru",
+    "calories": 44,
+    "protein": 377.41525749999994
+  },
+  {
+    "name": "Presunto, com capa de gordura",
+    "calories": 74,
+    "protein": 127.84921266563737
+  },
+  {
+    "name": "Presunto, sem capa de gordura",
+    "calories": 77,
+    "protein": 93.7432807208697
+  },
+  {
+    "name": "Quibe, assado",
+    "calories": 69,
+    "protein": 136.22887614158785
+  },
+  {
+    "name": "Quibe, cru",
+    "calories": 75,
+    "protein": 109.49066929475465
+  },
+  {
+    "name": "Quibe, frito",
+    "calories": 54,
+    "protein": 253.83130886964
+  },
+  {
+    "name": "Salame",
+    "calories": 35,
+    "protein": 397.8425065349341
+  },
+  {
+    "name": "Toucinho, cru",
+    "calories": 28,
+    "protein": 592.5311749999998
+  },
+  {
+    "name": "Toucinho, frito",
+    "calories": 6,
+    "protein": 696.5640066666666
+  },
+  {
+    "name": "Bebida láctea, pêssego",
+    "calories": 88,
+    "protein": 55.164833333333306
+  },
+  {
+    "name": "Creme de Leite",
+    "calories": 71,
+    "protein": 221.48354127513312
+  },
+  {
+    "name": "Iogurte, natural",
+    "calories": 90,
+    "protein": 51.48953333333329
+  },
+  {
+    "name": "Iogurte, natural, desnatado",
+    "calories": 89,
+    "protein": 41.49271128155834
+  },
+  {
+    "name": "Iogurte, sabor morango",
+    "calories": 85,
+    "protein": 69.56560000000003
+  },
+  {
+    "name": "Iogurte, sabor pêssego",
+    "calories": 85,
+    "protein": 67.84940000000002
+  },
+  {
+    "name": "Leite, condensado",
+    "calories": 27,
+    "protein": 312.57259999999997
+  },
+  {
+    "name": "Leite, de cabra",
+    "calories": 87,
+    "protein": 66.41574188654329
+  },
+  {
+    "name": "Leite, de vaca, achocolatado",
+    "calories": 81,
+    "protein": 82.82099627199361
+  },
+  {
+    "name": "Leite, de vaca, desnatado, pó",
+    "calories": 3,
+    "protein": 361.60799999999995
+  },
+  {
+    "name": "Leite, de vaca, integral, pó",
+    "calories": 3,
+    "protein": 496.6502999999999
+  },
+  {
+    "name": "Leite, fermentado",
+    "calories": 82,
+    "protein": 69.62147400000002
+  },
+  {
+    "name": "Queijo, minas, frescal",
+    "calories": 56,
+    "protein": 264.27312799999993
+  },
+  {
+    "name": "Queijo, minas, meia cura",
+    "calories": 47,
+    "protein": 320.72181773325985
+  },
+  {
+    "name": "Queijo, mozarela",
+    "calories": 45,
+    "protein": 329.8707184208871
+  },
+  {
+    "name": "Queijo, parmesão",
+    "calories": 21,
+    "protein": 452.9637553333333
+  },
+  {
+    "name": "Queijo, pasteurizado",
+    "calories": 54,
+    "protein": 303.07980333333325
+  },
+  {
+    "name": "Queijo, petit suisse, morango",
+    "calories": 72,
+    "protein": 121.105954
+  },
+  {
+    "name": "Queijo, prato",
+    "calories": 42,
+    "protein": 359.88046240505474
+  },
+  {
+    "name": "Queijo, requeijão, cremoso",
+    "calories": 62,
+    "protein": 256.57814866666666
+  },
+  {
+    "name": "Queijo, ricota",
+    "calories": 74,
+    "protein": 139.73177999999996
+  },
+  {
+    "name": "Bebida isotônica, sabores variados",
+    "calories": 94,
+    "protein": 25.613333333333344
+  },
+  {
+    "name": "Café, infusão 10%",
+    "calories": 97,
+    "protein": 9.070868599613517
+  },
+  {
+    "name": "Cana, caldo de",
+    "calories": 82,
+    "protein": 65.34359826898573
+  },
+  {
+    "name": "Cerveja, pilsen 2",
+    "calories": 92,
+    "protein": 40.72018855062866
+  },
+  {
+    "name": "Chá, erva-doce, infusão 5%",
+    "calories": 100,
+    "protein": 1.3970599738756386
+  },
+  {
+    "name": "Chá, mate, infusão 5%",
+    "calories": 99,
+    "protein": 2.730749951124143
+  },
+  {
+    "name": "Chá, preto, infusão 5%",
+    "calories": 99,
+    "protein": 2.24790995796521
+  },
+  {
+    "name": "Coco, água de",
+    "calories": 94,
+    "protein": 21.50859424050649
+  },
+  {
+    "name": "Refrigerante, tipo água tônica",
+    "calories": 92,
+    "protein": 30.7794
+  },
+  {
+    "name": "Refrigerante, tipo cola",
+    "calories": 91,
+    "protein": 33.514200000000045
+  },
+  {
+    "name": "Refrigerante, tipo guaraná",
+    "calories": 90,
+    "protein": 38.7
+  },
+  {
+    "name": "Refrigerante, tipo laranja",
+    "calories": 88,
+    "protein": 45.62730000000003
+  },
+  {
+    "name": "Refrigerante, tipo limão",
+    "calories": 90,
+    "protein": 39.71910000000001
+  },
+  {
+    "name": "Omelete, de queijo",
+    "calories": 60,
+    "protein": 268.00677218242487
+  },
+  {
+    "name": "Ovo, de codorna, inteiro, cru",
+    "calories": 72,
+    "protein": 176.89389999999997
+  },
+  {
+    "name": "Ovo, de galinha, clara, cozida/10minutos",
+    "calories": 85,
+    "protein": 59.43569666666667
+  },
+  {
+    "name": "Ovo, de galinha, gema, cozida/10minutos",
+    "calories": 50,
+    "protein": 352.67334000000005
+  },
+  {
+    "name": "Ovo, de galinha, inteiro, cozido/10minutos",
+    "calories": 76,
+    "protein": 145.70017
+  },
+  {
+    "name": "Ovo, de galinha, inteiro, cru",
+    "calories": 76,
+    "protein": 143.11173333333335
+  },
+  {
+    "name": "Ovo, de galinha, inteiro, frito",
+    "calories": 63,
+    "protein": 240.1872240091165
+  },
+  {
+    "name": "Achocolatado, pó",
+    "calories": 1,
+    "protein": 401.02
+  },
+  {
+    "name": "Açúcar, cristal",
+    "calories": 0,
+    "protein": 386.84572399999996
+  },
+  {
+    "name": "Açúcar, mascavo",
+    "calories": 3,
+    "protein": 368.55482252438867
+  },
+  {
+    "name": "Açúcar, refinado",
+    "calories": 0,
+    "protein": 386.5748239999999
+  },
+  {
+    "name": "Chocolate, ao leite",
+    "calories": 1,
+    "protein": 539.5866666666667
+  },
+  {
+    "name": "Chocolate, ao leite, com castanha do Pará",
+    "calories": 1,
+    "protein": 558.8763333333334
+  },
+  {
+    "name": "Chocolate, ao leite, dietético",
+    "calories": 2,
+    "protein": 556.8243333333334
+  },
+  {
+    "name": "Chocolate, meio amargo",
+    "calories": 1,
+    "protein": 474.91776997327383
+  },
+  {
+    "name": "Cocada branca",
+    "calories": 3,
+    "protein": 448.84545242331023
+  },
+  {
+    "name": "Doce, de abóbora, cremoso",
+    "calories": 44,
+    "protein": 198.9360630496343
+  },
+  {
+    "name": "Doce, de leite, cremoso",
+    "calories": 28,
+    "protein": 306.31013023105874
+  },
+  {
+    "name": "Geléia, mocotó, natural",
+    "calories": 73,
+    "protein": 106.08666666666662
+  },
+  {
+    "name": "Glicose de milho",
+    "calories": 20,
+    "protein": 292.1184052991867
+  },
+  {
+    "name": "Maria mole",
+    "calories": 22,
+    "protein": 301.2358875369997
+  },
+  {
+    "name": "Maria mole, coco queimado",
+    "calories": 21,
+    "protein": 306.6318969970185
+  },
+  {
+    "name": "Marmelada",
+    "calories": 28,
+    "protein": 257.24147319380444
+  },
+  {
+    "name": "Mel, de abelha",
+    "calories": 16,
+    "protein": 309.24266666666665
+  },
+  {
+    "name": "Melado",
+    "calories": 22,
+    "protein": 296.5064912319183
+  },
+  {
+    "name": "Quindim",
+    "calories": 24,
+    "protein": 411.3487215708494
+  },
+  {
+    "name": "Rapadura",
+    "calories": 7,
+    "protein": 351.9581221015453
+  },
+  {
+    "name": "Café, pó, torrado",
+    "calories": 3,
+    "protein": 418.6186666666666
+  },
+  {
+    "name": "Capuccino, pó",
+    "calories": 3,
+    "protein": 417.4066666666667
+  },
+  {
+    "name": "Fermento em pó, químico",
+    "calories": 7,
+    "protein": 89.72206665112176
+  },
+  {
+    "name": "Fermento, biológico, levedura, tablete",
+    "calories": 72,
+    "protein": 89.79486703058885
+  },
+  {
+    "name": "Gelatina, sabores variados, pó",
+    "calories": 1,
+    "protein": 380.22290000000004
+  },
+  {
+    "name": "Sal, dietético",
+    "calories": 1,
+    "protein": 0
+  },
+  {
+    "name": "Sal, grosso",
+    "calories": 0,
+    "protein": 0
+  },
+  {
+    "name": "Shoyu",
+    "calories": 71,
+    "protein": 60.92774987538659
+  },
+  {
+    "name": "Tempero a base de sal",
+    "calories": 8,
+    "protein": 21.33
+  },
+  {
+    "name": "Azeitona, preta, conserva",
+    "calories": 68,
+    "protein": 194.1538470209837
+  },
+  {
+    "name": "Azeitona, verde, conserva",
+    "calories": 76,
+    "protein": 136.93643000000003
+  },
+  {
+    "name": "Chantilly, spray, com gordura vegetal",
+    "calories": 55,
+    "protein": 314.9560002666667
+  },
+  {
+    "name": "Leite, de coco",
+    "calories": 78,
+    "protein": 166.16030161554647
+  },
+  {
+    "name": "Maionese, tradicional com ovos",
+    "calories": 58,
+    "protein": 302.1526776878237
+  },
+  {
+    "name": "Acarajé",
+    "calories": 50,
+    "protein": 289.21166666666664
+  },
+  {
+    "name": "Arroz carreteiro",
+    "calories": 68,
+    "protein": 153.772
+  },
+  {
+    "name": "Baião de dois, arroz e feijão-de-corda",
+    "calories": 69,
+    "protein": 135.68133333333333
+  },
+  {
+    "name": "Barreado",
+    "calories": 71,
+    "protein": 164.9752340474129
+  },
+  {
+    "name": "Bife à cavalo, com contra filé",
+    "calories": 54,
+    "protein": 291.2295092449586
+  },
+  {
+    "name": "Bolinho de arroz",
+    "calories": 42,
+    "protein": 273.51433333333335
+  },
+  {
+    "name": "Camarão à baiana",
+    "calories": 82,
+    "protein": 100.78304300403595
+  },
+  {
+    "name": "Charuto, de repolho",
+    "calories": 82,
+    "protein": 78.23472922221822
+  },
+  {
+    "name": "Cuscuz, de milho, cozido com sal",
+    "calories": 71,
+    "protein": 113.45948166666666
+  },
+  {
+    "name": "Cuscuz, paulista",
+    "calories": 69,
+    "protein": 142.123
+  },
+  {
+    "name": "Cuxá, molho",
+    "calories": 81,
+    "protein": 80.09161563650767
+  },
+  {
+    "name": "Dobradinha",
+    "calories": 75,
+    "protein": 124.50020083333331
+  },
+  {
+    "name": "Estrogonofe de carne",
+    "calories": 70,
+    "protein": 173.1413643180132
+  },
+  {
+    "name": "Estrogonofe de frango",
+    "calories": 71,
+    "protein": 156.80610301323728
+  },
+  {
+    "name": "Feijão tropeiro mineiro",
+    "calories": 62,
+    "protein": 151.56185683095453
+  },
+  {
+    "name": "L",
+    "calories": 72,
+    "protein": 116.9334573110342
+  },
+  {
+    "name": "Frango, com açafrão",
+    "calories": 80,
+    "protein": 112.78376884122686
+  },
+  {
+    "name": "Macarrão, molho bolognesa",
+    "calories": 71,
+    "protein": 119.53177144556008
+  },
+  {
+    "name": "Maniçoba",
+    "calories": 76,
+    "protein": 134.22289340098695
+  },
+  {
+    "name": "Quibebe",
+    "calories": 81,
+    "protein": 86.349230299592
+  },
+  {
+    "name": "Salada, de legumes, com maionese",
+    "calories": 82,
+    "protein": 96.10358839845655
+  },
+  {
+    "name": "Salada, de legumes, cozida no vapor",
+    "calories": 90,
+    "protein": 35.40810429847241
+  },
+  {
+    "name": "Salpicão, de frango",
+    "calories": 73,
+    "protein": 147.8645961340268
+  },
+  {
+    "name": "Sarapatel",
+    "calories": 75,
+    "protein": 122.98185821243132
+  },
+  {
+    "name": "Tabule",
+    "calories": 86,
+    "protein": 57.45347668848058
+  },
+  {
+    "name": "Tacacá",
+    "calories": 85,
+    "protein": 46.88917715120316
+  },
+  {
+    "name": "Tapioca, com manteiga",
+    "calories": 25,
+    "protein": 347.8265562578241
+  },
+  {
+    "name": "Tucupi, com pimenta-de-cheiro",
+    "calories": 92,
+    "protein": 27.1837984027266
+  },
+  {
+    "name": "Vaca atolada",
+    "calories": 75,
+    "protein": 144.89697968479
+  },
+  {
+    "name": "Vatapá",
+    "calories": 58,
+    "protein": 254.89328572415508
+  },
+  {
+    "name": "Virado à paulista",
+    "calories": 49,
+    "protein": 306.94678645131984
+  },
+  {
+    "name": "Yakisoba",
+    "calories": 69,
+    "protein": 112.80204125340781
+  },
+  {
+    "name": "Amendoim, grão, cru",
+    "calories": 6,
+    "protein": 544.0526557994334
+  },
+  {
+    "name": "Amendoim, torrado, salgado",
+    "calories": 2,
+    "protein": 605.7810929170192
+  },
+  {
+    "name": "Ervilha, em vagem",
+    "calories": 77,
+    "protein": 88.09358199977854
+  },
+  {
+    "name": "Ervilha, enlatada, drenada",
+    "calories": 80,
+    "protein": 73.8447043478261
+  },
+  {
+    "name": "Feijão, carioca, cozido",
+    "calories": 80,
+    "protein": 76.42408566666668
+  },
+  {
+    "name": "Feijão, carioca, cru",
+    "calories": 14,
+    "protein": 329.0267362318841
+  },
+  {
+    "name": "Feijão, fradinho, cozido",
+    "calories": 80,
+    "protein": 78.00889666666667
+  },
+  {
+    "name": "Feijão, fradinho, cru",
+    "calories": 13,
+    "protein": 339.16476666666665
+  },
+  {
+    "name": "Feijão, jalo, cozido",
+    "calories": 76,
+    "protein": 92.73992
+  },
+  {
+    "name": "Feijão, jalo, cru",
+    "calories": 14,
+    "protein": 327.90526666666665
+  },
+  {
+    "name": "Feijão, preto, cozido",
+    "calories": 80,
+    "protein": 77.02726666666668
+  },
+  {
+    "name": "Feijão, preto, cru",
+    "calories": 15,
+    "protein": 323.5657115942029
+  },
+  {
+    "name": "Feijão, rajado, cozido",
+    "calories": 78,
+    "protein": 84.7018527334929
+  },
+  {
+    "name": "Feijão, rajado, cru",
+    "calories": 15,
+    "protein": 325.84441116273405
+  },
+  {
+    "name": "Feijão, rosinha, cozido",
+    "calories": 83,
+    "protein": 67.86622877142827
+  },
+  {
+    "name": "Feijão, rosinha, cru",
+    "calories": 12,
+    "protein": 336.9619111275673
+  },
+  {
+    "name": "Feijão, roxo, cozido",
+    "calories": 80,
+    "protein": 76.89338231790063
+  },
+  {
+    "name": "Feijão, roxo, cru",
+    "calories": 13,
+    "protein": 331.4149774567286
+  },
+  {
+    "name": "Grão-de-bico, cru",
+    "calories": 12,
+    "protein": 354.70287658909956
+  },
+  {
+    "name": "Guandu, cru",
+    "calories": 11,
+    "protein": 344.1336512849927
+  },
+  {
+    "name": "Lentilha, cozida",
+    "calories": 76,
+    "protein": 92.63876625229915
+  },
+  {
+    "name": "Lentilha, crua",
+    "calories": 11,
+    "protein": 339.1412402035533
+  },
+  {
+    "name": "Paçoca, amendoim",
+    "calories": 2,
+    "protein": 486.9270864645243
+  },
+  {
+    "name": "Pé-de-moleque, amendoim",
+    "calories": 3,
+    "protein": 503.1903658399557
+  },
+  {
+    "name": "Soja, farinha",
+    "calories": 6,
+    "protein": 403.955845810399
+  },
+  {
+    "name": "Soja, extrato solúvel, natural, fluido",
+    "calories": 91,
+    "protein": 39.10485527535076
+  },
+  {
+    "name": "Soja, extrato solúvel, pó",
+    "calories": 4,
+    "protein": 458.8957294378677
+  },
+  {
+    "name": "Soja, queijo (tofu)",
+    "calories": 87,
+    "protein": 64.48509407389021
+  },
+  {
+    "name": "Tremoço, cru",
+    "calories": 10,
+    "protein": 381.27817396012944
+  },
+  {
+    "name": "Tremoço, em conserva",
+    "calories": 68,
+    "protein": 120.64258534487091
+  },
+  {
+    "name": "Amêndoa, torrada, salgada",
+    "calories": 3,
+    "protein": 580.7469545560705
+  },
+  {
+    "name": "Castanha-de-caju, torrada, salgada",
+    "calories": 3,
+    "protein": 570.167626501619
+  },
+  {
+    "name": "Castanha-do-Brasil, crua",
+    "calories": 4,
+    "protein": 642.9630716810693
+  },
+  {
+    "name": "Coco, cru",
+    "calories": 43,
+    "protein": 406.4873531078099
+  },
+  {
+    "name": "Farinha, de mesocarpo de babaçu, crua",
+    "calories": 16,
+    "protein": 328.7714002448336
+  },
+  {
+    "name": "Gergelim, semente",
+    "calories": 4,
+    "protein": 583.5467147545495
+  },
+  {
+    "name": "Linhaça, semente",
+    "calories": 7,
+    "protein": 495.09611384365076
+  },
+  {
+    "name": "Pinhão, cozido",
+    "calories": 51,
+    "protein": 174.36990200000002
+  },
+  {
+    "name": "Pupunha, cozida",
+    "calories": 54,
+    "protein": 218.53388087660073
+  },
+  {
+    "name": "Noz, crua",
+    "calories": 6,
+    "protein": 620.0600197905668
+  }
+]
