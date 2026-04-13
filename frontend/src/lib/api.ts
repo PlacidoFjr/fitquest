@@ -1,6 +1,6 @@
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";
 
-export type ApiMethod = "GET" | "POST" | "PUT";
+export type ApiMethod = "GET" | "POST" | "PUT" | "DELETE";
 
 export async function apiRequest<T>(
   endpoint: string,
