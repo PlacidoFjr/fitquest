@@ -12,10 +12,22 @@ const dashboardRoutes = require("./routes/dashboardRoutes");
 
 const app = express();
 
-app.use(cors());
+// Configuração de CORS para aceitar qualquer origem do Vercel e localhost
+app.use(cors({
+  origin: true, // Permite todas as origens (ideal para fase de testes/Vercel)
+  credentials: true
+}));
 app.use(helmet());
 app.use(morgan("dev"));
 app.use(express.json());
+
+// Middleware para lidar com o prefixo /_/backend do Vercel Services
+app.use((req, res, next) => {
+  if (req.url.startsWith("/_/backend")) {
+    req.url = req.url.replace("/_/backend", "");
+  }
+  next();
+});
 
 app.get("/health", (_req, res) => res.json({ ok: true }));
 app.use("/api/auth", authRoutes);

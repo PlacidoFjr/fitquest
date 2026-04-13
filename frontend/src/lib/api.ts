@@ -1,4 +1,5 @@
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";
+const isVercel = typeof window !== "undefined" && window.location.hostname !== "localhost";
+const API_URL = process.env.NEXT_PUBLIC_API_URL || (isVercel ? "/_/backend" : "http://localhost:4000");
 
 export type ApiMethod = "GET" | "POST" | "PUT" | "DELETE";
 

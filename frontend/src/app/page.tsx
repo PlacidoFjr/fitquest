@@ -122,7 +122,9 @@ export default function Home() {
                   onClick={() => setMode("login")}
                   className={cn(
                     "flex-1 py-2.5 text-sm font-black rounded-xl transition-all duration-300",
-                    mode === "login" ? "bg-primary text-primary-foreground shadow-lg" : "text-slate-500 hover:text-slate-300"
+                    mode === "login" 
+                      ? "bg-primary text-primary-foreground shadow-lg" 
+                      : "text-slate-500 hover:text-slate-300 hover:bg-white/5"
                   )}
                 >
                   Login
@@ -132,7 +134,9 @@ export default function Home() {
                   onClick={() => setMode("register")}
                   className={cn(
                     "flex-1 py-2.5 text-sm font-black rounded-xl transition-all duration-300",
-                    mode === "register" ? "bg-primary text-primary-foreground shadow-lg" : "text-slate-500 hover:text-slate-300"
+                    mode === "register" 
+                      ? "bg-primary text-primary-foreground shadow-lg" 
+                      : "text-slate-500 hover:text-slate-300 hover:bg-white/5"
                   )}
                 >
                   Cadastro
@@ -168,7 +172,10 @@ export default function Home() {
                 </div>
 
                 <Button 
-                  className="w-full h-12 text-base font-black rounded-2xl shadow-2xl shadow-primary/20 mt-2" 
+                  className={cn(
+                    "w-full h-12 text-base font-black rounded-2xl shadow-2xl mt-2",
+                    mode === "login" ? "bg-primary shadow-primary/20" : "bg-secondary shadow-secondary/20"
+                  )}
                   type="submit"
                   loading={loading}
                 >
@@ -180,11 +187,17 @@ export default function Home() {
                     <div className="w-full border-t border-slate-800"></div>
                   </div>
                   <div className="relative flex justify-center text-xs font-black uppercase">
-                    <span className="bg-[#0f172a] px-4 text-slate-500">Ou continue com</span>
+                    <span className="bg-[#020617] px-4 text-slate-500">Ou continue com</span>
                   </div>
                 </div>
 
-                <div id="googleBtn" className="w-full min-h-[44px]"></div>
+                <div className="flex justify-center w-full min-h-[44px]">
+                  <div 
+                    id="googleBtn" 
+                    className="w-full flex justify-center"
+                    style={{ minHeight: '44px', display: 'flex', justifyContent: 'center' }}
+                  ></div>
+                </div>
               </form>
             </>
           ) : (
