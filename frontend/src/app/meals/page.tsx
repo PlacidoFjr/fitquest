@@ -11,6 +11,7 @@ import { Badge } from "@/components/ui/Badge";
 import { useToast } from "@/components/providers/ToastProvider";
 import { apiRequest } from "@/lib/api";
 import { getToken } from "@/lib/auth";
+import { cn } from "@/lib/cn";
 import TACO_DATABASE from "@/data/taco_database.json";
 
 interface Meal {
@@ -31,7 +32,7 @@ const MEAL_CATEGORIES = [
   { id: 'Ceia', label: 'Ceia', icon: '🌙' },
 ];
 
-import { UtensilsCrossed, Plus, Search, Scale, Trash2, Clock, Flame } from "lucide-react";
+import { UtensilsCrossed, Plus, Search, Scale, Trash2, Flame } from "lucide-react";
 
 export default function MealsPage() {
   const router = useRouter();
@@ -44,6 +45,7 @@ export default function MealsPage() {
   const [weight, setWeight] = useState(100);
   const [loading, setLoading] = useState(false);
   const [suggestions, setSuggestions] = useState<typeof FOOD_DATABASE>([]);
+  const [isCustomRecipe, setIsCustomRecipe] = useState(false);
 
   async function loadMeals(token: string) {
     const list = await apiRequest<Meal[]>("/api/meals", "GET", undefined, token);
@@ -143,20 +145,48 @@ export default function MealsPage() {
       </div>
 
       <Card variant="gradient" className="mb-8 border-slate-800/40">
+        <div className="flex items-center gap-2 mb-6 p-1 bg-slate-950/50 rounded-xl w-fit border border-white/5">
+          <button
+            onClick={() => setIsCustomRecipe(false)}
+            className={cn(
+              "px-4 py-2 text-[10px] font-black uppercase tracking-widest rounded-lg transition-all",
+              !isCustomRecipe ? "bg-primary text-primary-foreground shadow-lg" : "text-slate-500 hover:text-white"
+            )}
+          >
+            Buscar Alimento
+          </button>
+          <button
+            onClick={() => {
+              setIsCustomRecipe(true);
+              setName("");
+              setCalories(0);
+              setProtein(0);
+            }}
+            className={cn(
+              "px-4 py-2 text-[10px] font-black uppercase tracking-widest rounded-lg transition-all",
+              isCustomRecipe ? "bg-primary text-primary-foreground shadow-lg" : "text-slate-500 hover:text-white"
+            )}
+          >
+            Montar Receita
+          </button>
+        </div>
+
         <form onSubmit={onSubmit} className="space-y-6">
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-5">
             <div className="relative lg:col-span-2">
-              <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-1 mb-1.5 block">Alimento</label>
+              <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-1 mb-1.5 block">
+                {isCustomRecipe ? "Nome da Receita" : "Alimento"}
+              </label>
               <Input 
-                placeholder="Busque um alimento (ex: Pão)" 
+                placeholder={isCustomRecipe ? "Ex: Meu Sanduíche Especial" : "Busque um alimento (ex: Pão)"} 
                 value={name} 
                 onChange={(e) => setName(e.target.value)} 
-                icon={<Search size={18} />}
+                icon={isCustomRecipe ? <UtensilsCrossed size={18} /> : <Search size={18} />}
                 required
               />
               
-              {/* Lista de Sugestões */}
-              {suggestions.length > 0 && (
+              {/* Lista de Sugestões - Só aparece no modo busca */}
+              {!isCustomRecipe && suggestions.length > 0 && (
                 <div className="absolute z-50 mt-2 w-full overflow-hidden rounded-2xl border border-slate-700 bg-slate-900 shadow-2xl animate-in">
                   {suggestions.map((food) => (
                     <button
@@ -175,20 +205,48 @@ export default function MealsPage() {
               )}
             </div>
 
-            <div className="relative">
-              <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-1 mb-1.5 block">Quantidade</label>
-              <Input
-                placeholder="Peso (g)"
-                type="number"
-                value={weight || ""}
-                onChange={(e) => handleWeightChange(Number(e.target.value))}
-                icon={<Scale size={18} />}
-                required
-              />
-              <span className="absolute right-4 bottom-3 text-[10px] font-black text-slate-500 uppercase pointer-events-none">
-                G
-              </span>
-            </div>
+            {isCustomRecipe ? (
+              <>
+                <div className="relative">
+                  <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-1 mb-1.5 block">Calorias Totais</label>
+                  <Input
+                    placeholder="0"
+                    type="number"
+                    value={calories || ""}
+                    onChange={(e) => setCalories(Number(e.target.value))}
+                    icon={<Flame size={18} />}
+                    required
+                  />
+                </div>
+                <div className="relative">
+                  <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-1 mb-1.5 block">Proteína (g)</label>
+                  <Input
+                    placeholder="0.0"
+                    type="number"
+                    step="0.1"
+                    value={protein || ""}
+                    onChange={(e) => setProtein(Number(e.target.value))}
+                    icon={<Scale size={18} />}
+                    required
+                  />
+                </div>
+              </>
+            ) : (
+              <div className="relative">
+                <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-1 mb-1.5 block">Quantidade</label>
+                <Input
+                  placeholder="Peso (g)"
+                  type="number"
+                  value={weight || ""}
+                  onChange={(e) => handleWeightChange(Number(e.target.value))}
+                  icon={<Scale size={18} />}
+                  required
+                />
+                <span className="absolute right-4 bottom-3 text-[10px] font-black text-slate-500 uppercase pointer-events-none">
+                  G
+                </span>
+              </div>
+            )}
 
             <div className="relative">
               <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-1 mb-1.5 block">Refeição</label>
@@ -203,16 +261,18 @@ export default function MealsPage() {
               </select>
             </div>
 
-            <div className="flex gap-2 items-end">
-              <div className="flex-1 h-11 rounded-xl bg-slate-950/50 border border-white/5 p-2 flex flex-col items-center justify-center">
-                <span className="text-[10px] font-black text-slate-500 uppercase">Kcal</span>
-                <span className="text-sm font-bold text-white">{Number(calories).toFixed(0)}</span>
+            {!isCustomRecipe && (
+              <div className="flex gap-2 items-end">
+                <div className="flex-1 h-11 rounded-xl bg-slate-950/50 border border-white/5 p-2 flex flex-col items-center justify-center">
+                  <span className="text-[10px] font-black text-slate-500 uppercase">Kcal</span>
+                  <span className="text-sm font-bold text-white">{Number(calories).toFixed(0)}</span>
+                </div>
+                <div className="flex-1 h-11 rounded-xl bg-slate-950/50 border border-white/5 p-2 flex flex-col items-center justify-center">
+                  <span className="text-[10px] font-black text-slate-500 uppercase">Prot (g)</span>
+                  <span className="text-sm font-bold text-white">{Number(protein).toFixed(1)}</span>
+                </div>
               </div>
-              <div className="flex-1 h-11 rounded-xl bg-slate-950/50 border border-white/5 p-2 flex flex-col items-center justify-center">
-                <span className="text-[10px] font-black text-slate-500 uppercase">Prot (g)</span>
-                <span className="text-sm font-bold text-white">{Number(protein).toFixed(1)}</span>
-              </div>
-            </div>
+            )}
           </div>
 
           <div className="flex justify-end pt-2">

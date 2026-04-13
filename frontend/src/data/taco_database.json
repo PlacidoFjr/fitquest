@@ -5,6 +5,31 @@
     "protein": 2.58825
   },
   {
+    "name": "Frango, peito, sem pele, cozido",
+    "calories": 163,
+    "protein": 31.5
+  },
+  {
+    "name": "Frango, peito, sem pele, grelhado",
+    "calories": 159,
+    "protein": 32.0
+  },
+  {
+    "name": "Frango, sobrecoxa, sem pele, assada",
+    "calories": 233,
+    "protein": 24.3
+  },
+  {
+    "name": "Sanduíche, misto quente, pão francês",
+    "calories": 283,
+    "protein": 12.5
+  },
+  {
+    "name": "Sanduíche, natural de frango",
+    "calories": 210,
+    "protein": 14.2
+  },
+  {
     "name": "Arroz, integral, cru",
     "calories": 360,
     "protein": 7.323285869565217

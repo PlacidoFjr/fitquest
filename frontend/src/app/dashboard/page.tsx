@@ -45,16 +45,13 @@ export default function DashboardPage() {
 
   // Mifflin-St Jeor TDEE calculation logic
   const calculateTDEE = (weight: number, height: number, age: number, gender: 'male' | 'female', activity: number, goal: string) => {
-    // BMR Calculation
     const bmr = (10 * weight) + (6.25 * height) - (5 * age) + (gender === 'male' ? 5 : -161);
-    // TDEE (Maintenance)
     const tdee = Math.round(bmr * activity);
     
     let calorieGoal = tdee;
     if (goal === 'emagrecer') calorieGoal = tdee - 500;
     if (goal === 'ganhar_massa') calorieGoal = tdee + 400;
 
-    // Protein: 2g per kg for mass gain/weight loss (muscle preservation), 1.6g for maintenance
     const proteinFactor = (goal === 'manter') ? 1.6 : 2.0;
     const proteinGoal = Math.round(weight * proteinFactor);
 
@@ -70,9 +67,14 @@ export default function DashboardPage() {
     apiRequest<DashboardData>("/api/dashboard", "GET", undefined, token)
       .then((response) => {
         setData(response);
-        const key = `fitquest_onboarding_done_${response.profile.id}`;
-        const done = window.localStorage.getItem(key) === "true";
-        if (!done) setShowOnboarding(true);
+        if (response.profile) {
+          const key = `fitquest_onboarding_done_${response.profile.id}`;
+          const done = window.localStorage.getItem(key) === "true";
+          // Se o perfil tiver metas zeradas ou não tiver onboarding concluído, mostra onboarding
+          if (!done || !response.profile.calorie_goal) {
+            setShowOnboarding(true);
+          }
+        }
       })
       .catch(() => {
         showToast("Nao foi possivel carregar o dashboard.", "error");
@@ -98,7 +100,7 @@ export default function DashboardPage() {
     if (autoCalculate) {
       const weight = Number(formData.get("weight"));
       const height = Number(formData.get("height"));
-      const age = Number(formData.get("age")) || 25; // Default age if not provided
+      const age = Number(formData.get("age")) || 25;
       const gender = (formData.get("gender") as 'male' | 'female') || 'male';
       const activity = Number(formData.get("activityLevel")) || 1.375;
       const goal = formData.get("goalType") as string;
@@ -142,7 +144,6 @@ export default function DashboardPage() {
   return (
     <AppShell>
       <div className="flex flex-col gap-6">
-        {/* Header Section */}
         <div className="flex flex-col justify-between gap-6 rounded-[2.5rem] bg-gradient-to-br from-card to-slate-900 p-8 shadow-2xl border border-slate-800/60 md:flex-row md:items-center">
           <div className="flex-1">
             <div className="flex items-center gap-2 text-primary mb-2">
@@ -157,7 +158,6 @@ export default function DashboardPage() {
           </div>
           
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
-            {/* XP Card */}
             <div className="flex items-center gap-5 rounded-3xl bg-slate-950/40 p-5 border border-white/5 backdrop-blur-md min-w-[200px]">
               <div className="h-14 w-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary shadow-inner shrink-0">
                 <Trophy size={28} />
@@ -173,7 +173,6 @@ export default function DashboardPage() {
               </div>
             </div>
 
-            {/* Streak Card - Moved to header for importance */}
             <div className="flex items-center gap-5 rounded-3xl bg-slate-950/40 p-5 border border-amber-500/10 backdrop-blur-md min-w-[180px]">
               <div className="h-14 w-14 rounded-2xl bg-amber-500/10 flex items-center justify-center text-amber-500 shadow-inner shrink-0">
                 <Flame size={28} className={cn(profile?.current_streak && profile.current_streak > 0 ? "animate-bounce" : "")} />
@@ -197,7 +196,6 @@ export default function DashboardPage() {
           </div>
         ) : (
           <div className="grid gap-6 md:grid-cols-1 lg:grid-cols-3">
-            {/* Main Stats Column - Grouped for better focus */}
             <div className="lg:col-span-2 grid gap-6 sm:grid-cols-2">
               <Card hover variant="gradient" className="relative overflow-hidden group">
                 <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:scale-110 group-hover:opacity-20 transition-all duration-500">
@@ -247,7 +245,6 @@ export default function DashboardPage() {
                 </div>
               </Card>
 
-              {/* Action Buttons for quick access */}
               <div className="sm:col-span-2 grid grid-cols-2 gap-4">
                 <Button 
                   onClick={() => router.push('/meals')}
@@ -282,7 +279,6 @@ export default function DashboardPage() {
               </div>
             </div>
 
-            {/* Missions Sidebar - Keep it as a dedicated vertical list */}
             <Card hover variant="gradient" className="relative overflow-hidden group border-slate-800/40">
               <div className="mb-6 flex items-center justify-between">
                 <div className="p-3 rounded-2xl bg-emerald-500/10 text-emerald-500 border border-emerald-500/10">
@@ -455,34 +451,28 @@ export default function DashboardPage() {
 
         <AnimatePresence>
           {showOnboarding && (
-            <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="absolute inset-0 bg-slate-950/80 backdrop-blur-sm"
-              />
+            <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 overflow-y-auto bg-slate-950/80 backdrop-blur-sm">
               <motion.div
                 initial={{ opacity: 0, scale: 0.95, y: 20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                className="relative w-full max-w-lg overflow-hidden rounded-3xl bg-slate-900 border border-slate-700 shadow-2xl"
+                className="relative w-full max-w-lg my-auto overflow-hidden rounded-3xl bg-slate-900 border border-slate-700 shadow-2xl"
               >
-                <div className="bg-gradient-to-r from-primary/20 to-secondary/20 p-8 text-center">
+                <div className="bg-gradient-to-r from-primary/20 to-secondary/20 p-6 sm:p-8 text-center">
                   <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-slate-900 border border-slate-700 shadow-xl">
                     <Sparkles className="text-primary" size={32} />
                   </div>
                   <h3 className="text-2xl font-black text-white">Bem-vindo ao FitQuest!</h3>
                   <p className="mt-2 text-sm text-slate-400">
-                    Para uma jornada personalizada, precisamos de alguns dados basicos.
+                    Vamos calcular seu plano ideal baseado no seu metabolismo real.
                   </p>
                 </div>
 
-                <div className="p-8">
-                  <form className="grid gap-6 md:grid-cols-2" onSubmit={updateProfile}>
+                <div className="p-6 sm:p-8 max-h-[70vh] overflow-y-auto custom-scrollbar">
+                  <form className="grid gap-5 md:grid-cols-2" onSubmit={updateProfile}>
                     <div className="space-y-1.5">
                       <label className="text-[10px] font-black uppercase text-slate-500 ml-1">Sexo</label>
-                      <select name="gender" className="w-full rounded-xl border border-slate-700 bg-slate-900/70 px-3 py-2.5 text-sm text-slate-100 outline-none">
+                      <select name="gender" className="w-full rounded-xl border border-slate-700 bg-slate-900/70 px-3 py-2.5 text-sm text-slate-100 outline-none focus:border-primary transition-all" required>
                         <option value="male">Masculino</option>
                         <option value="female">Feminino</option>
                       </select>
@@ -492,45 +482,48 @@ export default function DashboardPage() {
                       <Input name="age" type="number" defaultValue={25} placeholder="25" className="px-3" required />
                     </div>
                     <div className="space-y-1.5">
-                      <label className="text-[10px] font-black uppercase text-slate-500 ml-1">Peso Atual (kg)</label>
+                      <label className="text-[10px] font-black uppercase text-slate-500 ml-1">Peso (kg)</label>
                       <div className="relative group">
-                        <Scale className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-secondary transition-colors" size={16} />
+                        <Scale className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-primary transition-colors" size={16} />
                         <Input name="weight" type="number" defaultValue={profile?.weight} placeholder="00.0" className="pl-10" required />
                       </div>
                     </div>
                     <div className="space-y-1.5">
                       <label className="text-[10px] font-black uppercase text-slate-500 ml-1">Altura (cm)</label>
                       <div className="relative group">
-                        <Activity className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-secondary transition-colors" size={16} />
+                        <Activity className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-primary transition-colors" size={16} />
                         <Input name="height" type="number" defaultValue={profile?.height} placeholder="170" className="pl-10" required />
                       </div>
                     </div>
                     <div className="space-y-1.5 md:col-span-2">
-                      <label className="text-[10px] font-black uppercase text-slate-500 ml-1">Frequencia de Atividade</label>
-                      <select name="activityLevel" className="w-full rounded-xl border border-slate-700 bg-slate-900/70 px-3 py-2.5 text-sm text-slate-100 outline-none">
-                        <option value="1.2">Sedentario (Pouco/Nenhum exercicio)</option>
+                      <label className="text-[10px] font-black uppercase text-slate-500 ml-1">Nível de Atividade</label>
+                      <select name="activityLevel" className="w-full rounded-xl border border-slate-700 bg-slate-900/70 px-3 py-2.5 text-sm text-slate-100 outline-none focus:border-primary transition-all" required>
+                        <option value="1.2">Sedentário (Pouco exercício)</option>
                         <option value="1.375">Leve (1-3 dias/semana)</option>
                         <option value="1.55">Moderado (3-5 dias/semana)</option>
                         <option value="1.725">Ativo (6-7 dias/semana)</option>
-                        <option value="1.9">Muito Ativo (Atleta/Trabalho pesado)</option>
+                        <option value="1.9">Atleta (Treino pesado diário)</option>
                       </select>
                     </div>
                     <div className="space-y-1.5 md:col-span-2">
                       <label className="text-[10px] font-black uppercase text-slate-500 ml-1">Seu Objetivo</label>
                       <select
-                        className="w-full rounded-xl border border-slate-700 bg-slate-900/70 px-3 py-2.5 text-sm text-slate-100 outline-none transition-all focus:border-secondary focus:ring-2 focus:ring-secondary/35"
                         name="goalType"
+                        className="w-full rounded-xl border border-slate-700 bg-slate-900/70 px-3 py-2.5 text-sm text-slate-100 outline-none focus:border-primary transition-all"
                         defaultValue={profile?.goal_type || "manter"}
+                        required
                       >
                         <option value="emagrecer">Emagrecer - Perda de gordura</option>
-                        <option value="manter">Manter - Equilíbrio saudavel</option>
+                        <option value="manter">Manter - Equilíbrio saudável</option>
                         <option value="ganhar_massa">Ganhar Massa - Hipertrofia</option>
                       </select>
                     </div>
                     
-                    <Button className="mt-2 md:col-span-2 py-4 text-base font-black rounded-2xl" type="submit" disabled={saving}>
-                      {saving ? "Calculando seu plano..." : "Começar Minha Jornada"}
-                    </Button>
+                    <div className="md:col-span-2 pt-2">
+                      <Button className="w-full py-4 text-base font-black rounded-2xl shadow-xl shadow-primary/20" type="submit" disabled={saving}>
+                        {saving ? "Calculando seu plano..." : "Começar Minha Jornada"}
+                      </Button>
+                    </div>
                   </form>
                 </div>
               </motion.div>

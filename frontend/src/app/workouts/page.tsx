@@ -34,19 +34,6 @@ const WORKOUT_TYPES = [
   { id: 'futebol', label: 'Futebol', icon: <Activity size={14} />, met: 8.0 },
 ];
 
-// Helper para formatar a data amigável
-function formatFriendlyDate(dateStr: string) {
-  const date = new Date(dateStr);
-  const today = new Date();
-  const yesterday = new Date();
-  yesterday.setDate(today.getDate() - 1);
-
-  if (date.toDateString() === today.toDateString()) return "Hoje";
-  if (date.toDateString() === yesterday.toDateString()) return "Ontem";
-
-  return date.toLocaleDateString("pt-BR", { day: "2-digit", month: "short" });
-}
-
 export default function WorkoutsPage() {
   const router = useRouter();
   const { showToast } = useToast();
@@ -245,11 +232,15 @@ export default function WorkoutsPage() {
                 {WORKOUT_TYPES.find(t => t.id === item.type)?.icon || <Clock size={18} />}
               </div>
               <div>
-                <p className="font-bold text-white tracking-tight">{formatFriendlyDate(item.date)}</p>
-                <div className="flex items-center gap-2">
-                  <p className="text-[10px] font-black uppercase tracking-widest text-slate-500">
+                <div className="flex flex-col">
+                  <p className="text-sm font-black text-white tracking-tight">
                     {WORKOUT_TYPES.find(t => t.id === item.type)?.label || 'Sessão'} • {item.duration_minutes} min
                   </p>
+                  <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">
+                    {new Date(item.date).toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit", year: "numeric" })}
+                  </p>
+                </div>
+                <div className="flex items-center gap-2 mt-1">
                   <div className="flex items-center gap-1 text-[10px] font-bold text-amber-500/80">
                     <Flame size={10} />
                     <span>{Number(item.calories_burned).toFixed(0)} kcal</span>
