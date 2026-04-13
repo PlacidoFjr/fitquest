@@ -43,17 +43,25 @@ export default function DashboardPage() {
   const [showOnboarding, setShowOnboarding] = useState(false);
   const [autoCalculate, setAutoCalculate] = useState(true);
 
+  // Form states for reactivity
+  const [age, setAge] = useState<number>(25);
+  const [gender, setGender] = useState<'male' | 'female'>('male');
+  const [weight, setWeight] = useState<number>(0);
+  const [height, setHeight] = useState<number>(0);
+  const [activityLevel, setActivityLevel] = useState<number>(1.375);
+  const [goalType, setGoalType] = useState<string>('manter');
+
   // Mifflin-St Jeor TDEE calculation logic
-  const calculateTDEE = (weight: number, height: number, age: number, gender: 'male' | 'female', activity: number, goal: string) => {
-    const bmr = (10 * weight) + (6.25 * height) - (5 * age) + (gender === 'male' ? 5 : -161);
-    const tdee = Math.round(bmr * activity);
+  const calculateTDEE = (w: number, h: number, a: number, g: 'male' | 'female', act: number, goal: string) => {
+    const bmr = (10 * w) + (6.25 * h) - (5 * a) + (g === 'male' ? 5 : -161);
+    const tdee = Math.round(bmr * act);
     
     let calorieGoal = tdee;
     if (goal === 'emagrecer') calorieGoal = tdee - 500;
     if (goal === 'ganhar_massa') calorieGoal = tdee + 400;
 
     const proteinFactor = (goal === 'manter') ? 1.6 : 2.0;
-    const proteinGoal = Math.round(weight * proteinFactor);
+    const proteinGoal = Math.round(w * proteinFactor);
 
     return { calorieGoal, proteinGoal };
   };
@@ -68,6 +76,14 @@ export default function DashboardPage() {
       .then((response) => {
         setData(response);
         if (response.profile) {
+          // Update states with profile data
+          setAge(response.profile.age || 25);
+          setGender(response.profile.gender || 'male');
+          setWeight(Number(response.profile.weight) || 0);
+          setHeight(Number(response.profile.height) || 0);
+          setActivityLevel(Number(response.profile.activity_level) || 1.375);
+          setGoalType(response.profile.goal_type || 'manter');
+
           const key = `fitquest_onboarding_done_${response.profile.id}`;
           const done = window.localStorage.getItem(key) === "true";
           // Se o perfil tiver metas zeradas ou não tiver onboarding concluído, mostra onboarding
@@ -90,24 +106,21 @@ export default function DashboardPage() {
 
   async function updateProfile(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const formData = new FormData(event.currentTarget);
     const token = getToken();
     if (!token || !profile) return;
 
-    let calorieGoal = Number(formData.get("calorieGoal"));
-    let proteinGoal = Number(formData.get("proteinGoal"));
+    // Use current states for calculation
+    let calorieGoal = profile.calorie_goal;
+    let proteinGoal = profile.protein_goal;
 
     if (autoCalculate) {
-      const weight = Number(formData.get("weight"));
-      const height = Number(formData.get("height"));
-      const age = Number(formData.get("age")) || 25;
-      const gender = (formData.get("gender") as 'male' | 'female') || 'male';
-      const activity = Number(formData.get("activityLevel")) || 1.375;
-      const goal = formData.get("goalType") as string;
-      
-      const calculated = calculateTDEE(weight, height, age, gender, activity, goal);
+      const calculated = calculateTDEE(weight, height, age, gender, activityLevel, goalType);
       calorieGoal = calculated.calorieGoal;
       proteinGoal = calculated.proteinGoal;
+    } else {
+      const formData = new FormData(event.currentTarget);
+      calorieGoal = Number(formData.get("calorieGoal"));
+      proteinGoal = Number(formData.get("proteinGoal"));
     }
 
     setSaving(true);
@@ -117,11 +130,14 @@ export default function DashboardPage() {
         "/api/users/me",
         "PUT",
         {
-          weight: Number(formData.get("weight")),
-          height: Number(formData.get("height")),
-          goalType: formData.get("goalType"),
+          weight,
+          height,
+          goalType,
           calorieGoal,
           proteinGoal,
+          age,
+          gender,
+          activityLevel
         },
         token
       );
@@ -361,26 +377,56 @@ export default function DashboardPage() {
               <>
                 <div className="space-y-1.5">
                   <label className="text-[10px] font-black uppercase text-slate-500 ml-1">Sexo</label>
-                  <select name="gender" className="w-full rounded-xl border border-slate-700 bg-slate-900/70 px-3 py-2 text-sm text-slate-100 outline-none">
+                  <select 
+                    name="gender" 
+                    value={gender}
+                    onChange={(e) => setGender(e.target.value as 'male' | 'female')}
+                    className="w-full rounded-xl border border-slate-700 bg-slate-900/70 px-3 py-2 text-sm text-slate-100 outline-none"
+                  >
                     <option value="male">Masculino</option>
                     <option value="female">Feminino</option>
                   </select>
                 </div>
                 <div className="space-y-1.5">
                   <label className="text-[10px] font-black uppercase text-slate-500 ml-1">Idade</label>
-                  <Input name="age" type="number" defaultValue={25} placeholder="25" />
+                  <Input 
+                    name="age" 
+                    type="number" 
+                    value={age}
+                    onChange={(e) => setAge(Number(e.target.value))}
+                    placeholder="25" 
+                  />
                 </div>
                 <div className="space-y-1.5">
                   <label className="text-[10px] font-black uppercase text-slate-500 ml-1">Peso (kg)</label>
-                  <Input name="weight" type="number" defaultValue={profile?.weight} placeholder="00.0" icon={<Scale size={18} />} />
+                  <Input 
+                    name="weight" 
+                    type="number" 
+                    value={weight}
+                    onChange={(e) => setWeight(Number(e.target.value))}
+                    placeholder="00.0" 
+                    icon={<Scale size={18} />} 
+                  />
                 </div>
                 <div className="space-y-1.5">
                   <label className="text-[10px] font-black uppercase text-slate-500 ml-1">Altura (cm)</label>
-                  <Input name="height" type="number" defaultValue={profile?.height} placeholder="000" icon={<Activity size={18} />} />
+                  <Input 
+                    name="height" 
+                    type="number" 
+                    value={height}
+                    onChange={(e) => setHeight(Number(e.target.value))}
+                    placeholder="000" 
+                    icon={<Activity size={18} />} 
+                  />
                 </div>
                 <div className="space-y-1.5">
                   <label className="text-[10px] font-black uppercase text-slate-500 ml-1">Atividade</label>
-                  <select name="activityLevel" className="w-full rounded-xl border border-slate-700 bg-slate-900/70 px-3 py-2 text-sm text-slate-100 outline-none">
+                  <select 
+                    name="activityLevel" 
+                    value={activityLevel}
+                    onChange={(e) => setActivityLevel(Number(e.target.value))}
+                    className="w-full rounded-xl border border-slate-700 bg-slate-900/70 px-3 py-2 text-sm text-slate-100 outline-none"
+                  >
                     <option value="1.2">Sedentario</option>
                     <option value="1.375">Leve</option>
                     <option value="1.55">Moderado</option>
@@ -390,7 +436,12 @@ export default function DashboardPage() {
                 </div>
                 <div className="lg:col-span-2 space-y-1.5">
                   <label className="text-[10px] font-black uppercase text-slate-500 ml-1">Objetivo</label>
-                  <select name="goalType" className="w-full rounded-xl border border-slate-700 bg-slate-900/70 px-3 py-2 text-sm text-slate-100 outline-none" defaultValue={profile?.goal_type}>
+                  <select 
+                    name="goalType" 
+                    value={goalType}
+                    onChange={(e) => setGoalType(e.target.value)}
+                    className="w-full rounded-xl border border-slate-700 bg-slate-900/70 px-3 py-2 text-sm text-slate-100 outline-none"
+                  >
                     <option value="emagrecer">Emagrecer</option>
                     <option value="manter">Manter</option>
                     <option value="ganhar_massa">Ganhar Massa</option>
@@ -404,14 +455,29 @@ export default function DashboardPage() {
               </>
             ) : (
               <>
-                <Input name="weight" type="number" defaultValue={profile?.weight} placeholder="00.0" icon={<Scale size={18} />} />
-                <Input name="height" type="number" defaultValue={profile?.height} placeholder="000" icon={<Activity size={18} />} />
+                <Input 
+                  name="weight" 
+                  type="number" 
+                  value={weight}
+                  onChange={(e) => setWeight(Number(e.target.value))}
+                  placeholder="00.0" 
+                  icon={<Scale size={18} />} 
+                />
+                <Input 
+                  name="height" 
+                  type="number" 
+                  value={height}
+                  onChange={(e) => setHeight(Number(e.target.value))}
+                  placeholder="000" 
+                  icon={<Activity size={18} />} 
+                />
                 <div className="space-y-2">
                   <div className="relative">
                     <select
                       className="w-full rounded-xl border border-slate-700 bg-slate-900/50 px-4 py-3 text-sm text-slate-100 outline-none transition-all focus:border-primary/50 focus:ring-4 focus:ring-primary/10 appearance-none"
                       name="goalType"
-                      defaultValue={profile?.goal_type}
+                      value={goalType}
+                      onChange={(e) => setGoalType(e.target.value)}
                     >
                       <option value="emagrecer">Emagrecer</option>
                       <option value="manter">Manter</option>
@@ -472,32 +538,68 @@ export default function DashboardPage() {
                   <form className="grid gap-6 md:grid-cols-2" id="onboardingForm" onSubmit={updateProfile}>
                     <div className="space-y-2">
                       <label className="text-[10px] font-black uppercase text-slate-500 ml-1 tracking-widest">Sexo</label>
-                      <select name="gender" className="w-full rounded-xl border border-slate-700 bg-slate-950/50 px-4 py-3 text-sm text-slate-100 outline-none focus:border-primary transition-all appearance-none" required>
+                      <select 
+                        name="gender" 
+                        value={gender}
+                        onChange={(e) => setGender(e.target.value as 'male' | 'female')}
+                        className="w-full rounded-xl border border-slate-700 bg-slate-950/50 px-4 py-3 text-sm text-slate-100 outline-none focus:border-primary transition-all appearance-none" 
+                        required
+                      >
                         <option value="male">Masculino</option>
                         <option value="female">Feminino</option>
                       </select>
                     </div>
                     <div className="space-y-2">
                       <label className="text-[10px] font-black uppercase text-slate-500 ml-1 tracking-widest">Idade</label>
-                      <Input name="age" type="number" defaultValue={25} placeholder="25" className="h-11" required />
+                      <Input 
+                        name="age" 
+                        type="number" 
+                        value={age}
+                        onChange={(e) => setAge(Number(e.target.value))}
+                        placeholder="25" 
+                        className="h-11" 
+                        required 
+                      />
                     </div>
                     <div className="space-y-2">
                       <label className="text-[10px] font-black uppercase text-slate-500 ml-1 tracking-widest">Peso (kg)</label>
                       <div className="relative group">
                         <Scale className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-primary transition-colors" size={16} />
-                        <Input name="weight" type="number" defaultValue={profile?.weight} placeholder="70.0" className="pl-10 h-11" required />
+                        <Input 
+                          name="weight" 
+                          type="number" 
+                          value={weight}
+                          onChange={(e) => setWeight(Number(e.target.value))}
+                          placeholder="70.0" 
+                          className="pl-10 h-11" 
+                          required 
+                        />
                       </div>
                     </div>
                     <div className="space-y-2">
                       <label className="text-[10px] font-black uppercase text-slate-500 ml-1 tracking-widest">Altura (cm)</label>
                       <div className="relative group">
                         <Activity className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-primary transition-colors" size={16} />
-                        <Input name="height" type="number" defaultValue={profile?.height} placeholder="170" className="pl-10 h-11" required />
+                        <Input 
+                          name="height" 
+                          type="number" 
+                          value={height}
+                          onChange={(e) => setHeight(Number(e.target.value))}
+                          placeholder="170" 
+                          className="pl-10 h-11" 
+                          required 
+                        />
                       </div>
                     </div>
                     <div className="space-y-2 md:col-span-2">
                       <label className="text-[10px] font-black uppercase text-slate-500 ml-1 tracking-widest">Nível de Atividade</label>
-                      <select name="activityLevel" className="w-full rounded-xl border border-slate-700 bg-slate-950/50 px-4 py-3 text-sm text-slate-100 outline-none focus:border-primary transition-all appearance-none" required>
+                      <select 
+                        name="activityLevel" 
+                        value={activityLevel}
+                        onChange={(e) => setActivityLevel(Number(e.target.value))}
+                        className="w-full rounded-xl border border-slate-700 bg-slate-950/50 px-4 py-3 text-sm text-slate-100 outline-none focus:border-primary transition-all appearance-none" 
+                        required
+                      >
                         <option value="1.2">Sedentário (Pouco exercício)</option>
                         <option value="1.375">Leve (1-3 dias/semana)</option>
                         <option value="1.55">Moderado (3-5 dias/semana)</option>
@@ -510,7 +612,8 @@ export default function DashboardPage() {
                       <select
                         name="goalType"
                         className="w-full rounded-xl border border-slate-700 bg-slate-950/50 px-4 py-3 text-sm text-slate-100 outline-none focus:border-primary transition-all appearance-none"
-                        defaultValue={profile?.goal_type || "manter"}
+                        value={goalType}
+                        onChange={(e) => setGoalType(e.target.value)}
                         required
                       >
                         <option value="emagrecer">Emagrecer - Perda de gordura</option>

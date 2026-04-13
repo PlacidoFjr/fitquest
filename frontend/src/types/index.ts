@@ -12,6 +12,9 @@ export interface UserProfile {
   total_xp: number;
   level: number;
   current_streak: number;
+  age?: number;
+  gender?: 'male' | 'female';
+  activity_level?: number;
 }
 
 export interface DailyProgress {

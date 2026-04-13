@@ -39,6 +39,19 @@ const runMigrations = async () => {
         IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name='meals' AND column_name='category') THEN
           ALTER TABLE meals ADD COLUMN category VARCHAR(50) DEFAULT 'Lanche';
         END IF;
+
+        -- Adiciona colunas de perfil na tabela users
+        IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name='users' AND column_name='age') THEN
+          ALTER TABLE users ADD COLUMN age INTEGER DEFAULT 25;
+        END IF;
+
+        IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name='users' AND column_name='gender') THEN
+          ALTER TABLE users ADD COLUMN gender VARCHAR(10) DEFAULT 'male';
+        END IF;
+
+        IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name='users' AND column_name='activity_level') THEN
+          ALTER TABLE users ADD COLUMN activity_level NUMERIC(10,3) DEFAULT 1.375;
+        END IF;
       END $$;
     `);
 
