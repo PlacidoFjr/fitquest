@@ -119,16 +119,10 @@ export default function Home() {
               loading={loading}
             >
               {mode === "login" ? "Entrar na Arena" : "Iniciar Minha Jornada"}
-            </Button>
-          </form>
-
-          <div className="mt-8 flex items-center gap-2 justify-center text-[10px] font-black uppercase tracking-widest text-slate-600">
-            <Sparkles size={12} className="text-primary" />
-            <span>Gamified Fitness Experience</span>
-            <Sparkles size={12} className="text-primary" />
-          </div>
-        </Card>
-      </motion.div>
+          </Button>
+        </form>
+      </Card>
+    </motion.div>
     </div>
   );
 }

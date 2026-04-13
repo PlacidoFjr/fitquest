@@ -33,4 +33,21 @@ async function listMeals(req, res) {
   return res.json(result.rows);
 }
 
-module.exports = { createMeal, listMeals };
+async function deleteMeal(req, res) {
+  try {
+    const { id } = req.params;
+    const result = await db.query(
+      "DELETE FROM meals WHERE id = $1 AND user_id = $2 RETURNING date",
+      [id, req.userId]
+    );
+    if (result.rowCount === 0) {
+      return res.status(404).json({ message: "Refeição não encontrada." });
+    }
+    await recomputeDay(req.userId, result.rows[0].date);
+    return res.status(200).json({ message: "Refeição removida." });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+}
+
+module.exports = { createMeal, listMeals, deleteMeal };

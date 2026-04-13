@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Dumbbell, Calendar, CheckCircle2, Trophy, Clock } from "lucide-react";
+import { Dumbbell, Calendar, CheckCircle2, Trophy, Clock, Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { AppShell } from "@/components/AppShell";
 import { useToast } from "@/components/providers/ToastProvider";
@@ -27,6 +27,18 @@ export default function WorkoutsPage() {
   async function load(token: string) {
     const data = await apiRequest<WorkoutItem[]>("/api/workouts/history", "GET", undefined, token);
     setWorkouts(data);
+  }
+
+  async function handleDeleteWorkout(id: number) {
+    const token = getToken();
+    if (!token) return;
+    try {
+      await apiRequest(`/api/workouts/${id}`, "DELETE", undefined, token);
+      showToast("Treino removido.");
+      await load(token);
+    } catch (error) {
+      showToast((error as Error).message, "error");
+    }
   }
 
   useEffect(() => {
@@ -116,9 +128,17 @@ export default function WorkoutsPage() {
                 <p className="text-[10px] font-black uppercase tracking-widest text-slate-500">Sessão de Treinamento</p>
               </div>
             </div>
-            <Badge variant={item.completed ? "success" : "warning"} className="px-4">
-              {item.completed ? "Concluído" : "Pendente"}
-            </Badge>
+            <div className="flex items-center gap-3">
+              <Badge variant={item.completed ? "success" : "warning"} className="px-4">
+                {item.completed ? "Concluído" : "Pendente"}
+              </Badge>
+              <button
+                onClick={() => handleDeleteWorkout(item.id)}
+                className="p-2 text-slate-500 hover:text-destructive transition-colors rounded-lg hover:bg-destructive/10"
+              >
+                <Trash2 size={16} />
+              </button>
+            </div>
           </motion.div>
         ))}
         {workouts.length === 0 && (

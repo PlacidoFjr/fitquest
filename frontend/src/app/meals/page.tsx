@@ -18,7 +18,21 @@ interface Meal {
   protein: number;
 }
 
-import { UtensilsCrossed, Plus, Flame, Activity } from "lucide-react";
+// Pequena amostra da tabela TACO para demonstração
+const FOOD_DATABASE = [
+  { name: "Arroz integral, cozido", calories: 124, protein: 2.6 }, // por 100g
+  { name: "Feijão carioca, cozido", calories: 76, protein: 4.8 },
+  { name: "Pão francês", calories: 300, protein: 8.0 },
+  { name: "Ovo de galinha, cozido", calories: 155, protein: 13.0 },
+  { name: "Peito de frango, grelhado", calories: 159, protein: 32.0 },
+  { name: "Banana prata, crua", calories: 89, protein: 1.3 },
+  { name: "Alface crespa, crua", calories: 11, protein: 1.3 },
+  { name: "Azeite de oliva extra virgem", calories: 884, protein: 0.0 },
+  { name: "Carne moída (patinho), cozida", calories: 219, protein: 35.9 },
+  { name: "Aveia em flocos", calories: 394, protein: 13.9 },
+];
+
+import { UtensilsCrossed, Plus, Flame, Activity, Search, Scale, Trash2 } from "lucide-react";
 
 export default function MealsPage() {
   const router = useRouter();
@@ -27,11 +41,25 @@ export default function MealsPage() {
   const [name, setName] = useState("");
   const [calories, setCalories] = useState(0);
   const [protein, setProtein] = useState(0);
+  const [weight, setWeight] = useState(100);
   const [loading, setLoading] = useState(false);
+  const [suggestions, setSuggestions] = useState<typeof FOOD_DATABASE>([]);
 
   async function loadMeals(token: string) {
     const list = await apiRequest<Meal[]>("/api/meals", "GET", undefined, token);
     setMeals(list);
+  }
+
+  async function handleDelete(id: number) {
+    const token = getToken();
+    if (!token) return;
+    try {
+      await apiRequest(`/api/meals/${id}`, "DELETE", undefined, token);
+      showToast("Refeição removida.");
+      await loadMeals(token);
+    } catch (error) {
+      showToast((error as Error).message, "error");
+    }
   }
 
   useEffect(() => {
@@ -43,6 +71,38 @@ export default function MealsPage() {
     });
   }, [router, showToast]);
 
+  // Lógica de busca e sugestão
+  useEffect(() => {
+    if (name.length > 1) {
+      const filtered = FOOD_DATABASE.filter(f => 
+        f.name.toLowerCase().includes(name.toLowerCase())
+      ).slice(0, 5);
+      setSuggestions(filtered);
+    } else {
+      setSuggestions([]);
+    }
+  }, [name]);
+
+  const selectFood = (food: typeof FOOD_DATABASE[0]) => {
+    setName(food.name);
+    calculateMacros(food, weight);
+    setSuggestions([]);
+  };
+
+  const calculateMacros = (food: typeof FOOD_DATABASE[0] | null, currentWeight: number) => {
+    const selected = food || FOOD_DATABASE.find(f => f.name === name);
+    if (selected) {
+      const ratio = currentWeight / 100;
+      setCalories(Math.round(selected.calories * ratio));
+      setProtein(Number((selected.protein * ratio).toFixed(1)));
+    }
+  };
+
+  const handleWeightChange = (newWeight: number) => {
+    setWeight(newWeight);
+    calculateMacros(null, newWeight);
+  };
+
   async function onSubmit(event: FormEvent) {
     event.preventDefault();
     const token = getToken();
@@ -53,6 +113,7 @@ export default function MealsPage() {
       setName("");
       setCalories(0);
       setProtein(0);
+      setWeight(100);
       await loadMeals(token);
       showToast("Refeição registrada com sucesso!");
     } catch (e) {
@@ -70,37 +131,63 @@ export default function MealsPage() {
         </div>
         <div>
           <h2 className="text-3xl font-black text-white tracking-tight">Registro de Refeição</h2>
-          <p className="text-sm text-slate-500 font-medium">Abasteça seu corpo para a próxima missão</p>
+          <p className="text-sm text-slate-500 font-medium">Busque na base oficial TACO ou insira manualmente</p>
         </div>
       </div>
 
       <Card variant="gradient" className="mb-8 border-slate-800/40">
         <form onSubmit={onSubmit} className="space-y-6">
-          <div className="grid gap-6 md:grid-cols-3">
-            <Input 
-              placeholder="O que você comeu?" 
-              value={name} 
-              onChange={(e) => setName(e.target.value)} 
-              icon={<UtensilsCrossed size={18} />}
-              required
-            />
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            <div className="relative lg:col-span-2">
+              <Input 
+                placeholder="Busque um alimento (ex: Pão)" 
+                value={name} 
+                onChange={(e) => setName(e.target.value)} 
+                icon={<Search size={18} />}
+                required
+              />
+              
+              {/* Lista de Sugestões */}
+              {suggestions.length > 0 && (
+                <div className="absolute z-50 mt-2 w-full overflow-hidden rounded-2xl border border-slate-700 bg-slate-900 shadow-2xl animate-in">
+                  {suggestions.map((food) => (
+                    <button
+                      key={food.name}
+                      type="button"
+                      onClick={() => selectFood(food)}
+                      className="flex w-full flex-col px-4 py-3 text-left hover:bg-slate-800 transition-colors border-b border-slate-800 last:border-0"
+                    >
+                      <span className="text-sm font-bold text-white">{food.name}</span>
+                      <span className="text-[10px] uppercase text-slate-500 font-black">
+                        {food.calories} kcal | {food.protein}g proteína (por 100g)
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+
             <Input
-              placeholder="Calorias (kcal)"
+              placeholder="Peso (g)"
               type="number"
-              value={calories || ""}
-              onChange={(e) => setCalories(Number(e.target.value))}
-              icon={<Flame size={18} />}
+              value={weight || ""}
+              onChange={(e) => handleWeightChange(Number(e.target.value))}
+              icon={<Scale size={18} />}
               required
             />
-            <Input
-              placeholder="Proteína (g)"
-              type="number"
-              value={protein || ""}
-              onChange={(e) => setProtein(Number(e.target.value))}
-              icon={<Activity size={18} />}
-              required
-            />
+
+            <div className="flex gap-2">
+              <div className="flex-1 rounded-xl bg-slate-950/50 border border-white/5 p-2 flex flex-col items-center justify-center">
+                <span className="text-[10px] font-black text-slate-500 uppercase">Kcal</span>
+                <span className="text-sm font-bold text-white">{calories}</span>
+              </div>
+              <div className="flex-1 rounded-xl bg-slate-950/50 border border-white/5 p-2 flex flex-col items-center justify-center">
+                <span className="text-[10px] font-black text-slate-500 uppercase">Prot (g)</span>
+                <span className="text-sm font-bold text-white">{protein}</span>
+              </div>
+            </div>
           </div>
+
           <div className="flex justify-end pt-2">
             <Button type="submit" loading={loading} className="px-8 rounded-2xl">
               <Plus size={18} />
@@ -141,6 +228,12 @@ export default function MealsPage() {
                 </div>
               </div>
             </div>
+            <button
+              onClick={() => handleDelete(meal.id)}
+              className="p-2 text-slate-500 hover:text-destructive transition-colors rounded-lg hover:bg-destructive/10"
+            >
+              <Trash2 size={18} />
+            </button>
           </motion.div>
         ))}
         {meals.length === 0 && (

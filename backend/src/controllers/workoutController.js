@@ -21,4 +21,21 @@ async function workoutHistory(req, res) {
   return res.json(result.rows);
 }
 
-module.exports = { completeWorkout, workoutHistory };
+async function undoWorkout(req, res) {
+  try {
+    const { id } = req.params;
+    const result = await db.query(
+      "DELETE FROM workouts WHERE id = $1 AND user_id = $2 RETURNING date",
+      [id, req.userId]
+    );
+    if (result.rowCount === 0) {
+      return res.status(404).json({ message: "Treino não encontrado." });
+    }
+    await recomputeDay(req.userId, result.rows[0].date);
+    return res.status(200).json({ message: "Treino removido." });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+}
+
+module.exports = { completeWorkout, workoutHistory, undoWorkout };
