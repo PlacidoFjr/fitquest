@@ -211,6 +211,8 @@ export default function Home() {
                   {mode === "login" ? "Entrar na Arena" : "Iniciar Minha Jornada"}
                 </Button>
 
+                {/* Ocultando Google Login temporariamente conforme solicitado pelo usuário */}
+                {/* 
                 <div className="relative my-6">
                   <div className="absolute inset-0 flex items-center">
                     <div className="w-full border-t border-slate-800"></div>
@@ -227,6 +229,7 @@ export default function Home() {
                     style={{ minHeight: '44px', display: 'flex', justifyContent: 'center' }}
                   ></div>
                 </div>
+                */}
               </form>
             </>
           ) : (
