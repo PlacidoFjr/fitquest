@@ -4,8 +4,9 @@ const { z } = require("zod");
 const db = require("../config/db");
 
 const authSchema = z.object({
-  email: z.email(),
+  email: z.string().email(),
   password: z.string().min(6),
+  name: z.string().min(1).optional(),
 });
 
 function buildToken(userId) {
@@ -68,15 +69,15 @@ async function register(req, res) {
 
     const passwordHash = await bcrypt.hash(body.password, 10);
     const user = await db.query(
-      `INSERT INTO users (email, password_hash, weight, height, goal_type, calorie_goal, protein_goal)
-       VALUES ($1, $2, 70, 170, 'manter', 2200, 120)
-       RETURNING id, email`,
-      [body.email, passwordHash]
+      `INSERT INTO users (email, name, password_hash, weight, height, goal_type, calorie_goal, protein_goal)
+       VALUES ($1, $2, $3, 70, 170, 'manter', 2200, 120)
+       RETURNING id, email, name`,
+      [body.email, body.name || body.email.split("@")[0], passwordHash]
     );
     const token = buildToken(user.rows[0].id);
     
     // Enviar email de boas-vindas de forma assíncrona (não trava a resposta)
-    const userName = body.email.split("@")[0];
+    const userName = body.name || body.email.split("@")[0];
     sendWelcomeEmail(body.email, userName).catch(err => console.error("Erro email boas-vindas:", err));
 
     return res.status(201).json({ token, user: user.rows[0] });

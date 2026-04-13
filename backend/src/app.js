@@ -10,9 +10,13 @@ const mealRoutes = require("./routes/mealRoutes");
 const workoutRoutes = require("./routes/workoutRoutes");
 const dashboardRoutes = require("./routes/dashboardRoutes");
 
-if (!authRoutes || !userRoutes || !mealRoutes || !workoutRoutes || !dashboardRoutes) {
-  console.error("Erro fatal: Algumas rotas não foram carregadas corretamente!");
-}
+// Log de diagnóstico para identificar qual rota está falhando
+console.log("Diagnóstico de Rotas:");
+console.log("- authRoutes:", typeof authRoutes);
+console.log("- userRoutes:", typeof userRoutes);
+console.log("- mealRoutes:", typeof mealRoutes);
+console.log("- workoutRoutes:", typeof workoutRoutes);
+console.log("- dashboardRoutes:", typeof dashboardRoutes);
 
 const app = express();
 

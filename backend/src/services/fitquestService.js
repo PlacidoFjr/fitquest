@@ -12,7 +12,7 @@ function todayISO() {
 
 async function getProfile(userId) {
   const result = await db.query(
-    "SELECT id, email, weight, height, goal_type, calorie_goal, protein_goal, total_xp, current_streak FROM users WHERE id = $1",
+    "SELECT id, email, name, weight, height, goal_type, calorie_goal, protein_goal, total_xp, current_streak FROM users WHERE id = $1",
     [userId]
   );
   return result.rows[0];

@@ -1,6 +1,7 @@
 CREATE TABLE IF NOT EXISTS users (
   id SERIAL PRIMARY KEY,
   email VARCHAR(255) UNIQUE NOT NULL,
+  name VARCHAR(100),
   password_hash TEXT NOT NULL,
   weight NUMERIC(5,2) NOT NULL,
   height NUMERIC(5,2) NOT NULL,
@@ -10,6 +11,8 @@ CREATE TABLE IF NOT EXISTS users (
   total_xp INTEGER NOT NULL DEFAULT 0,
   level INTEGER NOT NULL DEFAULT 1,
   current_streak INTEGER NOT NULL DEFAULT 0,
+  reset_token TEXT,
+  reset_expires TIMESTAMP,
   created_at TIMESTAMP NOT NULL DEFAULT NOW(),
   updated_at TIMESTAMP NOT NULL DEFAULT NOW()
 );
