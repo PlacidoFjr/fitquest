@@ -22,8 +22,8 @@ export function Input({
           className={cn(
             "w-full rounded-xl border border-slate-700 bg-slate-900/50 px-4 py-3 text-sm text-slate-100 outline-none transition-all placeholder:text-slate-500",
             "focus:border-primary/50 focus:ring-4 focus:ring-primary/10",
-            icon && "pl-11",
-            error && "border-destructive focus:ring-destructive/10",
+            icon ? "pl-11" : "",
+            error ? "border-destructive focus:ring-destructive/10" : "",
             className
           )}
           {...props}
