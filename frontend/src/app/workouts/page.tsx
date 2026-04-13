@@ -34,6 +34,19 @@ const WORKOUT_TYPES = [
   { id: 'futebol', label: 'Futebol', icon: <Activity size={14} />, met: 8.0 },
 ];
 
+// Helper para formatar a data amigável
+function formatFriendlyDate(dateStr: string) {
+  const date = new Date(dateStr);
+  const today = new Date();
+  const yesterday = new Date();
+  yesterday.setDate(today.getDate() - 1);
+
+  if (date.toDateString() === today.toDateString()) return "Hoje";
+  if (date.toDateString() === yesterday.toDateString()) return "Ontem";
+
+  return date.toLocaleDateString("pt-BR", { day: "2-digit", month: "short" });
+}
+
 export default function WorkoutsPage() {
   const router = useRouter();
   const { showToast } = useToast();
@@ -232,7 +245,7 @@ export default function WorkoutsPage() {
                 {WORKOUT_TYPES.find(t => t.id === item.type)?.icon || <Clock size={18} />}
               </div>
               <div>
-                <p className="font-bold text-white tracking-tight">{item.date}</p>
+                <p className="font-bold text-white tracking-tight">{formatFriendlyDate(item.date)}</p>
                 <div className="flex items-center gap-2">
                   <p className="text-[10px] font-black uppercase tracking-widest text-slate-500">
                     {WORKOUT_TYPES.find(t => t.id === item.type)?.label || 'Sessão'} • {item.duration_minutes} min

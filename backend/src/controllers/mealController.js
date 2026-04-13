@@ -6,6 +6,7 @@ const mealSchema = z.object({
   name: z.string().min(1),
   calories: z.number().nonnegative(),
   protein: z.number().nonnegative(),
+  category: z.string().default("Lanche"),
   date: z.string().optional(),
 });
 
@@ -14,8 +15,8 @@ async function createMeal(req, res) {
     const body = mealSchema.parse(req.body);
     const date = body.date || todayISO();
     const result = await db.query(
-      "INSERT INTO meals (user_id, date, name, calories, protein) VALUES ($1, $2, $3, $4, $5) RETURNING *",
-      [req.userId, date, body.name, body.calories, body.protein]
+      "INSERT INTO meals (user_id, date, name, calories, protein, category) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
+      [req.userId, date, body.name, body.calories, body.protein, body.category]
     );
     await recomputeDay(req.userId, date);
     return res.status(201).json(result.rows[0]);

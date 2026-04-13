@@ -35,6 +35,18 @@ function formatDate(dateStr: string) {
   return date.toLocaleDateString("pt-BR", { day: "2-digit", month: "short" });
 }
 
+// Formatação para data completa do treino (ex: 13 Abr, 14:30)
+function formatWorkoutDate(dateStr: string) {
+  const date = new Date(dateStr);
+  const dayMonth = date.toLocaleDateString("pt-BR", { day: "2-digit", month: "short" });
+  
+  // Se for apenas data sem hora (ISO date), retorna apenas dia/mês
+  if (dateStr.length <= 10) return dayMonth;
+
+  const time = date.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
+  return `${dayMonth}, ${time}`;
+}
+
 export default function HistoryPage() {
   const router = useRouter();
   const { showToast } = useToast();

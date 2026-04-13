@@ -34,6 +34,11 @@ const runMigrations = async () => {
 
         -- Remove a restrição UNIQUE antiga que impedia mais de um treino por dia
         ALTER TABLE workouts DROP CONSTRAINT IF EXISTS workouts_user_id_date_key;
+
+        -- Adiciona coluna de categoria na tabela meals
+        IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name='meals' AND column_name='category') THEN
+          ALTER TABLE meals ADD COLUMN category VARCHAR(50) DEFAULT 'Lanche';
+        END IF;
       END $$;
     `);
 

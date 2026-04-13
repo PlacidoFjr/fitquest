@@ -12,7 +12,14 @@ function getMissionStatus({ proteinTotal, caloriesTotal, workoutDone, proteinGoa
 }
 
 function calculateDailyXp(status) {
-  return (status.workoutMission ? 50 : 0) + (status.caloriesMission ? 70 : 0) + (status.proteinMission ? 30 : 0);
+  let xp = (status.workoutMission ? 50 : 0) + (status.caloriesMission ? 70 : 0) + (status.proteinMission ? 30 : 0);
+  
+  // Bônus Lendário: Bateu as 3 missões principais
+  if (status.completedCount === 3) {
+    xp += 50;
+  }
+  
+  return xp;
 }
 
 function calculateFeedback(completedCount) {
